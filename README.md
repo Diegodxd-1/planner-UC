@@ -1,81 +1,120 @@
-# Sistema de Generación Óptima de Horarios Académicos (SGO-HA)
+<div align="center">
 
-## Tabla de Contenido
-- [Integrantes del equipo](#integrantes-del-equipo)
-- [Problemática abordada](#problemática-abordada)
-- [Justificación del PMV](#justificación-del-pmv)
-- [Tecnologías utilizadas](#tecnologías-utilizadas)
-- [Arquitectura del sistema](#arquitectura-del-sistema)
-- [Estándares y Calidad](#estándares-y-calidad)
-- [Instrucciones de instalación](#instrucciones-de-instalación)
-- [Instrucciones de build](#instrucciones-de-build)
-- [Instrucciones de despliegue](#instrucciones-de-despliegue)
-- [Video explicativo](#video-explicativo)
-- [Documentación](#documentación)
+# 🗓️ Sistema de Generación Óptima de Horarios Académicos (SGO-HA)
 
-## Integrantes del equipo
-- **VASQUEZ MIRANDA, Luis Alexis** - Líder del Proyecto / Desarrollador Backend
-- **ARAUJO HUAMANI, Leonardo Daniel** - Analista de Sistemas
-- **CURI UNTIVEROS, Jefferson Diego** - Diseñador de Software
-- **VILCARANO DE LA CRUZ, Frank Anthony** - Desarrollador Frontend y QA
+[![React](https://img.shields.io/badge/Frontend-React-61DAFB?style=for-the-badge&logo=react&logoColor=black)](https://reactjs.org/)
+[![Node.js](https://img.shields.io/badge/Backend-Node.js-339933?style=for-the-badge&logo=nodedotjs&logoColor=white)](https://nodejs.org/)
+[![MongoDB](https://img.shields.io/badge/Database-MongoDB-47A248?style=for-the-badge&logo=mongodb&logoColor=white)](https://www.mongodb.com/)
+[![Express](https://img.shields.io/badge/Framework-Express-000000?style=for-the-badge&logo=express&logoColor=white)](https://expressjs.com/)
 
-## Problemática abordada
-La planificación de horarios académicos en entornos de currículo flexible es una tarea de alta complejidad que involucra múltiples variables: disponibilidad docente, asignación de aulas, cruces de secciones y prerrequisitos. 
+---
 
-Este proyecto aborda un **Problema de Satisfacción de Restricciones (CSP - Constraint Satisfaction Problem)** de naturaleza combinatoria, donde el espacio de búsqueda crece exponencialmente con cada nueva sección, docente y aula, clasificándolo como un **problema complejo de ingeniería**. La falta de automatización genera solapamientos y un uso ineficiente de los recursos institucionales.
+### 🚀 Revolucionando la Planificación Universitaria con Ingeniería de Software
+*Un proyecto diseñado para la eficiencia, escalabilidad y precisión académica.*
 
-## Justificación del PMV
-El Producto Mínimo Viable (PMV) busca automatizar la generación de horarios mediante un sistema que valide las restricciones principales en tiempo real. Al centralizar la gestión de datos académicos y aplicar algoritmos de validación, se reduce el error humano, se optimiza el tiempo de los coordinadores y se garantiza una planificación académica libre de conflictos.
+[**Explorar Documentación**](docs/) | [**Ver Video Demo**](#video-explicativo) | [**Instrucciones**](#instrucciones-de-instalacion)
 
-## Tecnologías utilizadas
-El stack tecnológico ha sido seleccionado para cumplir con los requerimientos de escalabilidad y mantenibilidad:
+</div>
 
-- **Frontend (React.js):** Elegido por su capacidad para crear una **SPA (Single Page Application)** fluida, asegurando una experiencia de usuario rápida y cumpliendo con los estándares de usabilidad de la rúbrica.
-- **Backend (Node.js & Express):** Seleccionado para implementar una **API REST** altamente escalable y manejar operaciones asíncronas de validación de horarios en tiempo real.
-- **Base de Datos (MongoDB):** Se optó por un modelo **NoSQL** por la flexibilidad del esquema ante requerimientos cambiantes y la alta variabilidad en la estructura de los currículos universitarios.
-- **Control de Versiones:** Git & GitHub (Flujo de trabajo basado en ramas).
+## 👥 Integrantes del Equipo
+| Nombre | Rol Principal | Especialidad |
+| :--- | :--- | :--- |
+| **VASQUEZ MIRANDA, Luis Alexis** | 👑 Líder del Proyecto | Backend Developer |
+| **ARAUJO HUAMANI, Leonardo Daniel** | 🔍 Analista de Sistemas | Requirements & Logic |
+| **CURI UNTIVEROS, Jefferson Diego** | 🎨 Diseñador de Software | Architecture & Design |
+| **VILCARANO DE LA CRUZ, Frank Anthony** | 💻 Desarrollador Frontend | UI/UX & QA |
 
-## Arquitectura del sistema
-El sistema implementa una **Arquitectura Decoupled (Desacoplada)** mediante una SPA en React que consume una API REST en Node.js, garantizando la **Separación de Intereses (SoC - Separation of Concerns)**, permitiendo una mayor mantenibilidad y facilidad para futuras integraciones.
+---
 
-## Estándares y Calidad
-Para asegurar un producto de nivel profesional, el desarrollo se rige bajo los siguientes lineamientos:
-- **ISO/IEC 25010:** Utilizada como marco de referencia para asegurar mantenibilidad, seguridad y rendimiento.
-- **OWASP Top 10:** Seguridad en la autenticación y el manejo de datos académicos sensibles.
-- **Green Software:** Diseño de algoritmos optimizados para reducir el consumo innecesario de ciclos de CPU (eficiencia energética computacional).
-- **WCAG 2.1:** Garantizando una interfaz accesible para todos los actores del sistema (docentes, estudiantes y administrativos).
+## 🌩️ Problemática Abordada
+La planificación de horarios académicos en entornos de currículo flexible es un desafío crítico. Involucra variables masivas: disponibilidad docente, capacidad de aulas, cruces de secciones y prerrequisitos.
 
-## Instrucciones de instalación
+> [!IMPORTANT]
+> Este proyecto aborda un **Problema de Satisfacción de Restricciones (CSP)** de naturaleza combinatoria. El espacio de búsqueda crece exponencialmente, clasificándolo como un **problema complejo de ingeniería**.
+
+❌ **Consecuencias Actuales:**
+- ⚠️ Solapamientos de cursos.
+- 🕒 Pérdida masiva de tiempo administrativo.
+- 📉 Uso ineficiente de infraestructura institucional.
+
+---
+
+## 🎯 Justificación del PMV
+Nuestro **Producto Mínimo Viable (PMV)** automatiza la generación de horarios integrando algoritmos de validación en tiempo real. 
+
+- ✅ **Precisión:** Eliminación total del solapamiento.
+- ✅ **Optimización:** Distribución eficiente de aulas y docentes.
+- ✅ **Agilidad:** Respuesta inmediata ante cambios de currículo.
+
+---
+
+## 🛠️ Stack Tecnológico
+| Tecnología | Logo | Justificación Técnica |
+| :--- | :---: | :--- |
+| **React.js** | ![React](https://img.shields.io/badge/React-20232A?style=flat-square&logo=react&logoColor=61DAFB) | Creación de una **SPA** fluida con alta usabilidad siguiendo normativas de UI. |
+| **Node.js** | ![Node](https://img.shields.io/badge/Node.js-339933?style=flat-square&logo=nodedotjs&logoColor=white) | Implementación de una **API REST** asíncrona para validaciones en tiempo real. |
+| **MongoDB** | ![MongoDB](https://img.shields.io/badge/MongoDB-47A248?style=flat-square&logo=mongodb&logoColor=white) | Esquema **NoSQL** flexible para soportar variabilidad en mallas curriculares. |
+| **Express** | ![Express](https://img.shields.io/badge/Express-000000?style=flat-square&logo=express&logoColor=white) | Middleware robusto para gestión de rutas y seguridad de la API. |
+
+---
+
+## 🏗️ Arquitectura del Sistema
+Utilizamos una **Arquitectura Decoupled (Desacoplada)**:
+- 🎨 **Frontend:** SPA independiente en React.
+- ⚙️ **Backend:** API REST en Node.js/Express.
+- 🔗 **Comunicación:** Protocolo HTTP/JSON bajo principios de **Separación de Intereses (SoC)**.
+
+---
+
+## ✨ Estándares y Calidad
+Nos regimos bajo los más altos lineamientos de ingeniería:
+
+- 🛡️ **OWASP Top 10:** Seguridad en autenticación y datos sensibles.
+- 📏 **ISO/IEC 25010:** Marco de referencia para mantenibilidad y rendimiento.
+- 🌿 **Green Software:** Algoritmos eficientes para reducir el impacto energético.
+- ♿ **WCAG 2.1:** Accesibilidad garantizada para todos los usuarios.
+
+---
+
+## ⚙️ Instrucciones de Instalación
 ```bash
-# Clonar el repositorio
+# 1. Clonar el repositorio
 git clone https://github.com/Diegodxd-1/planner-UC.git
 
-# Configurar el Backend
+# 2. Configurar el Backend
 cd backend
 npm install
 
-# Configurar el Frontend
+# 3. Configurar el Frontend
 cd ../frontend
 npm install
 ```
 
-## Instrucciones de build
+## 🏗️ Instrucciones de Build
 ```bash
-# Build de producción para el Frontend
+# Generar archivos de producción para el Frontend
 cd frontend
 npm run build
 ```
 
-## Instrucciones de despliegue
-[El despliegue se realizará en plataformas Cloud como Vercel (Frontend) y Render/Heroku (Backend)]
+---
 
-## Video explicativo
-[Enlace al video de demostración (Pendiente - Máximo 5 minutos)]
+## 📂 Estructura de Documentación (PMBOK)
+Accede a la documentación detallada del proyecto siguiendo el estándar internacional:
 
-## Documentación
-La documentación oficial está organizada siguiendo las áreas de gestión del PMBOK en la carpeta `docs/`:
-- [📁 Fase de Inicio](docs/inicio/) (Acta de constitución, Stakeholders, Visión)
-- [📁 Fase de Planificación](docs/planificacion/)
-- [📁 Fase de Ejecución](docs/ejecucion/)
-- [📁 Seguimiento y Control](docs/seguimiento_control/)
-- [📁 Fase de Cierre](docs/cierre/)
+*   [**📁 Fase de Inicio**](docs/inicio/): Acta de Constitución, Stakeholders, Visión.
+*   [**📁 Fase de Planificación**](docs/planificacion/): Cronograma, Gestión de Riesgos.
+*   [**📁 Fase de Ejecución**](docs/ejecucion/): Sprint Backlogs, Evidencias.
+*   [**📁 Seguimiento y Control**](docs/seguimiento_control/): Métricas, Burndown charts.
+*   [**📁 Fase de Cierre**](docs/cierre/): Informe final, Lecciones aprendidas.
+
+---
+
+## 🎥 Video Explicativo
+> [!NOTE]
+> [Aquí aparecerá el enlace a tu video de demostración de 5 minutos]
+
+---
+<div align="center">
+  <sub>Desarrollado con ❤️ para el Taller de Proyectos 2 - Continental</sub>
+</div>
