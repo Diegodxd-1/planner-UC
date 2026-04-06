@@ -12,7 +12,7 @@
 ### 🚀 Revolucionando la Planificación Universitaria con Ingeniería de Software
 *Un proyecto diseñado para la eficiencia, escalabilidad y precisión académica.*
 
-[**Explorar Documentación**](docs/) | [**Ver Video Demo**](#video-explicativo) | [**Instrucciones**](#instrucciones-de-instalacion)
+[**Explorar Documentación**](docs/) | [**Instrucciones de Instalación**](#instrucciones-de-instalacion)
 
 </div>
 
@@ -107,12 +107,6 @@ Accede a la documentación detallada del proyecto siguiendo el estándar interna
 *   [**📁 Fase de Ejecución**](docs/ejecucion/): Sprint Backlogs, Evidencias.
 *   [**📁 Seguimiento y Control**](docs/seguimiento_control/): Métricas, Burndown charts.
 *   [**📁 Fase de Cierre**](docs/cierre/): Informe final, Lecciones aprendidas.
-
----
-
-## 🎥 Video Explicativo
-> [!NOTE]
-> [Aquí aparecerá el enlace a tu video de demostración de 5 minutos]
 
 ---
 <div align="center">
