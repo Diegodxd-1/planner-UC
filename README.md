@@ -12,7 +12,7 @@
 ### 🚀 Revolucionando la Planificación Universitaria con Ingeniería de Software
 *Un proyecto diseñado para la eficiencia, escalabilidad y precisión académica.*
 
-[**Explorar Documentación**](docs/) | [**Instrucciones de Instalación**](#instrucciones-de-instalacion)
+[**Explorar Documentación**](docs/)
 
 </div>
 
