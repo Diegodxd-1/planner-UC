@@ -40,12 +40,17 @@ Para una resolución efectiva, hemos detectado y gestionado las siguientes incer
 
 ---
 
-## 🎯 2. Visión y Alcance
-Nuestra visión es transformar la gestión académica mediante un **Producto Mínimo Viable (PMV)** que demuestre la viabilidad de la generación automática:
+## 🎯 2. Visión y Alcance (PMV)
+Nuestra visión es transformar la gestión académica mediante un **Producto Mínimo Viable (PMV)** que demuestre la viabilidad de la generación automática.
 
+### **✨ Valor de Negocio**
 > "Desarrollar una aplicación web moderna que permita gestionar y generar horarios universitarios de manera eficiente, facilitando la planificación académica y evitando conflictos, mediante una interfaz intuitiva y accesible."
 
-**Valor Agregado:** Reducción drástica del error humano y optimización del uso de infraestructura física en un 20%.
+### **📦 Alcance del PMV (Medible)**
+Para este proyecto Continental, el alcance se define estrictamente como:
+*   **Inclusión:** Motor de generación algorítmica, validación de conflictos en tiempo real, persistencia de datos base (docentes, aulas, cursos), y visualización de mallas horarias.
+*   **Exclusión:** No incluye integración con sistemas ERP universitarios (Banner/PeopleSoft), capacitación presencial ni soporte técnico post-entrega.
+*   **Meta:** Generar un horario 100% libre de conflictos para un escenario de prueba de 50 docentes y 100 cursos.
 
 ---
 
