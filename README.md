@@ -1,6 +1,6 @@
 <div align="center">
 
-# 🗓️ Sistema de Generación Óptima de Horarios Académicos (SGO-HA)
+# 🗓️ SISTEMA DE GENERACIÓN ÓPTIMA DE HORARIOS ACADÉMICOS EN ENTORNOS DE CURRÍCULO FLEXIBLE
 ### **Sprint 0: Inicio del Proyecto**
 *Un desafío de ingeniería complejo resuelto con metodologías ágiles y tecnologías modernas.*
 
