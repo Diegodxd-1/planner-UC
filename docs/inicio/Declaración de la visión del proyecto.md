@@ -15,4 +15,4 @@
 ---
 
 ## Visión
-Desarrollar una aplicación web moderna que permita gestionar y generar horarios universitarios de manera eficiente, facilitando la planificación académica y evitando conflictos entre cursos, docentes y aulas, mediante una interfaz intuitiva y accesible para los usuarios del sistema.
+Desarrollar una aplicación web moderna que permita gestionar y generar horarios universitarios de manera eficiente, considerando la disponibilidad de docentes, cursos y aulas para evitar conflictos académicos. El sistema ofrecerá generación automática de horarios con validación de restricciones y detección de conflictos en tiempo real, permitiendo una planificación académica más rápida, precisa y optimizada.
