@@ -1,146 +1,124 @@
 <div align="center">
 
 # 🗓️ Sistema de Generación Óptima de Horarios Académicos (SGO-HA)
+### **Sprint 0: Inicio del Proyecto**
+*Un desafío de ingeniería complejo resuelto con metodologías ágiles y tecnologías modernas.*
 
-[![React](https://img.shields.io/badge/Frontend-React-61DAFB?style=for-the-badge&logo=react&logoColor=black)](https://reactjs.org/)
-[![Node.js](https://img.shields.io/badge/Backend-Node.js-339933?style=for-the-badge&logo=nodedotjs&logoColor=white)](https://nodejs.org/)
-[![MongoDB](https://img.shields.io/badge/Database-MongoDB-47A248?style=for-the-badge&logo=mongodb&logoColor=white)](https://www.mongodb.com/)
-[![Express](https://img.shields.io/badge/Framework-Express-000000?style=for-the-badge&logo=express&logoColor=white)](https://expressjs.com/)
+[![MERN Stack](https://img.shields.io/badge/Stack-MERN-8860D0?style=for-the-badge)](https://www.mongodb.com/mern-stack)
+[![Scrum](https://img.shields.io/badge/Methodology-Scrum-5680E9?style=for-the-badge)](https://www.scrum.org/)
+[![GitHub](https://img.shields.io/badge/Repository-Operational-5AB9EA?style=for-the-badge)](https://github.com/Diegodxd-1/planner-UC)
 
 ---
-
-### 🚀 Revolucionando la Planificación Universitaria con Ingeniería de Software
-*Un proyecto diseñado para la eficiencia, escalabilidad y precisión académica.*
-
-[**Explorar Documentación**](docs/)
 
 </div>
 
-## 👥 Integrantes del Equipo
-| Nombre | Rol Principal | Especialidad |
+## 📌 Introducción
+Este proyecto surge de la necesidad de automatizar la planificación académica universitaria en entornos de **currículo flexible**. Abordamos un **Problema Complejo de Ingeniería** que involucra la optimización de recursos limitados bajo múltiples capas de restricciones.
+
+---
+
+## 🔎 1. Análisis del Problema Complejo
+*Evidencia de pensamiento crítico y estructuración técnica.*
+
+Abordamos un problema de naturaleza combinatoria conocido como **Constraint Satisfaction Problem (CSP)**. La complejidad radica en la interdependencia de variables dinámicas:
+
+### **❓ Ambigüedades Identificadas**
+Para una resolución efectiva, hemos detectado y gestionado las siguientes incertidumbres iniciales:
+1.  **Incertidumbre en Bloques:** Falta de definición exacta del número de bloques horarios por jornada.
+2.  **Priorización de Conflictos:** Ambigüedad en la jerarquía de restricciones ante escenarios sin solución perfecta.
+3.  **Carga Docente:** Falta de claridad sobre topes de secciones consecutivas por docente.
+4.  **Flexibilidad Estudiantil:** Grado de libertad de los estudiantes vs. planes de estudio predefinidos.
+
+### **🚫 Restricciones Reales**
+5.  **Exclusividad:** Un docente/aula no puede estar en dos lugares simultáneamente.
+6.  **Capacitación:** El aula debe soportar el aforo proyectado de la sección.
+7.  **Prerrequisitos:** El flujo de cursos debe respetar la malla curricular.
+8.  **Disponibilidad:** Respeto estricto a las ventanas horarias de docentes externos.
+
+> [!TIP]
+> Puedes profundizar en el análisis técnico en el [**Documento del Problema**](docs/inicio/Documento%20inicial%20del%20problema%20(primer%20borrador).md).
+
+---
+
+## 🎯 2. Visión y Alcance
+Nuestra visión es transformar la gestión académica mediante un **Producto Mínimo Viable (PMV)** que demuestre la viabilidad de la generación automática:
+
+> "Desarrollar una aplicación web moderna que permita gestionar y generar horarios universitarios de manera eficiente, facilitando la planificación académica y evitando conflictos, mediante una interfaz intuitiva y accesible."
+
+**Valor Agregado:** Reducción drástica del error humano y optimización del uso de infraestructura física en un 20%.
+
+---
+
+## ⚙️ 3. Requerimientos del Sistema (RF/RNF)
+Hemos definido una base sólida de **24 requerimientos** (16 Funcionales y 8 No Funcionales) para garantizar la calidad del software.
+
+| Tipo | Cantidad | Ejemplos Clave |
 | :--- | :--- | :--- |
-| **VASQUEZ MIRANDA, Luis Alexis** | 👑 Líder del Proyecto | Backend Developer |
-| **ARAUJO HUAMANI, Leonardo Daniel** | 🔍 Analista de Sistemas | Requirements & Logic |
-| **CURI UNTIVEROS, Jefferson Diego** | 🎨 Diseñador de Software | Architecture & Design |
-| **VILCARANO DE LA CRUZ, Frank Anthony** | 💻 Desarrollador Frontend | UI/UX & QA |
+| **Funcionales (RF)** | 16 | Detección de solapamientos, Gestión de disponibilidad, Motor de generación automática. |
+| **No Funcionales (RNF)** | 8 | Generación en < 60s, Disponibilidad del 95%, Seguridad via Hash de credenciales. |
+
+[**Ver Lista Completa de Requerimientos**](docs/inicio/Lista%20preliminar%20de%20requerimientos%20funcionales%20y%20no%20funcionales.md)
 
 ---
 
-## 🌩️ Problemática Abordada
-La planificación de horarios académicos en entornos de currículo flexible es un desafío crítico. Involucra variables masivas: disponibilidad docente, capacidad de aulas, cruces de secciones y prerrequisitos.
+## 🛠️ 4. Selección del Enfoque (Justificación Técnica)
+Hemos comparado dos arquitecturas principales antes de tomar una decisión fundamentada:
 
-> [!IMPORTANT]
-> Este proyecto aborda un **Problema de Satisfacción de Restricciones (CSP)** de naturaleza combinatoria. El espacio de búsqueda crece exponencialmente, clasificándolo como un **problema complejo de ingeniería**.
+1.  **Enfoque Seleccionado: MERN (React + Node.js)**
+    *   **Justificación:** El uso de un lenguaje único (**JavaScript ES6+**) maximiza la eficiencia del equipo. React permite una **SPA** fluida para visualización de horarios, y Node.js maneja la lógica asíncrona necesaria para el motor de generación.
+2.  **Alternativa Evaluada: Arquitectura Monolítica (Tradicional)**
+    *   **Descarte:** Menor escalabilidad y experiencia de usuario más lenta debido a recargas constantes del servidor.
 
-❌ **Consecuencias Actuales:**
-- ⚠️ Solapamientos de cursos.
-- 🕒 Pérdida masiva de tiempo administrativo.
-- 📉 Uso ineficiente de infraestructura institucional.
+**Metodología:** Aplicación estricta de **Scrum** con entregas incrementales y gestión mediante este repositorio.
 
----
-
-## 🎯 Justificación del PMV
-Nuestro **Producto Mínimo Viable (PMV)** automatiza la generación de horarios integrando algoritmos de validación en tiempo real. 
-
-- ✅ **Precisión:** Eliminación total del solapamiento.
-- ✅ **Optimización:** Distribución eficiente de aulas y docentes.
-- ✅ **Agilidad:** Respuesta inmediata ante cambios de currículo.
+[**Ver Justificación Detallada**](docs/inicio/Documento%20de%20selección%20del%20enfoque%20del%20proyecto.md)
 
 ---
 
-## 🛠️ Stack Tecnológico
-| Tecnología | Logo | Justificación Técnica |
-| :--- | :---: | :--- |
-| **React.js** | ![React](https://img.shields.io/badge/React-20232A?style=flat-square&logo=react&logoColor=61DAFB) | Creación de una **SPA** fluida con alta usabilidad siguiendo normativas de UI. |
-| **Node.js** | ![Node](https://img.shields.io/badge/Node.js-339933?style=flat-square&logo=nodedotjs&logoColor=white) | Implementación de una **API REST** asíncrona para validaciones en tiempo real. |
-| **MongoDB** | ![MongoDB](https://img.shields.io/badge/MongoDB-47A248?style=flat-square&logo=mongodb&logoColor=white) | Esquema **NoSQL** flexible para soportar variabilidad en mallas curriculares. |
-| **Express** | ![Express](https://img.shields.io/badge/Express-000000?style=flat-square&logo=express&logoColor=white) | Middleware robusto para gestión de rutas y seguridad de la API. |
-
----
-
-## 🏗️ Arquitectura del Sistema
-Utilizamos una **Arquitectura Decoupled (Desacoplada)**:
-- 🎨 **Frontend:** SPA independiente en React.
-- ⚙️ **Backend:** API REST en Node.js/Express.
-- 🔗 **Comunicación:** Protocolo HTTP/JSON bajo principios de **Separación de Intereses (SoC)**.
-
----
-
-## ✨ Estándares y Calidad
-Nos regimos bajo los más altos lineamientos de ingeniería:
-
-- 🛡️ **OWASP Top 10:** Seguridad en autenticación y datos sensibles.
-- 📏 **ISO/IEC 25010:** Marco de referencia para mantenibilidad y rendimiento.
-- 🌿 **Green Software:** Algoritmos eficientes para reducir el impacto energético.
-- ♿ **WCAG 2.1:** Accesibilidad garantizada para todos los usuarios.
-
----
-
-## ⚙️ Instrucciones de Instalación
-```bash
-# 1. Clonar el repositorio
-git clone https://github.com/Diegodxd-1/planner-UC.git
-
-# 2. Configurar el Backend
-cd backend
-npm install
-
-# 3. Configurar el Frontend
-cd ../frontend
-npm install
-```
-
-## 🏗️ Instrucciones de Build
-```bash
-# Generar archivos de producción para el Frontend
-cd frontend
-npm run build
-```
-
----
-
-## 📅 Cronograma de Hitos
-| Hito | Descripción | Semana |
+## 📅 5. Planificación y Gestión (Project Charter)
+| Hito | Fase | Semana |
 | :--- | :--- | :--- |
-| **Hito 1** | Análisis del problema y requerimientos | S1 – S2 |
-| **Hito 2** | Diseño de la solución | S3 – S4 |
-| **Hito 3** | Desarrollo del sistema | S5 – S9 |
-| **Hito 4** | Pruebas y validación | S10 – S11 |
-| **Hito 5** | Entrega final del proyecto | S12 |
+| **Hito 1** | Análisis y Requerimientos | S1 - S2 |
+| **Hito 2** | Diseño de Solución | S3 - S4 |
+| **Hito 3** | Desarrollo (Sprints) | S5 - S9 |
+| **Hito 4** | Pruebas y QA | S10 - S11 |
+| **Hito 5** | Cierre y Entrega | S12 |
+
+**Riesgo Crítico:** Complejidad del modelado matemático del algoritmo de generación.
+[**Ver Project Charter Oficial**](docs/inicio/Project%20Charter.md) | [**Ver Supuestos y Restricciones**](docs/inicio/Registro%20de%20supuestos%20y%20restricciones.md)
 
 ---
 
-## 📋 Requerimientos Clave
-El sistema se enfoca en resolver la asignación automatizada bajo restricciones:
-- **RF:** Gestión de docentes, aulas, bloques horarios y detección de conflictos.
-- **RNF:** Generación en < 60s, alta disponibilidad y seguridad de datos.
+## 👥 6. El Equipo de Proyecto
+Organizados bajo roles definidos y normas de convivencia orientadas a resultados.
+
+| Integrante | Rol Scrum / Especialidad |
+| :--- | :--- |
+| **VASQUEZ MIRANDA, Luis Alexis** | **Project Leader** / Backend Developer |
+| **ARAUJO HUAMANI, Leonardo Daniel** | **Analista de Sistemas** / Requirements Logic |
+| **CURI UNTIVEROS, Jefferson Diego** | **Diseñador de Software** / UX-UI Architecture |
+| **VILCARANO DE LA CRUZ, Frank Anthony**| **Frontend Developer** / QA Lead |
+
+**Normas de Trabajo:** Reuniones semanales via Meet, commits atómicos en GitHub, reporte de bloqueos inmediato.
+[**Ver Declaración del Equipo**](docs/inicio/Declaración%20del%20equipo%20del%20proyecto.md)
 
 ---
 
-## 📂 Estructura de Documentación (PMBOK 7.0)
-*Accede a los entregables clave del proyecto directamente desde GitHub.*
+## 📂 7. Entregables de la Fase de Inicio
+Acceso directo a la documentación formal generada en el Sprint 0:
 
-### 📌 Fase 01: Inicio del Proyecto
 | Documento | Descripción | Acceso |
 | :--- | :--- | :---: |
-| **Declaración de Visión** | El propósito y metas a largo plazo del sistema. | [👁️ Ver](docs/inicio/Declaración%20de%20la%20visión%20del%20proyecto.md) |
-| **Constitución del Equipo** | Roles, responsabilidades y acuerdos de trabajo. | [👁️ Ver](docs/inicio/Declaración%20del%20equipo%20del%20proyecto.md) |
-| **Definición del Problema** | Borrador detallado sobre la problemática académica. | [👁️ Ver](docs/inicio/Documento%20inicial%20del%20problema%20(primer%20borrador).md) |
-| **Requerimientos (RF/RNF)** | Especificaciones funcionales y no funcionales. | [👁️ Ver](docs/inicio/Lista%20preliminar%20de%20requerimientos%20funcionales%20y%20no%20funcionales.md) |
-| **Enfoque Tecnológico** | Comparativa y decisión del stack (MERN). | [👁️ Ver](docs/inicio/Documento%20de%20selección%20del%20enfoque%20del%20proyecto.md) |
-| **Project Charter** | Acta de constitución oficial del proyecto. | [👁️ Ver](docs/inicio/Project%20Charter.md) |
-| **Supuestos y Restricciones** | Factores críticos y limitaciones de diseño. | [👁️ Ver](docs/inicio/Registro%20de%20supuestos%20y%20restricciones.md) |
-| **Estado del Repositorio** | Informe sobre la operatividad en GitHub. | [👁️ Ver](docs/inicio/Repositorio%20GitHub%20operativo.md) |
-
----
-
-### 🔜 Próximas Fases
-*   [**📁 Fase de Planificación**](docs/planificacion/): Gestión de riesgos, EDT y Cronograma.
-*   [**📁 Fase de Ejecución**](docs/ejecucion/): Sprints, Backlogs y Evidencias de desarrollo.
-*   [**📁 Seguimiento y Control**](docs/seguimiento_control/): Métricas de calidad y Burndown charts.
-*   [**📁 Fase de Cierre**](docs/cierre/): Informe final y Lecciones aprendidas.
+| **Project Charter** | Acta de constitución oficial. | [👁️ Ver](docs/inicio/Project%20Charter.md) |
+| **Visión del Proyecto** | Metas y valor de negocio. | [👁️ Ver](docs/inicio/Declaración%20de%20la%20visión%20del%20proyecto.md) |
+| **Análisis del Problema** | Identificación de ambigüedades. | [👁️ Ver](docs/inicio/Documento%20inicial%20del%20problema%20(primer%20borrador).md) |
+| **Selección de Enfoque** | Justificación del Stack MERN. | [👁️ Ver](docs/inicio/Documento%20de%20selección%20del%20enfoque%20del%20proyecto.md) |
+| **Especificación de Requerimientos** | Detalle de RF y RNF. | [👁️ Ver](docs/inicio/Lista%20preliminar%20de%20requerimientos%20funcionales%20y%20no%20funcionales.md) |
+| **Registro de Supuestos** | 12 Supuestos y 12 Restricciones. | [👁️ Ver](docs/inicio/Registro%20de%20supuestos%20y%20restricciones.md) |
+| **Equipo y Roles** | Organización del equipo humano. | [👁️ Ver](docs/inicio/Declaración%20del%20equipo%20del%20proyecto.md) |
+| **Estado del Repositorio** | Informe de operatividad. | [👁️ Ver](docs/inicio/Repositorio%20GitHub%20operativo.md) |
 
 ---
 <div align="center">
-  <sub>Desarrollado con ❤️ para el Taller de Proyectos 2 - Universidad Continental</sub>
+  <sub>Taller de Proyectos 2 - Ingeniería de Sistemas e Informática - Universidad Continental (2026)</sub>
 </div>
