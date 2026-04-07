@@ -99,10 +99,37 @@ npm run build
 
 ---
 
+## 📅 Cronograma de Hitos
+| Hito | Descripción | Semana |
+| :--- | :--- | :--- |
+| **Hito 1** | Análisis del problema y requerimientos | S1 – S2 |
+| **Hito 2** | Diseño de la solución | S3 – S4 |
+| **Hito 3** | Desarrollo del sistema | S5 – S9 |
+| **Hito 4** | Pruebas y validación | S10 – S11 |
+| **Hito 5** | Entrega final del proyecto | S12 |
+
+---
+
+## 📋 Requerimientos Clave
+El sistema se enfoca en resolver la asignación automatizada bajo restricciones:
+- **RF:** Gestión de docentes, aulas, bloques horarios y detección de conflictos.
+- **RNF:** Generación en < 60s, alta disponibilidad y seguridad de datos.
+
+---
+
 ## 📂 Estructura de Documentación (PMBOK)
 Accede a la documentación detallada del proyecto siguiendo el estándar internacional:
 
-*   [**📁 Fase de Inicio**](docs/inicio/): Acta de Constitución, Stakeholders, Visión.
+*   [**📁 Fase de Inicio**](docs/inicio/):
+    *   [Declaración de la Visión](docs/inicio/Declaración%20de%20la%20visión%20del%20proyecto.md)
+    *   [Declaración del Equipo](docs/inicio/Declaración%20del%20equipo%20del%20proyecto.md)
+    *   [Documento del Problema](docs/inicio/Documento%20inicial%20del%20problema%20(primer%20borrador).md)
+    *   [Requerimientos (RF/RNF)](docs/inicio/Lista%20preliminar%20de%20requerimientos%20funcionales%20y%20no%20funcionales.md)
+    *   [Selección del Enfoque](docs/inicio/Documento%20de%20selección%20del%20enfoque%20del%20proyecto.md)
+    *   [Project Charter](docs/inicio/Project%20Charter.md)
+    *   [Supuestos y Restricciones](docs/inicio/Registro%20de%20supuestos%20y%20restricciones.md)
+    *   [Repositorio GitHub](docs/inicio/Repositorio%20GitHub%20operativo.md)
+
 *   [**📁 Fase de Planificación**](docs/planificacion/): Cronograma, Gestión de Riesgos.
 *   [**📁 Fase de Ejecución**](docs/ejecucion/): Sprint Backlogs, Evidencias.
 *   [**📁 Seguimiento y Control**](docs/seguimiento_control/): Métricas, Burndown charts.
