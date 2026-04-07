@@ -117,25 +117,30 @@ El sistema se enfoca en resolver la asignación automatizada bajo restricciones:
 
 ---
 
-## 📂 Estructura de Documentación (PMBOK)
-Accede a la documentación detallada del proyecto siguiendo el estándar internacional:
+## 📂 Estructura de Documentación (PMBOK 7.0)
+*Accede a los entregables clave del proyecto directamente desde GitHub.*
 
-*   [**📁 Fase de Inicio**](docs/inicio/):
-    *   [Declaración de la Visión](docs/inicio/Declaración%20de%20la%20visión%20del%20proyecto.md)
-    *   [Declaración del Equipo](docs/inicio/Declaración%20del%20equipo%20del%20proyecto.md)
-    *   [Documento del Problema](docs/inicio/Documento%20inicial%20del%20problema%20(primer%20borrador).md)
-    *   [Requerimientos (RF/RNF)](docs/inicio/Lista%20preliminar%20de%20requerimientos%20funcionales%20y%20no%20funcionales.md)
-    *   [Selección del Enfoque](docs/inicio/Documento%20de%20selección%20del%20enfoque%20del%20proyecto.md)
-    *   [Project Charter](docs/inicio/Project%20Charter.md)
-    *   [Supuestos y Restricciones](docs/inicio/Registro%20de%20supuestos%20y%20restricciones.md)
-    *   [Repositorio GitHub](docs/inicio/Repositorio%20GitHub%20operativo.md)
+### 📌 Fase 01: Inicio del Proyecto
+| Documento | Descripción | Acceso |
+| :--- | :--- | :---: |
+| **Declaración de Visión** | El propósito y metas a largo plazo del sistema. | [👁️ Ver](docs/inicio/Declaración%20de%20la%20visión%20del%20proyecto.md) |
+| **Constitución del Equipo** | Roles, responsabilidades y acuerdos de trabajo. | [👁️ Ver](docs/inicio/Declaración%20del%20equipo%20del%20proyecto.md) |
+| **Definición del Problema** | Borrador detallado sobre la problemática académica. | [👁️ Ver](docs/inicio/Documento%20inicial%20del%20problema%20(primer%20borrador).md) |
+| **Requerimientos (RF/RNF)** | Especificaciones funcionales y no funcionales. | [👁️ Ver](docs/inicio/Lista%20preliminar%20de%20requerimientos%20funcionales%20y%20no%20funcionales.md) |
+| **Enfoque Tecnológico** | Comparativa y decisión del stack (MERN). | [👁️ Ver](docs/inicio/Documento%20de%20selección%20del%20enfoque%20del%20proyecto.md) |
+| **Project Charter** | Acta de constitución oficial del proyecto. | [👁️ Ver](docs/inicio/Project%20Charter.md) |
+| **Supuestos y Restricciones** | Factores críticos y limitaciones de diseño. | [👁️ Ver](docs/inicio/Registro%20de%20supuestos%20y%20restricciones.md) |
+| **Estado del Repositorio** | Informe sobre la operatividad en GitHub. | [👁️ Ver](docs/inicio/Repositorio%20GitHub%20operativo.md) |
 
-*   [**📁 Fase de Planificación**](docs/planificacion/): Cronograma, Gestión de Riesgos.
-*   [**📁 Fase de Ejecución**](docs/ejecucion/): Sprint Backlogs, Evidencias.
-*   [**📁 Seguimiento y Control**](docs/seguimiento_control/): Métricas, Burndown charts.
-*   [**📁 Fase de Cierre**](docs/cierre/): Informe final, Lecciones aprendidas.
+---
+
+### 🔜 Próximas Fases
+*   [**📁 Fase de Planificación**](docs/planificacion/): Gestión de riesgos, EDT y Cronograma.
+*   [**📁 Fase de Ejecución**](docs/ejecucion/): Sprints, Backlogs y Evidencias de desarrollo.
+*   [**📁 Seguimiento y Control**](docs/seguimiento_control/): Métricas de calidad y Burndown charts.
+*   [**📁 Fase de Cierre**](docs/cierre/): Informe final y Lecciones aprendidas.
 
 ---
 <div align="center">
-  <sub>Desarrollado con ❤️ para el Taller de Proyectos 2 - Continental</sub>
+  <sub>Desarrollado con ❤️ para el Taller de Proyectos 2 - Universidad Continental</sub>
 </div>
