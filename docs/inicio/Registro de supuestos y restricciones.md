@@ -24,7 +24,7 @@ Los supuestos representan condiciones que se consideran verdaderas para el desar
 Las restricciones son limitaciones o condiciones que deben respetarse durante el desarrollo del proyecto.
 
 * El sistema debe desarrollarse utilizando el stack tecnológico **MERN (MongoDB, Express, React y Node.js)**.
-* El proyecto debe completarse dentro del periodo académico establecido de **12 semanas**.
+* El proyecto debe completarse dentro del periodo académico establecido de **16 semanas**.
 * El desarrollo se realizará en equipo de trabajo, por lo que se requiere coordinación entre los integrantes.
 * El sistema será desarrollado como un **Producto Mínimo Viable (PMV)**, por lo que solo se implementarán las funcionalidades esenciales.
 * El proyecto debe gestionarse utilizando metodologías ágiles, específicamente **Scrum**.
