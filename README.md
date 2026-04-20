@@ -43,19 +43,22 @@ Para una resolución efectiva, hemos detectado y gestionado las siguientes incer
 ## 🎯 2. Visión y Alcance (PMV)
 Nuestra visión es transformar la gestión académica mediante un **Producto Mínimo Viable (PMV)** que demuestre la viabilidad de la generación automática.
 
-### **✨ Valor de Negocio**
-> "Desarrollar una aplicación web moderna que permita gestionar y generar horarios universitarios de manera eficiente, facilitando la planificación académica y evitando conflictos, mediante una interfaz intuitiva y accesible."
+### **✨ Valor de Negocio (Visión)**
+> "Para los coordinadores académicos de la UC, el Sistema Planner-UC es una solución de optimización que permite la generación automática de horarios 100% libres de solapamientos, garantizando eficiencia y trazabilidad frente a los procesos manuales tradicionales."
+
 
 ### **📦 Alcance del PMV (Medible)**
 Para este proyecto Continental, el alcance se define estrictamente como:
 *   **Inclusión:** Motor de generación algorítmica, validación de conflictos en tiempo real, persistencia de datos base (docentes, aulas, cursos), y visualización de mallas horarias.
-*   **Exclusión:** No incluye integración con sistemas ERP universitarios (Banner/PeopleSoft), capacitación presencial ni soporte técnico post-entrega.
+*   **Exclusión (Consistencia MVP):** No incluye integración con sistemas ERP (Banner/PeopleSoft), pagos ni soporte técnico, manteniendo el enfoque en la **funcionalidad esencial de programación**.
 *   **Meta:** Generar un horario 100% libre de conflictos para un escenario de prueba de 50 docentes y 100 cursos.
+
 
 ---
 
-## ⚙️ 3. Requerimientos del Sistema (RF/RNF)
-Hemos definido una base sólida de **24 requerimientos** (16 Funcionales y 8 No Funcionales) para garantizar la calidad del software.
+## ⚙️ 3. Requerimientos del Sistema (SMART)
+Hemos definido una base de **24 requerimientos** formulados y validados conforme al enfoque **SMART** (Específicos, Medibles, Alcanzables, Relevantes y Acotados en el tiempo).
+
 
 | Tipo | Cantidad | Ejemplos Clave |
 | :--- | :--- | :--- |
@@ -70,7 +73,8 @@ Hemos definido una base sólida de **24 requerimientos** (16 Funcionales y 8 No 
 Hemos comparado dos arquitecturas principales antes de tomar una decisión fundamentada:
 
 1.  **Enfoque Seleccionado: MERN (React + Node.js)**
-    *   **Justificación:** El uso de un lenguaje único (**JavaScript ES6+**) maximiza la eficiencia del equipo. React permite una **SPA** fluida para visualización de horarios, y Node.js maneja la lógica asíncrona necesaria para el motor de generación.
+    *   **Justificación:** Selección fundamentada en criterios **técnicos** (procesamiento asíncrono), **metodológicos** (Scrum/Lenguaje unificado) y **contextuales** (curva de aprendizaje y 16 semanas de plazo).
+
 2.  **Alternativa Evaluada: Arquitectura Monolítica (Tradicional)**
     *   **Descarte:** Menor escalabilidad y experiencia de usuario más lenta debido a recargas constantes del servidor.
 
