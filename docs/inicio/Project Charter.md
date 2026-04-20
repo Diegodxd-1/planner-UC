@@ -55,11 +55,12 @@ Desarrollo de un sistema que permita generar horarios académicos de forma autom
 
 | Hito | Descripción | Fecha |
 | :--- | :--- | :--- |
-| Hito 1 | Análisis del problema y requerimientos | Semana 1 – Semana 2 |
-| Hito 2 | Diseño de la solución | Semana 3 – Semana 4 |
-| Hito 3 | Desarrollo del sistema | Semana 5 – Semana 9 |
-| Hito 4 | Pruebas y validación | Semana 10 – Semana 11 |
-| Hito 5 | Entrega final del proyecto | Semana 12 |
+| **Hito 1** | Fase de Inicio: Análisis del problema y requerimientos (SMART) | Semana 1 – Semana 3 |
+| **Hito 2** | Fase de Elaboración: Diseño de la arquitectura y la solución | Semana 4 – Semana 6 |
+| **Hito 3** | Fase de Construcción: Desarrollo iterativo del sistema (Sprints) | Semana 7 – Semana 13 |
+| **Hito 4** | Fase de Transición: Pruebas, QA y validación con usuarios | Semana 14 – Semana 15 |
+| **Hito 5** | Fase de Cierre: Entrega final y sustentación | Semana 16 |
+
 
 ## 6. Consideraciones del proyecto
 

@@ -84,11 +84,12 @@ Hemos comparado dos arquitecturas principales antes de tomar una decisión funda
 ## 5. Planificación y Gestión (Project Charter)
 | Hito | Fase | Semana |
 | :--- | :--- | :--- |
-| **Hito 1** | Análisis y Requerimientos | S1 - S2 |
-| **Hito 2** | Diseño de Solución | S3 - S4 |
-| **Hito 3** | Desarrollo (Sprints) | S5 - S9 |
-| **Hito 4** | Pruebas y QA | S10 - S11 |
-| **Hito 5** | Cierre y Entrega | S12 |
+| **Hito 1** | Análisis y Requerimientos | S1 - S3 |
+| **Hito 2** | Diseño de Solución | S4 - S6 |
+| **Hito 3** | Desarrollo (Sprints) | S7 - S13 |
+| **Hito 4** | Pruebas y QA | S14 - S15 |
+| **Hito 5** | Cierre y Entrega | S16 |
+
 
 **Riesgo Crítico:** Complejidad del modelado matemático del algoritmo de generación.
 
