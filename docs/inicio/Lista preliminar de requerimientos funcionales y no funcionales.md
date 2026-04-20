@@ -11,16 +11,17 @@
 
 Los siguientes requerimientos han sido validados con los stakeholders y cumplen con los criterios SMART (Específicos, Medibles, Alcanzables, Relevantes y Acotados en el tiempo).
 
-| ID | Nombre | Especificación (S) | Medición / Aceptación (M) | Plazo (T) |
-|:---|:---|:---|:---|:---|
-| **RF-01** | **Gestión de Docentes** | Registrar, editar y listar docentes con código único, especialidad y disponibilidad horaria. | Validación de código único (100%) y respuesta de guardado en < 1s. | Sprint 1 |
-| **RF-02** | **Gestión de Cursos** | Registrar cursos con créditos, horas semanales, requisitos de aula y secciones necesarias. | Los cursos deben aparecer en el catálogo inmediatamente tras el registro. | Sprint 1 |
-| **RF-03** | **Gestión de Infraestructura** | Registrar aulas con capacidad de aforo y equipamiento técnico (ej: laboratorios). | El sistema debe impedir asignar más alumnos que el aforo definido. | Sprint 1 |
-| **RF-04** | **Motor de Generación** | Algoritmo que asigne automáticamente docente-curso-aula-bloque sin solapamientos. | Generación de un horario completo para 100 cursos en menos de 60 segundos. | Sprint 2 |
-| **RF-05** | **Validación de Conflictos** | Identificar y alertar en tiempo real si un docente o aula tiene doble asignación. | 100% de solapamientos detectados con mensaje de advertencia visual. | Sprint 2 |
-| **RF-06** | **Ajuste Manual** | Permitir al administrador mover clases en una grilla interactiva tipo "drag-and-drop". | Cada movimiento manual debe disparar una validación de reglas de negocio en < 300ms. | Sprint 3 |
-| **RF-07** | **Reporte de Factibilidad** | Generar un informe de cursos no programados por falta de recursos (aulas/docentes). | El reporte debe listar la causa exacta (ej: "Sin aula disponible en bloque X"). | Sprint 2 |
-| **RF-08** | **Seguridad de Roles** | Diferenciar permisos entre "Carga Académica" (lectura/escritura) y "Consulta" (solo lectura). | 100% de endpoints protegidos mediante tokens JWT y validación de roles. | Sprint 1 |
+| ID | Nombre | Especificación (S) | Medición (M) | Trazabilidad | Prioridad |
+|:---|:---|:---|:---|:---|:---|
+| **RF-01** | **Gestión de Docentes** | Registro incremental de disponibilidad y especialidad. | Validación de código único al 100%. | Docentes / Disponibilidad | Alta |
+| **RF-02** | **Gestión de Cursos** | Definición de horas semanales y requisitos de aula. | Visibilidad en catálogo inmediata (< 1s). | Cursos / Malla Curricular | Alta |
+| **RF-03** | **Infraestructura** | Registro de aulas con aforo y equipamiento. | Bloqueo automático ante exceso de aforo. | Aulas / Capacidad | Alta |
+| **RF-04** | **Motor de Generación** | Asignación automática sin solapamientos. | Solución para 100 cursos en < 60s. | Bloques / Restricciones | Crítica |
+| **RF-05** | **Validación Real-time** | Alertas de doble asignación en tiempo real. | 100% de solapamientos detectados. | Conflictos horaros | Crítica |
+| **RF-06** | **Ajuste Manual** | Interfaz drag-and-drop para cambios post-motor. | Latencia de validación < 300ms. | Flexibilidad operativa | Media |
+| **RF-07** | **Reporte Factibilidad** | Listado de cursos no asignados con causa. | Informe con 0% de ambigüedad en falla. | Optimización recursos | Alta |
+| **RF-08** | **Seguridad** | Autenticación y roles (Escritura/Lectura). | 100% de endpoints protegidos por JWT. | Integridad de datos | Crítica |
+
 
 ---
 

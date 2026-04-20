@@ -10,6 +10,9 @@ Los supuestos representan condiciones que se consideran verdaderas para el desar
 * **Disponibilidad de Datos**: Se asume que la universidad proporcionará la carga de docentes y aulas en formatos compatibles (Excel/CSV) durante el Sprint 1.
 * **Infraestructura**: Se cuenta con un entorno de staging para pruebas de integración continua.
 * **Usuarios**: Los coordinadores académicos tienen competencias digitales básicas para operar una SPA.
+* **Conectividad**: Se asume que el sistema operará en un entorno con acceso a internet estable para el consumo de la base de datos en la nube.
+* **Integridad Previa**: Los datos fuentes de aulas y docentes entregados por la institución no contienen solapamientos previos al ingreso al sistema.
+
 
 ## 2. Restricciones del Sistema
 Las restricciones son limitaciones técnicas y de negocio que guían la arquitectura, coordinadas con los stakeholders principales.

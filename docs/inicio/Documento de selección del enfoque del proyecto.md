@@ -33,12 +33,14 @@ La selección del enfoque se fundamenta en los siguientes criterios clave:
 
 ## 3. Evaluación de Enfoques
 
-| Criterio | Enfoque Seleccionado: MERN Stack | Alternativa: Arquitectura Monolítica |
-| :--- | :--- | :--- |
-| **Arquitectura** | **SPA (Single Page Application)**: Frontend (React) y Backend (Node) desacoplados. | **MPA (Multi-Page Application)**: Basada en plantillas del lado del servidor. |
-| **Productividad** | **Muy Alta**: Equipo especializado en un solo lenguaje (JS/TS). | **Media**: Requiere cambio de contexto entre lenguajes (ej: PHP/Java y JS). |
-| **Interactividad** | **React.js**: Actualización parcial del DOM sin recargar la página. | **HTML/JQuery**: Recargas constantes, UX menos fluida. |
-| **Despliegue** | **Cloud Native**: Optimizado para micro-servicios y hosting moderno. | **Tradicional**: Requiere gestión manual de servidores y SO. |
+| Criterio | Seleccionado: MERN Stack | Alternativa 1: Monolito Tradicional | Alternativa 2: Microservicios (Go/Python) |
+| :--- | :--- | :--- | :--- |
+| **Arquitectura** | **SPA**: Full desacople. | **MPA**: Basado en plantillas. | **Distribuida**: Servicios independientes. |
+| **Productividad** | **Muy Alta**: Lenguaje único (JS). | **Media**: Cambio de contexto. | **Baja**: Complejidad de red y despliegue. |
+| **Interactividad** | **React.js**: UX fluida. | **HTML/JQuery**: UX básica. | **Web/Mobile**: UX flexible pero costosa. |
+| **Escalabilidad** | **Alta**: Horizontal en Node. | **Baja**: Vertical (Monolito). | **Máxima**: Escala por servicio. |
+| **Mantenimiento** | **Simplificado**: Monorepo/Ecosistema. | **Robusto**: Pero lento de cambiar. | **Complejo**: Requiere Orquestadores. |
+
 
 ## 4. Conclusión
 Se ha optado por el stack **MERN (MongoDB, Express, React, Node.js)** porque maximiza los criterios de **Eficiencia de Procesamiento** y **Colaboración Full-stack**, garantizando la entrega de un MVP funcional y escalable dentro de los plazos establecidos.

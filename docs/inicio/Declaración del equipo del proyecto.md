@@ -35,8 +35,11 @@
 ## Objetivos del Equipo
 El equipo tiene como objetivo desarrollar un sistema funcional que permita generar horarios académicos óptimos, cumpliendo con los requerimientos establecidos y trabajando de manera colaborativa.
 
-## Normas de Trabajo
-* Cumplir con fechas de entrega.
-* Participar activamente en reuniones.
-* Comunicar avances y problemas.
-* Usar herramientas compartidas.
+## Normas de Convivencia y Trabajo (Marco Scrum)
+Para asegurar el alto rendimiento, el equipo adopta el siguiente código de conducta:
+1.  **Sincronización Diaria**: Uso de canal de Discord para actualizaciones de 5 minutos sobre: *¿Qué hice? ¿Qué haré? ¿Qué me bloquea?*
+2.  **Gestión de Código**: Prohibido hacer "Push" directo a la rama `main` sin un Pull Request verificado por al menos un compañero.
+3.  **Compromiso de Calidad**: Todo entregable debe pasar por una revisión de QA interna antes de ser considerado "Hecho" (Definition of Done).
+4.  **Resolución de Conflictos**: Los desacuerdos técnicos se resuelven mediante debate basado en datos y, en última instancia, por decisión del Líder de Proyecto priorizando la viabilidad del MVP.
+5.  **Puntualidad**: Tolerancia de 5 minutos en reuniones semanales. Ausencias deben justificarse con 24h de anticipación.
+

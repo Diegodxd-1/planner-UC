@@ -20,10 +20,19 @@ Actualmente, este proceso se gestiona de manera artesanal o con herramientas de 
 El desafío principal consiste en diseñar e implementar un motor de optimización que genere mallas horarias factibles y óptimas, garantizando el cumplimiento del 100% de las restricciones obligatorias y maximizando las preferencias institucionales.
 
 ### Gestión de Incertidumbres y Ambigüedades
-Como parte del pensamiento crítico aplicado, se han identificado las siguientes áreas de incertidumbre inicial que el sistema debe gestionar:
-1.  **Bloques Horarios Dinámicos**: Necesidad de definir una estructura de bloques (ej: 60 u 90 minutos) que se adapte a diferentes modalidades.
-2.  **Priorización Jerárquica**: Definir la lógica de decisión cuando dos restricciones deseables entran en conflicto (ej: Preferencia de docente vs. optimización de aula).
-3.  **Carga Docente Máxima**: Ambigüedad en la definición de topes de secciones consecutivas para evitar la fatiga académica.
+Como parte del pensamiento crítico aplicado, se han identificado las siguientes áreas de incertidumbre inicial que el sistema debe gestionar (Mínimo 4 según rúbrica):
+1.  **Bloques Horarios Dinámicos**: Falta de definición sobre si la estructura de bloques es rígida (todas las horas iguales) o dinámica por facultad.
+2.  **Priorización Jerárquica de Conflictos**: Ambigüedad en la jerarquía de resolución cuando dos restricciones de alta prioridad colisionan.
+3.  **Tope de Carga Lectiva**: Incertidumbre sobre el límite máximo de horas frente a aula consecutivas permitidas para evitar el agotamiento docente.
+4.  **Flexibilidad de Matrícula**: Desconocimiento del impacto real de los cruces de horarios en cursos electivos de diferentes facultades.
+
+## 3. Mapa de Stakeholders y Relaciones
+Para asegurar la viabilidad, se han identificado los siguientes actores clave:
+*   **Dirección Académica**: Responsable de definir las reglas de negocio y validar la factibilidad legal de los horarios.
+*   **Coordinadores de Facultad**: Stakeholders operativos que proveen la disponibilidad docente y necesidades de aula.
+*   **Gestión de Infraestructura**: Provee el inventario verificado de aulas, laboratorios y sus capacidades técnicas.
+*   **Cuerpo Docente**: Beneficiarios indirectos cuya satisfacción depende de mallas compactas y respeto a su disponibilidad.
+
 
 ## 3. Modelado del Problema: Variables y Parámetros
 Para abordar la resolución técnica, el problema se descompone en las siguientes entidades:

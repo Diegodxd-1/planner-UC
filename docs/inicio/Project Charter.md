@@ -85,8 +85,20 @@ Desarrollo de un sistema que permita generar horarios académicos de forma autom
 * Las restricciones se mantendrán estables.
 
 ### Restricciones
-* Tiempo limitado para el desarrollo.
-* Recursos técnicos limitados.
-* Proyecto desarrollado solo por estudiantes.
-* No se contará con datos reales completos.
-* Alcance limitado a un prototipo funcional.
+* Tiempo limitado para el desarrollo (16 semanas calendario).
+* Recursos técnicos limitados (equipo de 4 estudiantes).
+* Proyecto desarrollado íntegramente bajo marco académico.
+* Limitación de acceso a datos sensibles (solo se operará con datos anonimizados).
+* Alcance restringido a la funcionalidad núcleo de optimización horaria (PMV).
+
+## 7. Presupuesto Operativo Inicial
+Para la fase de Sprint 0 y ejecución del PMV:
+*   **Servicios Cloud (Hosting/DB)**: US$ 0.00 (Nivel Gratuito de Vercel/MongoDB Atlas).
+*   **Herramientas de Colaboración**: US$ 0.00 (GitHub/Meet/Discord).
+*   **Capital Humano**: 480 Horas-Hombre estimadas (16 semanas x 7.5h/semana x 4 integrantes).
+
+## 8. Gobernanza y Comunicación
+*   **Reuniones de Sincronización**: Lunes 18:00 - 19:30 (Revisión de Sprint).
+*   **Herramienta de Seguimiento**: GitHub Project Board (Kanban).
+*   **Validación de Entregables**: Aprobación por mayoría simple del equipo y feedback del docente supervisor.
+
