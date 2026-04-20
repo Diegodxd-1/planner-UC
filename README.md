@@ -129,7 +129,8 @@ Siguiendo las directrices académicas, la documentación del proyecto está orga
 | **3. Contexto y Alcance** | Delimitación del PMV y Project Charter. | [Ver](docs/inicio/Project%20Charter.md) |
 | **4. Estrategia Solución** | Justificación del Stack MERN seleccionado. | [Ver](docs/inicio/Documento%20de%20selección%20del%20enfoque%20del%20proyecto.md) |
 | **10. Calidad (SMART)** | Requerimientos Funcionales y No Funcionales. | [Ver](docs/inicio/Lista%20preliminar%20de%20requerimientos%20funcionales%20y%20no%20funcionales.md) |
-| **Análisis Técnico** | Definición del problema e incertidumbres. | [Ver](docs/inicio/Documento%20inicial%20del%20problema%20(primer%20borrador).md) |
+| **Análisis Técnico** | Análisis del problema complejo de ingeniería. | [Ver](docs/inicio/Documento%20inicial%20del%20problema%20(primer%20borrador).md) |
+
 | **Gestión Repositorio** | Informe de operatividad de GitHub. | [Ver](docs/inicio/Repositorio%20GitHub%20operativo.md) |
 | **Equipo Académico** | Roles y normas de convivencia. | [Ver](docs/inicio/Declaración%20del%20equipo%20del%20proyecto.md) |
 

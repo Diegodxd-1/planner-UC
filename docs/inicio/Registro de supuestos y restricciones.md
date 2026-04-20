@@ -15,7 +15,8 @@ Los supuestos representan condiciones que se consideran verdaderas para el desar
 Las restricciones son limitaciones técnicas y de negocio que guían la arquitectura, coordinadas con los stakeholders principales.
 
 ### 2.1 Restricciones de Negocio (MVP Coherence)
-* **Alcance del PMV**: El sistema se enfocará exclusivamente en la funcionalidad de **Generación y Optimización de Horarios**. Se excluyen módulos de pago, asistencia y actas de notas para mantener la viabilidad técnica en 16 semanas.
+* **Alcance del PMV**: El sistema se enfocará en la **implementación exclusiva de funcionalidades esenciales** de generación y optimización. Se excluyen módulos de pago, asistencia y actas para garantizar un despliegue viable en 16 semanas.
+
 * **Plazo Estricto**: Entrega final programada para la Semana 16 del ciclo académico 2026.
 * **Metodología**: Uso obligatorio de **Scrum** con ceremonias semanales registradas en el repositorio.
 

@@ -8,35 +8,42 @@
 
 ---
 
-## 1. Contexto del problema
-En las universidades, la planificación de horarios académicos es una tarea compleja que involucra múltiples variables como la disponibilidad de docentes, la asignación de aulas, los cursos ofrecidos, las secciones disponibles y las restricciones académicas asociadas. Generalmente, este proceso se realiza de forma manual o mediante herramientas poco automatizadas, lo que puede generar errores, conflictos de horarios y dificultades en la organización académica.
+## 1. Introducción y Contexto
+En el ámbito académico universitario, la planificación de horarios representa un **Problema de Ingeniería Complejo** de naturaleza combinatoria, específicamente un **Constraint Satisfaction Problem (CSP)**. En entornos de **currículo flexible**, como el de la Universidad Continental, la complejidad aumenta exponencialmente debido a la alta variabilidad en la matrícula estudiantil, la disponibilidad fragmentada de docentes y la infraestructura física limitada (aulas y laboratorios).
 
-## 2. Problema central
-El problema central consiste en la dificultad de generar horarios académicos universitarios de manera eficiente, considerando múltiples restricciones y recursos limitados. La generación manual es propensa a errores y requiere múltiples ajustes.
+Actualmente, este proceso se gestiona de manera artesanal o con herramientas de baja automatización, lo que resulta en:
+*   **Ineficiencia**: Ciclos de planificación extendidos que consumen recursos administrativos.
+*   **Conflictos**: Solapamientos involuntarios de docentes o aulas.
+*   **Suboptimización**: Uso ineficiente del aforo de las aulas y brechas horarias improductivas para estudiantes y docentes.
 
-### Ambigüedad del problema
-* No se especifica el número exacto de bloques horarios disponibles.
-* No se define la prioridad entre restricciones en caso de conflicto.
-* No se detalla si los docentes pueden dictar múltiples secciones del mismo curso.
-* No se establece si los estudiantes eligen libremente o siguen un plan predefinido.
+## 2. Definición del Problema Central
+El desafío principal consiste en diseñar e implementar un motor de optimización que genere mallas horarias factibles y óptimas, garantizando el cumplimiento del 100% de las restricciones obligatorias y maximizando las preferencias institucionales.
 
-## 3. Variables involucradas
-* Estudiantes matriculados.
-* Docentes responsables.
-* Cursos y secciones.
-* Aulas y capacidad.
-* Bloques horarios.
-* Restricciones de disponibilidad y compatibilidad.
+### Gestión de Incertidumbres y Ambigüedades
+Como parte del pensamiento crítico aplicado, se han identificado las siguientes áreas de incertidumbre inicial que el sistema debe gestionar:
+1.  **Bloques Horarios Dinámicos**: Necesidad de definir una estructura de bloques (ej: 60 u 90 minutos) que se adapte a diferentes modalidades.
+2.  **Priorización Jerárquica**: Definir la lógica de decisión cuando dos restricciones deseables entran en conflicto (ej: Preferencia de docente vs. optimización de aula).
+3.  **Carga Docente Máxima**: Ambigüedad en la definición de topes de secciones consecutivas para evitar la fatiga académica.
 
-## 4. Restricciones del problema
-* Un docente no puede estar en dos cursos al mismo tiempo.
-* Un aula no puede ser usada por más de un curso simultáneamente.
-* Los estudiantes no deben tener cursos obligatorios solapados.
-* La capacidad del aula debe ser suficiente.
-* Respetar prerrequisitos entre cursos.
+## 3. Modelado del Problema: Variables y Parámetros
+Para abordar la resolución técnica, el problema se descompone en las siguientes entidades:
+*   **Variables de Decisión**: Asignación `(Docente, Curso, Sección, Bloque, Aula)`.
+*   **Conjunto de Dominios**: Bloques horarios semanales y aulas disponibles por sede.
+*   **Parámetros de Entrada**: Matrícula proyectada, disponibilidad docente y malla curricular.
 
-## 5. Necesidad de una solución tecnológica
-Es necesario desarrollar una herramienta tecnológica que automatice el proceso, facilitando la gestión de datos, la validación de restricciones y la generación automática de soluciones óptimas.
+## 4. Restricciones del Sistema (Validación Técnica)
+Se han identificado dos capas de restricciones fundamentales:
+*   **Restricciones de Integridad (Duras)**: 
+    *   No solapamiento de docentes/aulas.
+    *   Cumplimiento de aforo máximo.
+    *   Sincronía de bloques en cursos con múltiples horas.
+*   **Restricciones de Calidad (Blandas)**:
+    *   Minimización de "horas huecas" para estudiantes.
+    *   Agrupación de secciones por especialidad en bloques contiguos.
 
-## 6. Alcance del proyecto
-Desarrollar un **Producto Mínimo Viable (PMV)** utilizando el **stack tecnológico MERN (MongoDB, Express, React y Node.js)** para demostrar la viabilidad de la solución automática.
+## 5. Propuesta de Solución: Enfoque MERN
+Se propone el desarrollo de un **Producto Mínimo Viable (PMV)** robusto basado en el stack **MERN** (MongoDB, Express, React, Node.js). Este enfoque permite:
+1.  **Frontend React**: Gestión de una interfaz interactiva para ajustes manuales post-generación.
+2.  **Backend Node.js**: Ejecución del algoritmo de optimización de forma asíncrona.
+3.  **Persistencia MongoDB**: Flexibilidad para almacenar mallas horarias con estructuras JSON variables.
+

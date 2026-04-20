@@ -26,9 +26,10 @@ La selección del enfoque se fundamenta en los siguientes criterios clave:
 *   **Mantenibilidad**: Facilidad para implementar pruebas unitarias y garantizar la trazabilidad mediante Git.
 
 ### 2.3 Criterios Contextuales
-*   **Escalabilidad del Proyecto**: El sistema debe soportar un crecimiento en el número de sedes y facultades sin rediseños mayores.
-*   **Entorno Universitario**: Compatibilidad con navegadores modernos y facilidad de acceso para coordinadores.
-*   **Restricciones de Tiempo**: Finalización del MVP en 16 semanas.
+*   **Integración Institucional**: Capacidad de alineación con el ecosistema digital de la **Universidad Continental** y su enfoque en currículo flexible.
+*   **Perfil del Usuario**: Adaptación a coordinadores académicos que requieren una herramienta centralizada y operativa sin dependencias externas complejas.
+*   **Marco Académico**: Cumplimiento del plazo de 16 semanas para la entrega de un proyecto terminal con alta carga de optimización matemática.
+
 
 ## 3. Evaluación de Enfoques
 
