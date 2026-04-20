@@ -124,15 +124,20 @@ Siguiendo las directrices académicas, la documentación del proyecto está orga
 
 | Sección arc42 | Documento de Referencia | Acceso Directo |
 | :--- | :--- | :---: |
-| **1. Metas y Visión** | Objetivos estratégicos y valor de negocio. | [Ver](docs/inicio/Declaración%20de%20la%20visión%20del%20proyecto.md) |
-| **2. Restricciones** | Limitaciones técnicas, de tiempo y equipo. | [Ver](docs/inicio/Registro%20de%20supuestos%20y%20restricciones.md) |
-| **3. Contexto y Alcance** | Delimitación del PMV y Project Charter. | [Ver](docs/inicio/Project%20Charter.md) |
-| **4. Estrategia Solución** | Justificación del Stack MERN seleccionado. | [Ver](docs/inicio/Documento%20de%20selección%20del%20enfoque%20del%20proyecto.md) |
+| **1. Metas y Visión** | Visión del producto y análisis del problema complejo. | [Ver](docs/inicio/Declaración%20de%20la%20visión%20del%20proyecto.md) |
+| **2. Restricciones** | Limitaciones técnicas, de negocio y equipo validadas. | [Ver](docs/inicio/Registro%20de%20supuestos%20y%20restricciones.md) |
+| **3. Contexto y Alcance** | Delimitación del PMV y Project Charter oficial. | [Ver](docs/inicio/Project%20Charter.md) |
+| **4. Estrategia Solución** | Justificación del Stack MERN y criterios de selección. | [Ver](docs/inicio/Documento%20de%20selección%20del%20enfoque%20del%20proyecto.md) |
+| **5. Vista de Bloques** | Estructura de alto nivel (React, Node, MongoDB). | [Ver](docs/ARC42.md#5-vista-de-bloques) |
+| **6 - 9. Vistas Técnicas** | Ejecución, despliegue y conceptos (En desarrollo). | [Ver](docs/ARC42.md) |
 | **10. Calidad (SMART)** | Requerimientos Funcionales y No Funcionales. | [Ver](docs/inicio/Lista%20preliminar%20de%20requerimientos%20funcionales%20y%20no%20funcionales.md) |
-| **Análisis Técnico** | Análisis del problema complejo de ingeniería. | [Ver](docs/inicio/Documento%20inicial%20del%20problema%20(primer%20borrador).md) |
+| **11 - 12. Riesgos y Otros** | Mitigación de riesgos y glosario de términos. | [Ver](docs/ARC42.md) |
 
-| **Gestión Repositorio** | Informe de operatividad de GitHub. | [Ver](docs/inicio/Repositorio%20GitHub%20operativo.md) |
-| **Equipo Académico** | Roles y normas de convivencia. | [Ver](docs/inicio/Declaración%20del%20equipo%20del%20proyecto.md) |
+### Gestión y Otros Entregables
+*   **Análisis del Problema**: [Documento de Ingeniería](docs/inicio/Documento%20inicial%20del%20problema%20(primer%20borrador).md)
+*   **Gestión Repositorio**: [Informe de Operatividad](docs/inicio/Repositorio%20GitHub%20operativo.md)
+*   **Equipo Académico**: [Roles y Normas](docs/inicio/Declaración%20del%20equipo%20del%20proyecto.md)
+
 
 ---
 <div align="center">
