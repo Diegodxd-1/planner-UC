@@ -15,4 +15,10 @@
 ---
 
 ## Visión
-Desarrollar una aplicación web moderna que permita gestionar y generar horarios universitarios de manera eficiente, considerando la disponibilidad de docentes, cursos y aulas para evitar conflictos académicos. El sistema ofrecerá generación automática de horarios con validación de restricciones y detección de conflictos en tiempo real, permitiendo una planificación académica más rápida, precisa y optimizada en comparación con los procesos manuales o herramientas tradicionales utilizadas en muchas instituciones educativas.
+**Para** los coordinadores académicos y gestores administrativos de la Universidad Continental,  
+**Que** enfrentan la compleja tarea de planificar y generar horarios en entornos de currículo flexible,  
+**El** Sistema Planner-UC **es una** aplicación web de optimización académica  
+**Que** permite la generación automática de horarios 100% libres de solapamientos, reduciendo el tiempo de planificación en un 80% y garantizando el cumplimiento de restricciones de docentes y aulas.  
+**A diferencia de** los procesos manuales en hojas de cálculo o herramientas genéricas de calendario,  
+**Nuestro producto** integra un motor de resolución de conflictos en tiempo real diseñado específicamente para la estructura de la universidad, ofreciendo trazabilidad total y flexibilidad inmediata ante cambios.
+

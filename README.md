@@ -109,19 +109,26 @@ Organizados bajo roles definidos y normas de convivencia orientadas a resultados
 
 ---
 
-## 📂 7. Entregables de la Fase de Inicio
-Acceso directo a la documentación formal generada en el Sprint 0:
+## 📂 7. Documentación Estructurada (Estándar ARC42)
 
-| Documento | Descripción | Acceso |
+Siguiendo las directrices académicas, la documentación del proyecto está organizada bajo el estándar **arc42**, garantizando la trazabilidad entre requerimientos y arquitectura.
+
+> [!IMPORTANT]
+> Puedes acceder al índice centralizado de arquitectura aquí: [**📘 Índice ARC42**](docs/ARC42.md)
+
+### 📋 Tabla de Contenidos (TOC)
+
+| Sección arc42 | Documento de Referencia | Acceso Directo |
 | :--- | :--- | :---: |
-| **Project Charter** | Acta de constitución oficial. | [👁️ Ver](docs/inicio/Project%20Charter.md) |
-| **Visión del Proyecto** | Metas y valor de negocio. | [👁️ Ver](docs/inicio/Declaración%20de%20la%20visión%20del%20proyecto.md) |
-| **Análisis del Problema** | Identificación de ambigüedades. | [👁️ Ver](docs/inicio/Documento%20inicial%20del%20problema%20(primer%20borrador).md) |
-| **Selección de Enfoque** | Justificación del Stack MERN. | [👁️ Ver](docs/inicio/Documento%20de%20selección%20del%20enfoque%20del%20proyecto.md) |
-| **Especificación de Requerimientos** | Detalle de RF y RNF. | [👁️ Ver](docs/inicio/Lista%20preliminar%20de%20requerimientos%20funcionales%20y%20no%20funcionales.md) |
-| **Registro de Supuestos** | 12 Supuestos y 12 Restricciones. | [👁️ Ver](docs/inicio/Registro%20de%20supuestos%20y%20restricciones.md) |
-| **Equipo y Roles** | Organización del equipo humano. | [👁️ Ver](docs/inicio/Declaración%20del%20equipo%20del%20proyecto.md) |
-| **Estado del Repositorio** | Informe de operatividad. | [👁️ Ver](docs/inicio/Repositorio%20GitHub%20operativo.md) |
+| **1. Metas y Visión** | Objetivos estratégicos y valor de negocio. | [👁️ Ver](docs/inicio/Declaración%20de%20la%20visión%20del%20proyecto.md) |
+| **2. Restricciones** | Limitaciones técnicas, de tiempo y equipo. | [👁️ Ver](docs/inicio/Registro%20de%20supuestos%20y%20restricciones.md) |
+| **3. Contexto y Alcance** | Delimitación del PMV y Project Charter. | [👁️ Ver](docs/inicio/Project%20Charter.md) |
+| **4. Estrategia Solución** | Justificación del Stack MERN seleccionado. | [👁️ Ver](docs/inicio/Documento%20de%20selección%20del%20enfoque%20del%20proyecto.md) |
+| **10. Calidad (SMART)** | Requerimientos Funcionales y No Funcionales. | [👁️ Ver](docs/inicio/Lista%20preliminar%20de%20requerimientos%20funcionales%20y%20no%20funcionales.md) |
+| **Análisis Técnico** | Definición del problema e incertidumbres. | [👁️ Ver](docs/inicio/Documento%20inicial%20del%20problema%20(primer%20borrador).md) |
+| **Gestión Repositorio** | Informe de operatividad de GitHub. | [👁️ Ver](docs/inicio/Repositorio%20GitHub%20operativo.md) |
+| **Equipo Académico** | Roles y normas de convivencia. | [👁️ Ver](docs/inicio/Declaración%20del%20equipo%20del%20proyecto.md) |
+
 
 ---
 <div align="center">

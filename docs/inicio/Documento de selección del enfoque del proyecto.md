@@ -11,17 +11,34 @@
 ## 1. Objetivo
 Definir y justificar el enfoque tecnológico seleccionado para el desarrollo del sistema de generación de horarios universitarios.
 
-## 2. Evaluación de Enfoques
+## 2. Criterios de Selección
 
-| Criterio | Enfoque Seleccionado: React + Node.js (Fullstack JS) | Alternativa Evaluada: Arquitectura Monolítica (Tradicional) |
+La selección del enfoque se fundamenta en los siguientes criterios clave:
+
+### 2.1 Criterios Técnicos
+*   **Eficiencia de Procesamiento**: Capacidad de manejar algoritmos de búsqueda combinatoria (CSP) en el servidor.
+*   **Renderizado Dinámico**: Necesidad de una interfaz altamente interactiva (SPA) para la visualización de grillas horarias.
+*   **Integridad de Datos**: Flexibilidad para manejar esquemas de datos que pueden evolucionar durante el desarrollo.
+
+### 2.2 Criterios Metodológicos
+*   **Ciclo de Entrega**: Alineación con el marco **Scrum**, permitiendo entregas incrementales y despliegues rápidos.
+*   **Colaboración Full-stack**: Uso de un lenguaje único (**JavaScript**) para minimizar la fricción entre el desarrollo de frontend y backend.
+*   **Mantenibilidad**: Facilidad para implementar pruebas unitarias y garantizar la trazabilidad mediante Git.
+
+### 2.3 Criterios Contextuales
+*   **Escalabilidad del Proyecto**: El sistema debe soportar un crecimiento en el número de sedes y facultades sin rediseños mayores.
+*   **Entorno Universitario**: Compatibilidad con navegadores modernos y facilidad de acceso para coordinadores.
+*   **Restricciones de Tiempo**: Finalización del MVP en 16 semanas.
+
+## 3. Evaluación de Enfoques
+
+| Criterio | Enfoque Seleccionado: MERN Stack | Alternativa: Arquitectura Monolítica |
 | :--- | :--- | :--- |
-| **Arquitectura** | **SPA (Single Page Application)**: El frontend y backend son independientes, comunicándose por JSON. | **MPA (Multi-Page Application)**: Basada en plantillas generadas directamente por el servidor. |
-| **Lenguaje principal** | **JavaScript (ES6 +)**: Un solo lenguaje unificado para todo el equipo, facilitando la colaboración. | **Múltiples lenguajes**: Uso de diferentes sintaxis (PHP/Java para Back, JS para Front). |
-| **Desarrollo frontend** | **React.js**: Biblioteca basada en componentes reutilizables que permite una interfaz fluida. | **HTML/JS Estático**: Menos interactivo, código difícil de mantener y de escalar. |
-| **Desarrollo backend** | **Node.js + Express**: Entorno de alto rendimiento ideal para procesar múltiples peticiones en tiempo real. | **Servidores Tradicionales**: Estructuras robustas pero con configuración inicial más lenta y compleja. |
-| **Base de datos** | **MongoDB / Supabase**: Alta flexibilidad para cambios dinámicos en el esquema del "planner". | **Bases de datos SQL rígidas**: Estructuras fijas que requieren migraciones manuales complejas. |
-| **Integración** | **Híbrido (Vercel + Render)**: Despliegue independiente optimizado para escalabilidad y hosting gratuito. | **Servidor único (VPS)**: Requiere configuración manual de infraestructura y genera costos operativos. |
-| **Aprendizaje** | **Alta eficiencia** al compartir la misma lógica de JavaScript entre el equipo de Front y Back. | **Más lenta** debido a la necesidad de aprender y dominar sintaxis distintas para cada capa. |
+| **Arquitectura** | **SPA (Single Page Application)**: Frontend (React) y Backend (Node) desacoplados. | **MPA (Multi-Page Application)**: Basada en plantillas del lado del servidor. |
+| **Productividad** | **Muy Alta**: Equipo especializado en un solo lenguaje (JS/TS). | **Media**: Requiere cambio de contexto entre lenguajes (ej: PHP/Java y JS). |
+| **Interactividad** | **React.js**: Actualización parcial del DOM sin recargar la página. | **HTML/JQuery**: Recargas constantes, UX menos fluida. |
+| **Despliegue** | **Cloud Native**: Optimizado para micro-servicios y hosting moderno. | **Tradicional**: Requiere gestión manual de servidores y SO. |
 
-## 3. Conclusión
-Se ha optado por el stack **MERN (MongoDB, Express, React, Node.js)** debido a su flexibilidad, el rendimiento de Node.js para tareas de procesamiento y la facilidad de desarrollo al usar un único lenguaje en todo el stack.
+## 4. Conclusión
+Se ha optado por el stack **MERN (MongoDB, Express, React, Node.js)** porque maximiza los criterios de **Eficiencia de Procesamiento** y **Colaboración Full-stack**, garantizando la entrega de un MVP funcional y escalable dentro de los plazos establecidos.
+
