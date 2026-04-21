@@ -131,6 +131,8 @@ Siguiendo las directrices académicas, la documentación del proyecto está orga
 | **5. Vista de Bloques** | Estructura de alto nivel (React, Node, MongoDB). | [Ver](docs/ARC42.md#5-vista-de-bloques) |
 | **6 - 9. Vistas Técnicas** | Ejecución, despliegue y conceptos (En desarrollo). | [Ver](docs/ARC42.md) |
 | **10. Calidad (SMART)** | Requerimientos Funcionales y No Funcionales. | [Ver](docs/inicio/Lista%20preliminar%20de%20requerimientos%20funcionales%20y%20no%20funcionales.md) |
+| **Product Backlog** | Historias de Usuario priorizadas y estimadas. | [Ver](docs/inicio/Product%20Backlog.md) |
+
 | **11 - 12. Riesgos y Otros** | Mitigación de riesgos y glosario de términos. | [Ver](docs/ARC42.md) |
 
 ### Gestión y Otros Entregables
