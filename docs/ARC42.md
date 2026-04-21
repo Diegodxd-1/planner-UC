@@ -44,6 +44,8 @@ Registro de decisiones críticas (ADR) tomadas durante el proyecto.
 ## 10. Requerimientos de Calidad
 Atributos de calidad formulados bajo el enfoque **SMART**.
 *   **Calidad de Software**: [Lista de RF y RNF](inicio/Lista%20preliminar%20de%20requerimientos%20funcionales%20y%20no%20funcionales.md)
+*   **Priorización de Valor**: [Product Backlog](inicio/Product%20Backlog.md)
+
 
 ## 11. Riesgos y Deuda Técnica
 Identificación de riesgos técnicos y planes de mitigación.
