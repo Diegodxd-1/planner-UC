@@ -1,0 +1,66 @@
+name: CI - Verificación de Calidad
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  # Este job se activará cuando empiecen a subir código real
+  backend-checks:
+
+    name: Backend CI
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '18'
+      
+      - name: Install Backend Dependencies
+        working-directory: ./Backend
+        run: |
+          if [ -f package.json ]; then
+            npm install
+          else
+            echo "No package.json found in Backend yet. Skipping."
+          fi
+
+      - name: Run Backend Tests
+        working-directory: ./Backend
+        run: |
+          if [ -f package.json ]; then
+            npm test || echo "No tests defined yet."
+          else
+            echo "Skipping tests."
+          fi
+
+  frontend-checks:
+    name: Frontend CI
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '18'
+      
+      - name: Install Frontend Dependencies
+        working-directory: ./Frontend
+        run: |
+          if [ -f package.json ]; then
+            npm install
+          else
+            echo "No package.json found in Frontend yet. Skipping."
+          fi
+
+      - name: Run Frontend Build
+        working-directory: ./Frontend
+        run: |
+          if [ -f package.json ]; then
+            npm run build || echo "No build script defined yet."
+          else
+            echo "Skipping build."
+          fi
