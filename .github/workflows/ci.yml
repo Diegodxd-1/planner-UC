@@ -18,18 +18,18 @@ jobs:
         with:
           python-version: '3.11'
 
+      - name: Install uv
+        run: pip install uv
+
       - name: Install Backend Dependencies
-        working-directory: ./backend
-        run: |
-          python -m pip install --upgrade pip
-          python -m pip install .
+        working-directory: backend
+        run: uv sync
 
       - name: Run Backend Tests
-        working-directory: ./backend
+        working-directory: backend
         run: |
           if [ -d tests ]; then
-            python -m pip install pytest
-            pytest
+            uv run pytest
           else
             python -m compileall app main.py
           fi
