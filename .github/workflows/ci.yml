@@ -18,8 +18,8 @@ jobs:
         with:
           python-version: '3.11'
 
-      - name: Install uv
-        run: pip install uv
+      - name: Setup uv
+        uses: astral-sh/setup-uv@v3
 
       - name: Install Backend Dependencies
         working-directory: backend
