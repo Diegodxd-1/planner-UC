@@ -22,11 +22,11 @@ jobs:
         uses: astral-sh/setup-uv@v3
 
       - name: Install Backend Dependencies
-        working-directory: backend
+        working-directory: Backend
         run: uv sync
 
       - name: Run Backend Tests
-        working-directory: backend
+        working-directory: Backend
         run: |
           if [ -d tests ]; then
             uv run pytest
