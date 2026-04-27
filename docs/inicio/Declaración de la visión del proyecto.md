@@ -1,12 +1,24 @@
-# DECLARACIÓN DE LA VISIÓN DEL PROYECTO
+# ✨ DECLARACIÓN DE LA VISIÓN DEL PROYECTO
 
-Para coordinadores académicos y personal administrativo de instituciones universitarias, quienes necesitan generar horarios académicos de manera eficiente y sin conflictos, el sistema es una aplicación web para la generación automática de horarios académicos universitarios, que permite gestionar información de docentes, cursos, aulas y restricciones.
+### 🎯 Misión del Producto
+Para los **coordinadores académicos** y **personal administrativo** de instituciones universitarias que necesitan generar horarios de manera eficiente y sin conflictos, el sistema es una aplicación web para la generación automática de horarios académicos que permite gestionar información de docentes, cursos, aulas y restricciones.
 
-El sistema permite generar horarios optimizados en un tiempo estimado menor a 5 minutos por ciclo académico, facilitando la detección de conflictos y la validación automática de restricciones.
+---
 
-A diferencia del proceso manual tradicional, que es propenso a errores, conflictos de asignación y falta de trazabilidad, nuestro producto ofrece validación automática de restricciones, detección de conflictos en tiempo real y una interfaz intuitiva.
+### 🚀 Propuesta de Valor
+A diferencia del proceso manual tradicional, propenso a errores y falta de trazabilidad, nuestro producto ofrece:
+- **Automatización:** Horarios optimizados en menos de **5 minutos**.
+- **Validación:** Detección de conflictos en tiempo real.
+- **Inteligencia:** Motor de optimización basado en restricciones académicas.
+- **Simplicidad:** Interfaz intuitiva centrada en el usuario administrativo.
 
-Como resultado, se espera reducir significativamente los conflictos en la generación de horarios (estimado ≥ 70%) y mejorar la eficiencia y precisión del proceso.
+---
 
-El alcance del sistema se limita a un Producto Mínimo Viable (PMV), priorizando únicamente las funcionalidades esenciales para la generación automática de horarios, asegurando su viabilidad dentro del tiempo de desarrollo establecido.  
-Este sistema servirá como base para futuras mejoras, como la integración de algoritmos avanzados de optimización o inteligencia artificial.
+### 📉 Impacto Esperado
+Como resultado, se proyecta:
+1.  Reducir significativamente los conflictos de asignación (**estimado ≥ 70%**).
+2.  Mejorar la eficiencia y precisión del proceso de planificación.
+3.  Optimizar el uso de la infraestructura física (aulas).
+
+> [!IMPORTANT]
+> El alcance se limita a un **Producto Mínimo Viable (PMV)**, priorizando las funcionalidades esenciales para asegurar la entrega en el tiempo establecido. Este sistema servirá como base para futuras integraciones de Inteligencia Artificial.
