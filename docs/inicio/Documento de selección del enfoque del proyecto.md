@@ -1,41 +1,45 @@
-# DOCUMENTO DE SELECCIÓN DEL ENFOQUE DEL PROYECTO
+# 🛠️ SELECCIÓN DEL ENFOQUE TÉCNICO
 
-La selección del enfoque del proyecto se fundamenta en criterios técnicos, metodológicos y contextuales, con el objetivo de asegurar la viabilidad del sistema y su alineación con los objetivos planteados.
+## 📋 Criterios de Selección
+Para garantizar la viabilidad del proyecto en un plazo de **16 semanas**, hemos priorizado los siguientes pilares:
 
-Para la selección del enfoque se han considerado los siguientes criterios:
+- ⏱️ **Time-to-Market:** Rápida implementación de funcionalidades core.
+- 🧩 **Simplicidad:** Reducción de la deuda técnica inicial.
+- 🎓 **Experiencia del Equipo:** Aprovechamiento del dominio en JavaScript.
+- 🚀 **Escalabilidad:** Arquitectura preparada para crecimiento futuro.
+- 💰 **Costo Cero:** Uso de servicios Cloud con tiers gratuitos.
 
-- Tiempo de desarrollo: limitado a 16 semanas, lo que exige un enfoque ágil y de rápida implementación.
-- Complejidad técnica: se priorizan tecnologías que reduzcan la dificultad de desarrollo y mantenimiento.
-- Experiencia del equipo: el equipo cuenta con conocimientos en JavaScript y desarrollo web.
-- Escalabilidad: el sistema debe permitir futuras mejoras sin requerir una reestructuración completa.
-- Costo: se prioriza el uso de servicios gratuitos o de bajo costo.
-- Facilidad de despliegue: se busca una implementación sencilla en entornos cloud accesibles.
+---
 
-En cuanto al contexto del proyecto, el sistema está orientado a estudiantes y personal administrativo que requieren gestionar procesos de convalidación académica de manera eficiente. Este tipo de sistema implica la manipulación de datos variables (cursos, equivalencias, requisitos), así como la necesidad de una interfaz interactiva que permita visualizar resultados de forma clara. Además, se considera la restricción de tiempo (16 semanas) y recursos limitados, por lo que se prioriza un enfoque que permita desarrollar un Producto Mínimo Viable (PMV) funcional, evitando complejidades innecesarias en la primera versión.
+## 🏗️ Enfoque Seleccionado: MERN Stack + Python
+Hemos optado por una arquitectura **decoupled (desacoplada)** que permite especializar cada capa del sistema.
 
-Desde el punto de vista técnico, se selecciona un enfoque Full Stack JavaScript utilizando React para el frontend y Node.js con Express para el backend. Esta decisión se fundamenta en la posibilidad de trabajar con un lenguaje unificado, lo que reduce la curva de aprendizaje y facilita la colaboración del equipo. Asimismo, Node.js permite manejar múltiples solicitudes concurrentes de manera eficiente, mientras que React proporciona una experiencia de usuario dinámica e interactiva, adecuada para sistemas que requieren visualización de datos en tiempo real o semiestructurados.
+### **Comparativa Técnica**
 
-La siguiente tabla presenta los principales criterios considerados en la selección del enfoque:
+| Criterio | Enfoque Seleccionado (JS/Python) | Alternativa Monolítica (Tradicional) |
+| :--- | :--- | :--- |
+| **Arquitectura** | **SPA (React)** + **Micro-Backend**. | **MPA** (Plantillas del servidor). |
+| **Lenguaje** | **JavaScript / Python**. | PHP, Java o C# (Rígidos). |
+| **Frontend** | React (Componentes dinámicos). | HTML/JS estático (Difícil de escalar). |
+| **Backend** | Node.js (E/S No bloqueante). | Servidores tradicionales (Configuración lenta). |
+| **Base de Datos** | **PostgreSQL / MongoDB**. | Esquemas SQL rígidos. |
+| **Despliegue** | **Vercel / Render** (CI/CD Automático). | Servidores VPS (Gestión manual). |
+| **Curva Aprendizaje**| **Baja/Media** (Lenguajes conocidos). | **Alta** (Múltiples paradigmas). |
 
-| **CRITERIOS DE SELECCIÓN DEL ENFOQUE** | **Enfoque Seleccionado: React + Node.js (Fullstack JS)**                                                  | **Alternativa Evaluada: Arquitectura Monolítica (Tradicional)**                                         |
+---
 
-| **Arquitectura**                       | **SPA (Single Page Application)**: El frontend y backend son independientes, comunicándose por JSON.      | **MPA (Multi-Page Application)**: Basada en plantillas generadas directamente por el servidor.          |
+## ⚖️ Justificación de Decisiones
 
-| **Lenguaje principal**                 | **JavaScript (ES6 +)**: Un solo lenguaje unificado para todo el equipo, facilitando la colaboración.      | **Múltiples lenguajes**: Uso de diferentes sintaxis (PHP/Java para Back, JS para Front).                |
+### **¿Por qué React + Node?**
+La unificación del lenguaje en JavaScript permite que todo el equipo colabore tanto en el cliente como en el servidor, eliminando silos de conocimiento y acelerando el desarrollo del PMV.
 
-| **Desarrollo frontend**                | :Biblioteca basada en componentes reutilizables que permite una interfaz fluida.                          | **HTML/JS Estático**: Menos interactivo, código difícil de mantener y de escalar.                       |
+### **¿Por qué un motor en Python?**
+Aunque el backend es Node.js, la lógica de optimización de horarios (Constraint Satisfaction Problem) se beneficia enormemente de librerías como **Google OR-Tools** disponibles en Python, lo que nos da una ventaja competitiva en el rendimiento del motor.
 
-| **Desarrollo backend**                 | : Entorno de alto rendimiento ideal para procesar múltiples peticiones en tiempo real.                    | **Servidores Tradicionales**: Estructuras robustas pero con configuración inicial más lenta y compleja. |
+### **¿Por qué PostgreSQL?**
+Necesitamos integridad referencial para los cursos y aulas, pero con la flexibilidad de manejar JSONB para las restricciones dinámicas del "planner".
 
-| **Base de datos**                      | **PostgreSQL**: Alta flexibilidad para cambios dinámicos en el esquema del "planner".                     | **Bases de datos SQL rígidas**: Estructuras fijas que requieren migraciones manuales complejas.         |
+---
 
-| **Integración frontend-backend**       | **Híbrido (Vercel + Render)**: Despliegue independiente optimizado para escalabilidad y hosting gratuito. | **Servidor único (VPS)**: Requiere configuración manual de infraestructura y genera costos operativos.  |
-
-| **Curva de aprendizaje**               | **Alta eficiencia** al compartir la misma lógica de JavaScript entre el equipo de Front y Back.           | **Más lenta** debido a la necesidad de aprender y dominar sintaxis distintas para cada capa.            |
-
-
-En comparación con la alternativa basada en Django, se determinó que, si bien este framework permite un desarrollo rápido mediante su arquitectura monolítica e incluye funcionalidades integradas, presenta una mayor curva de aprendizaje para el equipo, debido a su menor experiencia en Python. Asimismo, la separación entre frontend y backend en el enfoque Full Stack JavaScript permite una mayor flexibilidad para futuras mejoras del sistema.
-
-Por otro lado, el uso de MongoDB o Supabase se justifica por la necesidad de manejar estructuras de datos dinámicas propias del proceso de convalidación académica, evitando la rigidez de los esquemas relacionales en etapas tempranas del desarrollo.
-
-Finalmente, aunque se adopta una arquitectura moderna con separación de frontend y backend, el alcance del proyecto se mantiene alineado con un enfoque PMV, limitando la implementación a funcionalidades esenciales, lo que garantiza la viabilidad del desarrollo dentro del tiempo establecido.
+> [!IMPORTANT]
+> El enfoque se mantiene alineado con un **PMV**, garantizando que entregaremos una solución funcional y estable dentro del cronograma académico.

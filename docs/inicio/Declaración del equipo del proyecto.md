@@ -1,39 +1,42 @@
-# DECLARACIÓN DEL EQUIPO DEL PROYECTO
+# 🤝 DECLARACIÓN DEL EQUIPO
 
-- **Datos del Equipo**
-  - **Nombre del Equipo:** OptiHorario
-  - **Líder de Equipo:** Vasquez Miranda Luis Alexis
-  - **Miembros del Equipo:**
-    - Araujo Huamani, Leonardo Daniel
-    - Curi Untiveros Jefferson Diego
-    - Vasquez Miranda Luis Alexis
-    - Vilcarano De La Cruz Frank
-  - **Plan de Reuniones**
-    - Modalidad: Virtual (Google Meet)
-    - Frecuencia: Una vez por semana
-    - Día: Domingo
-    - Horario: 4:00 p.m. - 6:00 p.m.
+## 👥 Datos del Equipo: **OptiHorario**
+- **Líder de Equipo:** Vasquez Miranda Luis Alexis
+- **Integrantes:**
+  - Araujo Huamani, Leonardo Daniel
+  - Curi Untiveros Jefferson Diego
+  - Vasquez Miranda Luis Alexis
+  - Vilcarano De La Cruz Frank
 
-Las reuniones se utilizarán para revisar avances, resolver problemas y planificar las siguientes tareas del proyecto.
+---
 
-## Roles y Responsabilidades
+## 📅 Plan de Gestión de Reuniones
+*   **Modalidad:** Virtual (Google Meet / Discord)
+*   **Frecuencia:** Semanal
+*   **Día y Hora:** Domingos, 16:00 - 18:00
+*   **Propósito:** Revisión de sprints, resolución de bloqueos y sincronización técnica.
 
-| **Nombre** | **Título** | **Rol / Responsabilidad** |
+---
+
+## 🛠️ Roles y Responsabilidades
+
+| Miembro | Título | Responsabilidad Clave |
 | :--- | :--- | :--- |
-| Araujo Huamani Leonardo Daniel | Analista de Sistemas | Analizar el problema de generación de horarios, identificar variables y restricciones, y definir requerimientos del sistema. Validar que la solución responda al problema planteado. |
-| Curi Untiveros Jefferson Diego | Diseñador de Software | Diseñar la arquitectura del sistema, definir la estructura del frontend, backend y base de datos. Apoyar en la planificación técnica del proyecto. |
-| Vasquez Miranda Luis Alexis | Líder del Proyecto / Desarrollador Backend | Coordinar el equipo, asignar tareas y supervisar el avance. Desarrollar el backend y asegurar la integración entre los componentes del sistema. |
-| Vilcarano De La Cruz Frank Anthony | Desarrollador Frontend y QA | Desarrollar la interfaz del sistema, implementar funcionalidades del frontend y realizar pruebas para validar el correcto funcionamiento del sistema. |
+| **Araujo Huamani L.** | Analista de Sistemas | Modelado del problema (CSP) y validación de requerimientos. |
+| **Curi Untiveros J.** | Diseñador de Software | Arquitectura del sistema, diseño de DB y UI/UX. |
+| **Vasquez Miranda L.** | Líder / Backend | Gestión del equipo y desarrollo del motor de optimización. |
+| **Vilcarano De La Cruz F.** | Frontend / QA | Desarrollo de la interfaz React y aseguramiento de calidad. |
 
-## Objetivos del Equipo
+---
 
-Desarrollar un sistema funcional que permita generar horarios académicos optimizados, cumpliendo con los requerimientos definidos y manteniendo una organización colaborativa durante todo el proyecto.
+## 🎯 Objetivos Comunes
+Desarrollar un sistema funcional que permita generar horarios académicos optimizados, cumpliendo con los requerimientos definidos y manteniendo una cultura de **código limpio** y **colaboración radical**.
 
-## Normas de Trabajo
+---
 
-- Cumplir con las fechas de entrega establecidas.
-- Asistir y participar activamente en las reuniones.
-- Comunicar avances, dificultades y bloqueos a tiempo.
-- Utilizar herramientas compartidas (GitHub, documentación, etc.).
-- Mantener organizado el repositorio y la documentación.
-- Respetar la asignación de roles y responsabilidades.
+## 📜 Normas de Trabajo (Team Agreement)
+- ✅ **Puntualidad:** Respetar los plazos de entrega y horarios de reunión.
+- 🗣️ **Comunicación:** Notificar bloqueos o retrasos inmediatamente por los canales oficiales.
+- 🛠️ **Calidad:** Todo código debe pasar por un proceso de revisión antes del merge.
+- 📂 **Orden:** Mantener el repositorio y la documentación siempre actualizados.
+- 🤝 **Respeto:** Valorar las opiniones y roles de cada integrante.

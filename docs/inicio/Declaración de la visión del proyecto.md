@@ -1,12 +1,27 @@
-# DECLARACIÓN DE LA VISIÓN DEL PROYECTO
+# ✨ DECLARACIÓN DE LA VISIÓN DEL PROYECTO
 
-Para coordinadores académicos y personal administrativo de instituciones universitarias, quienes necesitan generar horarios académicos de manera eficiente y sin conflictos, el sistema es una aplicación web para la generación automática de horarios académicos universitarios, que permite gestionar información de docentes, cursos, aulas y restricciones.
+## 🎯 Nuestra Misión
+Para los **coordinadores académicos** y **personal administrativo** de instituciones universitarias que enfrentan el caos logístico de la planificación semestral, **Planner-UC** es una solución web inteligente que automatiza la generación de horarios académicos.
 
-El sistema permite generar horarios optimizados en un tiempo estimado menor a 5 minutos por ciclo académico, facilitando la detección de conflictos y la validación automática de restricciones.
+---
 
-A diferencia del proceso manual tradicional, que es propenso a errores, conflictos de asignación y falta de trazabilidad, nuestro producto ofrece validación automática de restricciones, detección de conflictos en tiempo real y una interfaz intuitiva.
+## 🚀 Propuesta de Valor
+A diferencia del proceso manual tradicional, propenso a errores humanos y conflictos de asignación, nuestro producto ofrece:
 
-Como resultado, se espera reducir significativamente los conflictos en la generación de horarios (estimado ≥ 70%) y mejorar la eficiencia y precisión del proceso.
+- ✅ **Velocidad:** Generación de horarios optimizados en **< 5 minutos**.
+- ✅ **Precisión:** Validación automática de restricciones en tiempo real.
+- ✅ **Transparencia:** Detección visual de conflictos de docentes y aulas.
+- ✅ **Usabilidad:** Interfaz intuitiva diseñada para la gestión académica.
 
-El alcance del sistema se limita a un Producto Mínimo Viable (PMV), priorizando únicamente las funcionalidades esenciales para la generación automática de horarios, asegurando su viabilidad dentro del tiempo de desarrollo establecido.  
-Este sistema servirá como base para futuras mejoras, como la integración de algoritmos avanzados de optimización o inteligencia artificial.
+---
+
+## 📈 Impacto Esperado
+Como resultado de la implementación de este sistema, proyectamos:
+1. **Reducción del 70%** en conflictos de horarios por ciclo.
+2. **Eliminación total** de solapamientos críticos en cursos troncales.
+3. **Mejora drástica** en la precisión y trazabilidad de los recursos físicos (aulas).
+
+---
+
+> [!NOTE]
+> El alcance se limita a un **Producto Mínimo Viable (PMV)**, garantizando una base sólida y funcional que podrá evolucionar con algoritmos avanzados de IA en el futuro.
