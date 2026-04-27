@@ -139,7 +139,57 @@ Siguiendo las directrices académicas, la documentación del proyecto está orga
 *   **Equipo Académico**: [Roles y Normas](docs/inicio/Declaración%20del%20equipo%20del%20proyecto.md)
 
 
+## 8. Guía de Ejecución
+Para poner en marcha el sistema completo, siga las instrucciones para cada componente.
+
+### **Backend (FastAPI)**
+El backend se encarga del motor de optimización de horarios.
+
+**Requisitos:**
+*   Python 3.11 o superior.
+*   [**uv**](https://docs.astral.sh/uv/) (Gestor de paquetes recomendado para Python).
+
+**Pasos:**
+1. Navegar a la carpeta del backend:
+   ```powershell
+   cd Backend
+   ```
+2. Instalar dependencias:
+   ```powershell
+   uv sync
+   ```
+3. Ejecutar el servidor de desarrollo:
+   ```powershell
+   uv run uvicorn app.main:app --reload
+   ```
+   *Acceso local:* [http://127.0.0.1:8000](http://127.0.0.1:8000)
+
 ---
+
+### **Frontend (Next.js)**
+El frontend proporciona la interfaz de usuario moderna y reactiva.
+
+**Requisitos:**
+*   Node.js (versión 20 o superior).
+*   npm (incluido con Node.js).
+
+**Pasos:**
+1. Navegar a la carpeta del frontend:
+   ```powershell
+   cd frontend
+   ```
+2. Instalar dependencias:
+   ```powershell
+   npm install
+   ```
+3. Ejecutar el servidor de desarrollo:
+   ```powershell
+   npm run dev
+   ```
+   *Acceso local:* [http://127.0.0.1:3000](http://127.0.0.1:3000)
+
+---
+
 <div align="center">
   <sub>Taller de Proyectos 2 - Ingeniería de Sistemas e Informática - Universidad Continental (2026)</sub>
 </div>
