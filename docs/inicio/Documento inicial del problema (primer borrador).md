@@ -1,58 +1,70 @@
-# 🔍 DOCUMENTO INICIAL DEL PROBLEMA
+# DOCUMENTO INICIAL DEL PROYECTO (PRIMER BORRADOR)
 
-## 🌏 Contexto del Problema
-En el ámbito universitario, la **planificación de horarios** es un rompecabezas logístico que involucra la sincronización de múltiples variables críticas. Actualmente, muchas instituciones dependen de procesos manuales o herramientas básicas (como hojas de cálculo) que resultan en:
+### Contexto del problema
 
-- ❌ **Solapamientos** de horarios para docentes y estudiantes.
-- 📉 **Uso ineficiente** de aulas y recursos físicos.
-- ⏳ **Largas jornadas** de trabajo para los coordinadores académicos.
-- ⚠️ **Errores humanos** difíciles de detectar hasta el inicio de clases.
+En las universidades, la planificación de horarios académicos es una tarea compleja que involucra múltiples variables, como la disponibilidad de docentes, la asignación de aulas, los cursos ofertados, las secciones disponibles y diversas restricciones académicas.
 
----
+En muchos casos, este proceso se realiza de forma manual o con herramientas limitadas, lo que genera errores, conflictos de horarios y dificultades en la organización académica. Además, la coordinación de estos elementos exige considerar restricciones como la capacidad de aulas, disponibilidad docente, compatibilidad de cursos y distribución de carga académica.
 
-## ⚡ Problema Central
-> "Dificultad crítica para generar horarios académicos eficientes que cumplan con el 100% de las restricciones operativas y pedagógicas en entornos de alta demanda."
+La falta de herramientas adecuadas provoca solapamientos de horarios, uso ineficiente de recursos y retrasos en la planificación.
 
-El proceso manual es propenso a inconsistencias y ajustes de último minuto, lo que afecta directamente la calidad del servicio educativo y la satisfacción de la comunidad académica.
+### Problema central
 
----
+Existe dificultad para generar horarios académicos universitarios de manera eficiente, considerando múltiples restricciones y recursos limitados.
 
-## 🧐 Análisis de Complejidad
+El proceso manual suele ser propenso a errores, conflictos entre docentes, cursos o aulas, y requiere múltiples ajustes hasta obtener una solución válida. Esto genera pérdida de tiempo en los coordinadores académicos y afecta la planificación oportuna de las actividades educativas.
 
-### **❓ Ambigüedades Identificadas**
-Para resolver este problema, hemos detectado áreas que requieren definición:
-- [ ] Definición exacta de bloques horarios por jornada.
-- [ ] Jerarquía de prioridad entre restricciones en caso de conflictos irresolubles.
-- [ ] Reglas de carga docente (máximo de secciones consecutivas).
-- [ ] Grado de flexibilidad del plan de estudios (cursos fijos vs. electivos).
+**Ambigüedad del problema**
 
-### **📊 Variables del Sistema**
-Para una solución integral, el modelo debe procesar:
-*   **Talento Humano:** Docentes y su disponibilidad.
-*   **Infraestructura:** Aulas, laboratorios y su capacidad de aforo.
-*   **Oferta Académica:** Cursos, secciones y malla curricular.
-*   **Tiempo:** Bloques horarios y ventanas permitidas.
+- No se define el número exacto de bloques horarios disponibles por periodo académico.
+- No se establece la prioridad entre restricciones cuando se presentan conflictos.
+- No se especifica si un docente puede dictar múltiples secciones del mismo curso en distintos horarios.
+- No se detalla si los estudiantes siguen un plan de estudios fijo o pueden elegir cursos libremente.
+- No se define el número máximo de cursos por estudiante en un periodo académico.
 
----
+### Variables involucradas
 
-## 🛠️ Restricciones del Modelo
+El problema involucra múltiples variables que deben ser consideradas para generar una solución válida:
 
-### **🔴 Restricciones Duras (Mandatorias)**
-1. **Exclusividad Docente:** Un docente no puede dictar dos cursos al mismo tiempo.
-2. **Exclusividad de Aula:** Un aula física no puede albergar dos secciones simultáneas.
-3. **Coherencia Estudiantil:** Un estudiante no puede tener dos cursos de su malla en el mismo bloque.
-4. **Capacidad Crítica:** El aforo del aula debe ser ≥ a la matrícula proyectada.
+- Estudiantes matriculados
+- Docentes asignados a cursos
+- Cursos y secciones disponibles
+- Aulas y su capacidad
+- Bloques horarios definidos
+- Restricciones académicas y operativas
 
----
+Estas variables deben combinarse correctamente para evitar conflictos y asegurar un horario funcional.
 
-## 💡 Propuesta de Solución: Sistema Planner-UC
-Se propone el desarrollo de una **aplicación web inteligente** que automatice la lógica de asignación mediante un motor de optimización.
+### Restricciones del problema
 
-### **🎯 Alcance del PMV**
-- **Gestión Base:** Registro de docentes, aulas y cursos.
-- **Configuración:** Definición de restricciones y bloques horarios.
-- **Algoritmo:** Generación automática de propuestas de horarios.
-- **Interfaz:** Visualización clara y detección de alertas de conflicto.
+El sistema debe respetar un conjunto de restricciones para garantizar la validez del horario generado:
 
-> [!NOTE]
-> El sistema se implementará bajo el stack **MERN** (Frontend React, Backend Node/Express) con un motor de optimización en Python para el procesamiento pesado.
+- Un docente no puede estar asignado a más de un curso en el mismo horario.
+- Un aula no puede ser utilizada por más de un curso simultáneamente.
+- Un estudiante no debe tener cursos obligatorios en el mismo horario.
+- La capacidad del aula debe ser suficiente para la cantidad de estudiantes asignados.
+- Se deben respetar los prerrequisitos entre cursos.
+
+Estas restricciones hacen que el problema sea de alta complejidad, ya que no todas las combinaciones posibles generan soluciones válidas.
+
+### Necesidad de una solución tecnológica
+
+Dada la complejidad del problema, se requiere una solución tecnológica que automatice la generación de horarios académicos.
+
+Una aplicación web permitirá gestionar la información académica, validar restricciones y generar horarios de forma automática. Esto reduce errores humanos, mejora la eficiencia del proceso y optimiza el uso de recursos como aulas y docentes.
+
+### Alcance del proyecto
+
+El proyecto consiste en el desarrollo de un Producto Mínimo Viable (PMV) de una aplicación web para la generación de horarios académicos.
+
+El sistema permitirá:
+
+- Registrar información básica (docentes, cursos, aulas y horarios)
+- Definir restricciones principales
+- Generar horarios automáticamente sin conflictos básicos
+
+El sistema será desarrollado utilizando el stack MERN (MongoDB, Express, React y Node.js) y se implementará en un entorno controlado, sin integración con sistemas reales.
+
+El alcance se limita a funcionalidades esenciales, priorizando la validación del modelo del problema y la generación de soluciones válidas dentro del tiempo del proyecto (16 semanas).
+
+Este documento servirá como base para la definición de requerimientos y el diseño de la solución.
