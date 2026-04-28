@@ -1,37 +1,41 @@
-# 🛠️ SELECCIÓN DEL ENFOQUE DEL PROYECTO
+# 🛠️ SELECCIÓN DEL ENFOQUE TÉCNICO
 
-La selección del enfoque se fundamenta en criterios técnicos, metodológicos y contextuales, con el objetivo de asegurar la viabilidad del sistema y su alineación estratégica.
+Este documento justifica la elección de la arquitectura y metodología, basándose en criterios técnicos, metodológicos y contextuales que aseguran la viabilidad del proyecto.
 
-### 📋 Criterios de Selección
-Para la toma de decisiones se han considerado los siguientes pilares:
-- **Tiempo de desarrollo:** Limitado a 16 semanas.
-- **Complejidad técnica:** Priorización de mantenibilidad.
-- **Experiencia del equipo:** Dominio de JavaScript y desarrollo web.
-- **Escalabilidad:** Capacidad de evolución futura.
-- **Eficiencia de costos:** Uso de servicios gratuitos/cloud.
-- **Facilidad de despliegue:** Implementación automatizada.
+### 📋 1. Criterios de Selección (Justificación)
 
----
-
-### 🏗️ Análisis del Enfoque Técnico
-Se ha seleccionado un enfoque **Full Stack JavaScript** utilizando **React** para el frontend y **Node.js** con **Express** para el backend. Esta decisión permite trabajar con un lenguaje unificado, reduciendo la curva de aprendizaje y facilitando la integración.
-
-#### **Comparativa de Soluciones**
-
-| **Criterio** | **Enfoque Seleccionado (MERN)** | **Alternativa Monolítica** |
+| **Criterio** | **Definición** | **Impacto en el Proyecto** |
 | :--- | :--- | :--- |
-| **Arquitectura** | **SPA**: Independencia entre Front y Back. | **MPA**: Basada en plantillas de servidor. |
-| **Lenguaje** | **JavaScript (ES6+)**: Lenguaje unificado. | **Múltiples**: PHP/Java + JavaScript. |
-| **Frontend** | **React**: Componentes reutilizables. | **HTML Estático**: Difícil de mantener. |
-| **Backend** | **Node.js**: Alto rendimiento asíncrono. | **Tradicional**: Configuración compleja. |
-| **Base de Datos** | **PostgreSQL**: Esquemas flexibles y robustos. | **SQL Rígida**: Migraciones complejas. |
-| **Integración** | **Híbrido (Vercel/Render)**: Escalable. | **Servidor Único**: Gestión manual. |
-| **Aprendizaje** | **Alta Eficiencia**: Un solo ecosistema. | **Lenta**: Diversidad de sintaxis. |
+| **Técnico** | Capacidad de procesamiento asíncrono y resolución de CSP. | Asegura que el motor no bloquee la interfaz de usuario. |
+| **Metodológico**| Soporte para entregas continuas (Scrum) y TDD. | Facilita la detección temprana de errores lógicos. |
+| **Contextual** | Experiencia previa del equipo y plazo de **16 semanas**. | Minimiza el riesgo de retrasos por aprendizaje de nuevas sintaxis. |
+| **Económico** | Costo de infraestructura y herramientas de despliegue. | Permite el uso de tiers gratuitos (Vercel/Render/Supabase). |
 
 ---
 
-### ⚖️ Justificación Técnica
-En comparación con alternativas como Django, se determinó que el enfoque JavaScript ofrece una mayor agilidad dada la experiencia previa del equipo. La separación de capas garantiza que el motor de optimización pueda evolucionar independientemente de la interfaz.
+### 🏗️ 2. Comparativa de Alternativas Evaluadas
+
+| **Variable** | **Alternativa Monolítica (Django/PHP)** | **Enfoque Seleccionado (MERN + Python)** |
+| :--- | :--- | :--- |
+| **Arquitectura** | Acoplada (Frontend servido por backend). | **Decoupled**: Independencia total (React/Next). |
+| **Interactividad** | Limitada (Recargas de página). | **Alta**: SPA con actualizaciones en tiempo real. |
+| **Algoritmo** | Librerías matemáticas estándar. | **Optimizado**: Google OR-Tools para CSP. |
+| **Escalabilidad** | Vertical (Dificultad al crecer). | **Horizontal**: Escalable mediante microservicios. |
+
+---
+
+### ⚖️ 3. Argumentación de Decisiones
+
+#### **¿Por qué React + Node.js?**
+La decisión de utilizar un stack **Full Stack JavaScript** (MERN) responde a la necesidad de agilidad. Unificar el lenguaje permite que todo el equipo trabaje en cualquier capa del sistema, eliminando silos de conocimiento y acelerando la construcción del **PMV**.
+
+#### **¿Por qué un Motor en Python?**
+A pesar de usar Node.js para la API, el núcleo de optimización se implementa en Python debido a su ecosistema robusto de investigación de operaciones. Esto permite una **Estrategia Híbrida** que combina la velocidad de desarrollo web con la potencia de cálculo matemático.
+
+#### **¿Por qué Scrum + TDD?**
+Dado que la generación de horarios es un problema de alta complejidad, el uso de **TDD** (Test-Driven Development) garantiza que cada regla añadida al algoritmo sea verificada automáticamente, evitando regresiones en la lógica de negocio.
+
+---
 
 > [!NOTE]
-> El uso de bases de datos modernas se justifica por la necesidad de manejar estructuras dinámicas propias del proceso académico, evitando la rigidez de esquemas tradicionales en etapas de PMV.
+> Este enfoque ha sido seleccionado para garantizar que la solución sea no solo funcional, sino también escalable y mantenible para futuras expansiones en la Universidad Continental.

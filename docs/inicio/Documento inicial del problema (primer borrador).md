@@ -1,64 +1,38 @@
 # 🔍 DOCUMENTO INICIAL DEL PROYECTO (PRIMER BORRADOR)
 
 ### 🌏 Contexto del Problema
-En las universidades, la planificación de horarios académicos es una tarea compleja que involucra múltiples variables, como la disponibilidad de docentes, la asignación de aulas, los cursos ofertados, las secciones disponibles y diversas restricciones académicas.
-
-En muchos casos, este proceso se realiza de forma manual o con herramientas limitadas, lo que genera errores, conflictos de horarios y dificultades en la organización académica. Además, la coordinación de estos elementos exige considerar restricciones como la capacidad de aulas, disponibilidad docente, compatibilidad de cursos y distribución de carga académica.
-
-> [!WARNING]
-> La falta de herramientas adecuadas provoca solapamientos de horarios, uso ineficiente de recursos y retrasos en la planificación.
+La planificación de horarios es un **Problema Complejo de Ingeniería**. En las universidades con **currículo flexible**, el número de combinaciones posibles crece exponencialmente, haciendo que el proceso manual sea ineficiente y propenso a errores críticos de solapamiento.
 
 ---
 
 ### ⚡ Problema Central
-**Existe dificultad para generar horarios académicos universitarios de manera eficiente, considerando múltiples restricciones y recursos limitados.**
+**Existe dificultad para generar horarios académicos óptimos que cumplan con restricciones físicas, académicas y humanas en tiempo real.**
 
-El proceso manual suele ser propenso a errores, conflictos entre docentes, cursos o aulas, y requiere múltiples ajustes hasta obtener una solución válida. Esto genera pérdida de tiempo en los coordinadores académicos y afecta la planificación oportuna de las actividades educativas.
-
-#### **🧐 Ambigüedad del Problema**
-- No se define el número exacto de bloques horarios disponibles por periodo académico.
-- No se establece la prioridad entre restricciones cuando se presentan conflictos.
-- No se especifica si un docente puede dictar múltiples secciones del mismo curso en distintos horarios.
-- No se detalla si los estudiantes siguen un plan de estudios fijo o pueden elegir cursos libremente.
-- No se define el número máximo de cursos por estudiante en un periodo académico.
-
----
-
-### 📊 Variables Involucradas
-El problema involucra múltiples variables que deben ser consideradas para generar una solución válida:
-*   Estudiantes matriculados
-*   Docentes asignados a cursos
-*   Cursos y secciones disponibles
-*   Aulas y su capacidad
-*   Bloques horarios definidos
-*   Restricciones académicas y operativas
+#### **🧐 Evidencia de Complejidad (Ambigüedades y Trade-offs)**
+1.  **Jerarquía de Conflictos:** No existe una prioridad clara entre restricciones. **Decisión:** Priorizamos las restricciones "Duras" (choques de aula/docente) sobre las "Blandas" (preferencias horarias).
+2.  **Variabilidad de Bloques:** La falta de estandarización en bloques (60/90 min) complica el algoritmo. **Decisión:** El sistema estandarizará bloques de 90 min para el PMV.
+3.  **Carga Docente:** ¿Es mejor compactar el horario del docente o el del alumno? **Trade-off:** Se prioriza la compactación de la malla estudiantil para reducir la deserción.
 
 ---
 
 ### 🛠️ Restricciones del Problema
-El sistema debe respetar un conjunto de restricciones para garantizar la validez del horario generado:
-1.  Un docente no puede estar asignado a más de un curso en el mismo horario.
-2.  Un aula no puede ser utilizada por más de un curso simultáneamente.
-3.  Un estudiante no debe tener cursos obligatorios en el mismo horario.
-4.  La capacidad del aula debe ser suficiente para la cantidad de estudiantes asignados.
-5.  Se deben respetar los prerrequisitos entre cursos.
-
-> [!IMPORTANT]
-> Estas restricciones hacen que el problema sea de alta complejidad, ya que no todas las combinaciones posibles generan soluciones válidas.
+1.  **Exclusividad:** Un docente/aula no puede tener dos actividades simultáneas.
+2.  **Capacidad:** El aforo del aula debe ser $\geq$ a la matrícula proyectada.
+3.  **Continuidad:** Respeto estricto a los prerrequisitos de la malla curricular.
+4.  **Disponibilidad:** Ventanas horarias obligatorias de docentes externos.
 
 ---
 
-### 💡 Necesidad de una Solución Tecnológica
-Dada la complejidad del problema, se requiere una solución tecnológica que automatice la generación de horarios académicos. Una aplicación web permitirá gestionar la información académica, validar restricciones y generar horarios de forma automática. Esto reduce errores humanos, mejora la eficiencia del proceso y optimiza el uso de recursos como aulas y docentes.
+### 💡 Justificación de la Solución Tecnológica
+Dada la naturaleza combinatoria (CSP - Constraint Satisfaction Problem) del problema, el uso de un motor de optimización (Google OR-Tools) es indispensable. Esto permite pasar de una planificación de días a una de **minutos**, garantizando el cumplimiento del 100% de las leyes académicas.
 
 ---
 
-### 🎯 Alcance del Proyecto
-El proyecto consiste en el desarrollo de un **Producto Mínimo Viable (PMV)** de una aplicación web para la generación de horarios académicos.
+### 🎯 Alcance del Proyecto (PMV)
+El desarrollo se centra en un **Producto Mínimo Viable** desarrollado en **16 semanas**:
+- Gestión de base de datos académica (MERN).
+- Algoritmo de generación automática validado con **TDD**.
+- Interfaz de ajuste manual con validación en tiempo real.
 
-**El sistema permitirá:**
-- Registrar información básica (docentes, cursos, aulas y horarios)
-- Definir restricciones principales
-- Generar horarios automáticamente sin conflictos básicos
-
-El sistema será desarrollado utilizando el stack **MERN** (MongoDB, Express, React y Node.js) y se implementará en un entorno controlado. El alcance se limita a funcionalidades esenciales, priorizando la validación del modelo del problema y la generación de soluciones válidas dentro del tiempo del proyecto (16 semanas).
+> [!NOTE]
+> Esta delimitación garantiza una entrega funcional y técnica de alta calidad, evitando la expansión innecesaria del alcance que ponga en riesgo los plazos.

@@ -1,195 +1,68 @@
+# 🗓️ Planner-UC: Generación Óptima de Horarios Académicos
+
 <div align="center">
 
-# SISTEMA DE GENERACIÓN ÓPTIMA DE HORARIOS ACADÉMICOS EN ENTORNOS DE CURRÍCULO FLEXIBLE
-### **Sprint 0: Inicio del Proyecto**
-*Un desafío de ingeniería complejo resuelto con metodologías ágiles y tecnologías modernas.*
+![MERN Stack](https://img.shields.io/badge/Architecture-MERN%20%2B%20Python-8860D0?style=for-the-badge)
+![TDD](https://img.shields.io/badge/Methodology-TDD%20%2F%20Scrum-5680E9?style=for-the-badge)
+![Antigravity](https://img.shields.io/badge/Support-Google%20Antigravity-5AB9EA?style=for-the-badge)
 
-[![MERN Stack](https://img.shields.io/badge/Stack-MERN-8860D0?style=for-the-badge)](https://www.mongodb.com/mern-stack)
-[![Scrum](https://img.shields.io/badge/Methodology-Scrum-5680E9?style=for-the-badge)](https://www.scrum.org/)
-[![GitHub](https://img.shields.io/badge/Repository-Operational-5AB9EA?style=for-the-badge)](https://github.com/Diegodxd-1/planner-UC)
+*Sistema de optimización para la planificación académica universitaria en entornos de currículo flexible.*
 
 ---
 
 </div>
 
-## Introducción
-Este proyecto surge de la necesidad de automatizar la planificación académica universitaria en entornos de **currículo flexible**. Abordamos un **Problema Complejo de Ingeniería** que involucra la optimización de recursos limitados bajo múltiples capas de restricciones.
+## 📖 Índice de Documentación (TOC)
+Toda la documentación del proyecto está organizada en archivos independientes para garantizar claridad y mantenibilidad, siguiendo el estándar **arc42**.
+
+### **1. Inicio y Fundamentación**
+- [🔍 Documento Inicial del Problema](docs/inicio/Documento%20inicial%20del%20problema%20(primer%20borrador).md) - Análisis de complejidad y ambigüedades.
+- [✨ Declaración de la Visión](docs/inicio/Declaración%20de%20la%20visión%20del%20proyecto.md) - Propuesta de valor y misión del producto.
+- [🛠️ Selección del Enfoque Técnico](docs/inicio/Documento%20de%20selección%20del%20enfoque%20del%20proyecto.md) - Justificación de tecnologías y metodología.
+- [📜 Project Charter](docs/inicio/Project%20Charter.md) - Acta de constitución, hitos y riesgos.
+- [📌 Registro de Supuestos y Restricciones](docs/inicio/Registro%20de%20supuestos%20y%20restricciones.md) - Marco lógico del proyecto.
+
+### **2. Requerimientos y Calidad**
+- [📋 Lista de Requerimientos SMART](docs/inicio/Lista%20preliminar%20de%20requerimientos%20funcionales%20y%20no%20funcionales.md) - RF, RNF y Matriz de Trazabilidad.
+- [🤝 Declaración del Equipo](docs/inicio/Declaración%20del%20equipo%20del%20proyecto.md) - Roles, responsabilidades y normas.
+- [🚀 Repositorio Operativo](docs/inicio/Repositorio%20GitHub%20operativo.md) - Guía de gestión de versiones.
+
+### **3. Arquitectura y Diseño (arc42)**
+- [🏗️ Documento Maestro ARC42](docs/ARC42.md) - Estructura completa de la arquitectura del sistema.
 
 ---
 
-## 1. Análisis del Problema Complejo
-*Evidencia de pensamiento crítico y estructuración técnica.*
+## 🚀 Presentación del Proyecto
+**Planner-UC** aborda un **Problema Complejo de Ingeniería** de naturaleza combinatoria (**CSP**). El sistema utiliza algoritmos de optimización para automatizar la creación de horarios, eliminando el error humano y optimizando el uso de infraestructura física.
 
-Abordamos un problema de naturaleza combinatoria conocido como **Constraint Satisfaction Problem (CSP)**. La complejidad radica en la interdependencia de variables dinámicas:
-
-### **Ambigüedades Identificadas**
-Para una resolución efectiva, hemos detectado y gestionado las siguientes incertidumbres iniciales:
-1.  **Incertidumbre en Bloques:** Falta de definición exacta del número de bloques horarios por jornada.
-2.  **Priorización de Conflictos:** Ambigüedad en la jerarquía de restricciones ante escenarios sin solución perfecta.
-3.  **Carga Docente:** Falta de claridad sobre topes de secciones consecutivas por docente.
-4.  **Flexibilidad Estudiantil:** Grado de libertad de los estudiantes vs. planes de estudio predefinidos.
-
-### **Restricciones Reales**
-5.  **Exclusividad:** Un docente/aula no puede estar en dos lugares simultáneamente.
-6.  **Capacitación:** El aula debe soportar el aforo proyectado de la sección.
-7.  **Prerrequisitos:** El flujo de cursos debe respetar la malla curricular.
-8.  **Disponibilidad:** Respeto estricto a las ventanas horarias de docentes externos.
-
-> [!NOTE]
-> Puede profundizar en el análisis técnico en el [**Documento del Problema**](docs/inicio/Documento%20inicial%20del%20problema%20(primer%20borrador).md).
+### **Puntos Clave del Desarrollo:**
+- **SMART Compliance:** Todos los requerimientos están validados bajo criterios específicos, medibles y temporales.
+- **Spec-Driven Development:** El desarrollo se guía por especificaciones técnicas rigurosas respaldadas por **Google Antigravity**.
+- **TDD (Test-Driven Development):** Núcleo algorítmico desarrollado bajo ciclos de pruebas automatizadas.
 
 ---
 
-## 2. Visión y Alcance (PMV)
-Nuestra visión es transformar la gestión académica mediante un **Producto Mínimo Viable (PMV)** que demuestre la viabilidad de la generación automática.
-
-### **Valor de Negocio (Visión)**
-> "Para los coordinadores académicos de la UC, el Sistema Planner-UC es una solución de optimización que permite la generación automática de horarios 100% libres de solapamientos, garantizando eficiencia y trazabilidad frente a los procesos manuales tradicionales."
-
-### **Alcance del PMV (Medible)**
-Para este proyecto Continental, el alcance se define estrictamente como:
-*   **Inclusión:** Motor de generación algorítmica, validación de conflictos en tiempo real, persistencia de datos base (docentes, aulas, cursos), y visualización de mallas horarias.
-*   **Exclusión (Consistencia MVP):** No incluye integración con sistemas ERP (Banner/PeopleSoft), pagos ni soporte técnico, manteniendo el enfoque en la **funcionalidad esencial de programación**.
-*   **Meta:** Generar un horario 100% libre de conflictos para un escenario de prueba de 50 docentes y 100 cursos.
+## ⚙️ Especificaciones Técnicas (Resumen)
+- **Rendimiento:** Generación de horarios base en **< 60 segundos**.
+- **Latencia:** Consultas administrativas con respuesta en **< 2 segundos**.
+- **Stack:** React (Frontend) + FastAPI/Python (Motor de Optimización) + PostgreSQL.
 
 ---
 
-## 3. Requerimientos del Sistema (SMART)
-Hemos definido una base de **24 requerimientos** formulados y validados conforme al enfoque **SMART** (Específicos, Medibles, Alcanzables, Relevantes y Acotados en el tiempo).
+## 🛠️ Guía de Ejecución Rápida
 
-| Tipo | Cantidad | Ejemplos Clave |
-| :--- | :--- | :--- |
-| **Funcionales (RF)** | 16 | Detección de solapamientos, Gestión de disponibilidad, Motor de generación automática. |
-| **No Funcionales (RNF)** | 8 | Generación en < 60s, Disponibilidad del 95%, Seguridad via Hash de credenciales. |
+### **Backend (Motor)**
+1. `cd Backend`
+2. `uv sync`
+3. `uv run uvicorn app.main:app --reload`
 
-[**Ver Lista Completa de Requerimientos**](docs/inicio/Lista%20preliminar%20de%20requerimientos%20funcionales%20y%20no%20funcionales.md)
-
----
-
-## 4. Selección del Enfoque (Justificación Técnica)
-Hemos comparado dos arquitecturas principales antes de tomar una decisión fundamentada:
-
-1.  **Enfoque Seleccionado: MERN (React + Node.js)**
-    *   **Justificación:** Selección fundamentada en criterios **técnicos** (procesamiento asíncrono), **metodológicos** (Scrum/Lenguaje unificado) y **contextuales** (curva de aprendizaje y 16 semanas de plazo).
-
-2.  **Alternativa Evaluada: Arquitectura Monolítica (Tradicional)**
-    *   **Descarte:** Menor escalabilidad y experiencia de usuario más lenta debido a recargas constantes del servidor.
-
-**Metodología:** Aplicación estricta de **Scrum** con entregas incrementales y gestión mediante este repositorio.
-
-[**Ver Justificación Detallada**](docs/inicio/Documento%20de%20selección%20del%20enfoque%20del%20proyecto.md)
-
----
-
-## 5. Planificación y Gestión (Project Charter)
-| Hito | Fase | Semana |
-| :--- | :--- | :--- |
-| **Hito 1** | Análisis y Requerimientos | S1 - S3 |
-| **Hito 2** | Diseño de Solución | S4 - S6 |
-| **Hito 3** | Desarrollo (Sprints) | S7 - S13 |
-| **Hito 4** | Pruebas y QA | S14 - S15 |
-| **Hito 5** | Cierre y Entrega | S16 |
-
-
-**Riesgo Crítico:** Complejidad del modelado matemático del algoritmo de generación.
-
-[**Ver Project Charter Oficial**](docs/inicio/Project%20Charter.md) | [**Ver Supuestos y Restricciones**](docs/inicio/Registro%20de%20supuestos%20y%20restricciones.md)
-
----
-
-## 6. El Equipo de Proyecto
-Organizados bajo roles definidos y normas de convivencia orientadas a resultados.
-
-| Integrante | Rol Scrum / Especialidad |
-| :--- | :--- |
-| **VASQUEZ MIRANDA, Luis Alexis** | Project Leader / Backend Developer |
-| **ARAUJO HUAMANI, Leonardo Daniel** | Analista de Sistemas / Requirements Logic |
-| **CURI UNTIVEROS, Jefferson Diego** | Diseñador de Software / UX-UI Architecture |
-| **VILCARANO DE LA CRUZ, Frank Anthony**| Frontend Developer / QA Lead |
-
-**Normas de Trabajo:** Reuniones semanales via Meet, commits atómicos en GitHub, reporte de bloqueos inmediato.
-
-[**Ver Declaración del Equipo**](docs/inicio/Declaración%20del%20equipo%20del%20proyecto.md)
-
----
-
-## 7. Documentación Estructurada (Estándar ARC42)
-
-Siguiendo las directrices académicas, la documentación del proyecto está organizada bajo el estándar **arc42**, garantizando la trazabilidad entre requerimientos y arquitectura.
-
-> [!IMPORTANT]
-> Puede acceder al índice centralizado de arquitectura aquí: [**Índice ARC42**](docs/ARC42.md)
-
-### **Tabla de Contenidos (TOC)**
-
-| Sección arc42 | Documento de Referencia | Acceso Directo |
-| :--- | :--- | :---: |
-| **1. Metas y Visión** | Visión del producto y análisis del problema complejo. | [Ver](docs/inicio/Declaración%20de%20la%20visión%20del%20proyecto.md) |
-| **2. Restricciones** | Limitaciones técnicas, de negocio y equipo validadas. | [Ver](docs/inicio/Registro%20de%20supuestos%20y%20restricciones.md) |
-| **3. Contexto y Alcance** | Delimitación del PMV y Project Charter oficial. | [Ver](docs/inicio/Project%20Charter.md) |
-| **4. Estrategia Solución** | Justificación del Stack MERN y criterios de selección. | [Ver](docs/inicio/Documento%20de%20selección%20del%20enfoque%20del%20proyecto.md) |
-| **5. Vista de Bloques** | Estructura de alto nivel (React, Node, MongoDB). | [Ver](docs/ARC42.md#5-vista-de-bloques) |
-| **6 - 9. Vistas Técnicas** | Ejecución, despliegue y conceptos (En desarrollo). | [Ver](docs/ARC42.md) |
-| **10. Calidad (SMART)** | Requerimientos Funcionales y No Funcionales. | [Ver](docs/inicio/Lista%20preliminar%20de%20requerimientos%20funcionales%20y%20no%20funcionales.md) |
-| **11 - 12. Riesgos y Otros** | Mitigación de riesgos y glosario de términos. | [Ver](docs/ARC42.md) |
-
-### Gestión y Otros Entregables
-*   **Análisis del Problema**: [Documento de Ingeniería](docs/inicio/Documento%20inicial%20del%20problema%20(primer%20borrador).md)
-*   **Gestión Repositorio**: [Informe de Operatividad](docs/inicio/Repositorio%20GitHub%20operativo.md)
-*   **Equipo Académico**: [Roles y Normas](docs/inicio/Declaración%20del%20equipo%20del%20proyecto.md)
-
-
-## 8. Guía de Ejecución
-Para poner en marcha el sistema completo, siga las instrucciones para cada componente.
-
-### **Backend (FastAPI)**
-El backend se encarga del motor de optimización de horarios.
-
-**Requisitos:**
-*   Python 3.11 o superior.
-*   [**uv**](https://docs.astral.sh/uv/) (Gestor de paquetes recomendado para Python).
-
-**Pasos:**
-1. Navegar a la carpeta del backend:
-   ```powershell
-   cd Backend
-   ```
-2. Instalar dependencias:
-   ```powershell
-   uv sync
-   ```
-3. Ejecutar el servidor de desarrollo:
-   ```powershell
-   uv run uvicorn app.main:app --reload
-   ```
-   *Acceso local:* [http://127.0.0.1:8000](http://127.0.0.1:8000)
-
----
-
-### **Frontend (Next.js)**
-El frontend proporciona la interfaz de usuario moderna y reactiva.
-
-**Requisitos:**
-*   Node.js (versión 20 o superior).
-*   npm (incluido con Node.js).
-
-**Pasos:**
-1. Navegar a la carpeta del frontend:
-   ```powershell
-   cd frontend
-   ```
-2. Instalar dependencias:
-   ```powershell
-   npm install
-   ```
-3. Ejecutar el servidor de desarrollo:
-   ```powershell
-   npm run dev
-   ```
-   *Acceso local:* [http://127.0.0.1:3000](http://127.0.0.1:3000)
+### **Frontend (Interfaz)**
+1. `cd frontend`
+2. `npm install`
+3. `npm run dev`
 
 ---
 
 <div align="center">
-  <sub>Taller de Proyectos 2 - Ingeniería de Sistemas e Informática - Universidad Continental (2026)</sub>
+  <sub>Taller de Proyectos 2 - Universidad Continental (2026)</sub>
 </div>
