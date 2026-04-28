@@ -1,69 +1,47 @@
-# 📋 LISTA PRELIMINAR DE REQUERIMIENTOS
+# 📋 LISTA DE REQUERIMIENTOS (ENFOQUE SMART)
 
-### 🔹 Requerimientos Funcionales
-Los requerimientos funcionales describen las acciones que el sistema debe ejecutar para satisfacer las necesidades del usuario.
+Siguiendo las directrices del docente, los requerimientos han sido formulados bajo el enfoque **SMART** (Específicos, Medibles, Alcanzables, Relevantes y Temporales) y estructurados para asegurar trazabilidad total.
 
-| **ID** | **Nombre del Requerimiento** | **Descripción Técnica** | **Criterio de Aceptación** |
+### 🔹 1. Requerimientos Funcionales (RF)
+
+| **ID** | **Requerimiento SMART** | **Descripción Técnica** | **Atributos SMART** |
 | :--- | :--- | :--- | :--- |
-| **RF-01** | Registrar docentes | Registro con código único, nombre, disponibilidad y cursos asignables. | Dado un docente válido, el sistema lo registra sin duplicados. |
-| **RF-02** | Registrar cursos | Registro con código único, nombre, créditos, sección y prerrequisitos. | El curso queda disponible para la planificación. |
-| **RF-03** | Registrar aulas | Registro con código único, capacidad (>0) y tipo. | El aula puede asignarse a bloques horarios. |
-| **RF-04** | Bloques horarios | Crear, editar y eliminar bloques con día, hora inicio y fin. | Bloques disponibles sin traslapes iniciales. |
-| **RF-05** | Registrar restricciones | Registro de reglas obligatorias o deseables para el motor. | La restricción se considera en la generación automática. |
-| **RF-06** | Validar datos previos | Verificar existencia mínima de datos antes de generar. | Bloquea la generación si faltan datos base. |
-| **RF-07** | Generar horarios | Algoritmo de asignación automática de docentes, aulas y bloques. | Horario sin conflictos en restricciones obligatorias. |
-| **RF-08** | Detectar conflictos | Identificación de traslapes en docentes, aulas o cursos. | El sistema lista detalladamente los conflictos. |
-| **RF-09** | Priorizar restricciones | Clasificación y prioridad de cumplimiento de reglas. | Se cumplen el 100% de las reglas obligatorias. |
-| **RF-10** | Visualizar horarios | Vistas por docente, curso, aula o bloque con filtros. | Los filtros muestran la información correcta. |
-| **RF-11** | Ajuste manual | Modificación manual con validación de conflictos en tiempo real. | No permite guardar si genera conflictos críticos. |
-| **RF-12** | Re-generar horarios | Nueva ejecución tras cambios en datos o restricciones. | Se obtiene un nuevo horario válido y actualizado. |
-| **RF-13** | Consultar horarios | Consultas específicas por estudiante, docente o aula. | Resultados precisos según los filtros aplicados. |
-| **RF-14** | Gestión de roles | Administración de permisos según rol (Admin/Coordinador). | Deniega acciones a usuarios sin permisos. |
-| **RF-15** | Registro historial | Almacenamiento de cada ejecución (fecha, usuario, resultado). | El registro aparece en la bitácora del sistema. |
-| **RF-16** | Reporte incidencias | Emisión de reporte si no existe solución válida. | Indica qué restricciones causan el bloqueo. |
+| **RF-01** | **Gestión de Docentes** | Registrar, editar y listar docentes con código único, especialidad y disponibilidad. | **S**: Datos docentes. **M**: 100% de registros en DB. **T**: Sprint 1. |
+| **RF-02** | **Gestión de Cursos** | Registrar cursos con créditos, prerrequisitos y secciones vinculadas. | **S**: Malla académica. **M**: Verificable por ID único. **T**: Sprint 1. |
+| **RF-03** | **Gestión de Aulas** | Registrar aulas con capacidad de aforo y tipo (Teoría/Lab). | **S**: Recursos físicos. **M**: Validación aforo > 0. **T**: Sprint 1. |
+| **RF-04** | **Configuración Temporal**| Definir franjas horarias de 60-90 min evitando traslapes base. | **S**: Estructura horaria. **M**: 0 traslapes en config. **T**: Sprint 2. |
+| **RF-05** | **Motor de Optimización**| Generar un horario automático asignando el 100% de cursos obligatorios. | **S**: Algoritmo CSP. **M**: 0 conflictos críticos. **T**: Sprint 3. |
+| **RF-06** | **Detector de Conflictos**| Identificar en tiempo real solapamientos de docente o aula. | **S**: QA de asignación. **M**: Alerta visual inmediata. **T**: Sprint 2. |
+| **RF-07** | **Validación de Aforo** | Impedir la asignación de secciones que superen la capacidad del aula. | **S**: Restricción física. **M**: Bloqueo al exceder cupo. **T**: Sprint 2. |
+| **RF-08** | **Edición Manual** | Permitir ajustes manuales con validación de reglas en < 1s. | **S**: Flexibilidad. **M**: Latencia < 1s por cambio. **T**: Sprint 3. |
+| **RF-09** | **Jerarquía de Reglas** | Aplicar prioridad: 1. Obligatorias (No solape), 2. Deseables (Compactación). | **S**: Lógica CSP. **M**: 100% éxito Niv. 1. **T**: Sprint 3. |
+| **RF-10** | **Reportes de Malla** | Visualizar el horario completo filtrado por docente, aula o curso. | **S**: Reporting. **M**: Filtros operativos 100%. **T**: Sprint 4. |
 
 ---
 
-### ⚙️ Requerimientos No Funcionales
-Atributos de calidad del sistema basados en el estándar ISO/IEC 25010.
+### ⚙️ 2. Requerimientos No Funcionales (RNF) - ISO 25010
 
-| **Categoría** | **Atributo** | **Requerimiento Cuantificable** | **Justificación** |
+| **ID** | **Atributo** | **Requerimiento Cuantificable (SMART)** | **Métrica de Validación** |
 | :--- | :--- | :--- | :--- |
-| **Rendimiento** | Tiempo consulta | Consultas de horario **≤ 2 s** con 500 registros. | Fluidez en la validación de horarios. |
-| **Rendimiento** | Tiempo generación | Generación **≤ 60 s** para escenario PMV. | Eficiencia frente al proceso manual. |
-| **Disponibilidad**| Operatividad | Disponibilidad **≥ 95%** durante el proyecto. | Garantía de acceso para validaciones. |
-| **Seguridad** | Control acceso | 100% de operaciones críticas requieren login. | Integridad de la planificación académica. |
-| **Seguridad** | Protección datos | Contraseñas con **Hash seguro** (no texto plano). | Protección de la identidad de usuarios. |
-| **Integridad** | Unicidad | 0 duplicados en códigos base. | Prevención de inconsistencias lógicas. |
-| **Usabilidad** | Feedback | Errores indican campo y acción correctiva. | Facilidad de uso para administrativos. |
-| **Compatibilidad**| Navegadores | Chrome, Edge y Firefox (últimas 2 versiones). | Estándar de uso institucional. |
-| **Mantenibilidad**| Modularidad | Organización en módulos (Front, Back, Lógica). | Facilita el mantenimiento futuro. |
-| **Mantenibilidad**| Trazabilidad | 100% de cambios vinculados a commits. | Seguimiento formal del desarrollo. |
-| **Escalabilidad** | Crecimiento | Soporta el doble de datos con degradación mínima. | Viabilidad ante crecimiento de la oferta. |
-| **Accesibilidad** | Interfaz | Cumplimiento básico WCAG 2.1 nivel A. | Acceso inclusivo para todos los usuarios. |
+| **RNF-01** | **Performance** | El motor debe generar un horario base en **< 60 segundos** para 100 secciones. | Tiempo de respuesta del servidor. |
+| **RNF-02** | **Latencia** | Las consultas administrativas deben responder en **< 2 segundos**. | Test de estrés (Postman/JMeter). |
+| **RNF-03** | **Disponibilidad** | El sistema debe mantener una operatividad del **95%** en fase beta. | Logs de Uptime del servidor. |
+| **RNF-04** | **Seguridad** | Las credenciales deben estar cifradas mediante **BCrypt con Salt**. | Auditoría de código/DB. |
+| **RNF-05** | **Escalabilidad** | Soportar un incremento del **50% en la carga** con degradación < 20%. | Test de escalabilidad horizontal. |
+| **RNF-06** | **Usabilidad** | Un usuario debe generar su primer horario tras **< 1h de capacitación**. | Evaluación de UX con usuario. |
 
 ---
 
-### 🏆 Criterios de Desempeño
-1.  Claridad y profundidad en el análisis del problema.
-2.  Coherencia y solidez en la justificación del enfoque.
-3.  Calidad, estructura y formalidad de los documentos.
-4.  Uso adecuado de herramientas (GitHub, documentación).
-5.  Nivel de organización y trabajo colaborativo.
+### 🔗 3. Matriz de Trazabilidad y Prioridad
+
+| **ID** | **Importancia** | **Relación con el Problema** | **Estado** |
+| :--- | :---: | :--- | :---: |
+| **RF-05** | Crítica | Automatización del proceso manual ineficiente. | Planificado |
+| **RF-07** | Alta | Optimización del uso de infraestructura física. | Planificado |
+| **RNF-01** | Alta | Reducción drástica del tiempo de planificación. | Planificado |
+| **RNF-04** | Media | Protección de integridad de la malla académica. | Planificado |
 
 ---
 
-### 📊 Rúbrica de Evaluación (Sprint 0)
-
-| **Criterio** | **Sobresaliente (3)** | **Suficiente (2)** | **En Desarrollo (1)** |
-| :--- | :--- | :--- | :--- |
-| **Análisis** | Análisis completo, identifica ≥4 ambigüedades. | Identifica elementos básicos, ≥2 ambigüedades. | Identificación parcial. |
-| **Requerimientos** | ≥8 RF y ≥5 RNF claros y trazables. | ≥5 RF y ≥3 RNF adecuados. | Incompletos o ambiguos. |
-| **Enfoque** | Justificación sólida, compara alternativas. | Justificación básica, coherente. | Justificación débil. |
-| **Visión** | Clara, concisa, define valor y alcance. | Adecuada, sin errores críticos. | Ambigua o incompleta. |
-| **Charter** | Documento completo y detallado. | Incluye la mayoría de elementos. | Faltan elementos. |
-| **Supuestos** | ≥5 supuestos y restricciones justificados. | ≥3 supuestos y restricciones básicos. | <3 elementos. |
-| **Equipo** | Roles claros (≥4) y normas explícitas. | Roles básicos definidos. | Roles poco claros. |
-| **GitHub** | Funcional, ordenado, commits frecuentes. | Creado, estructura básica, ≥2 commits. | Incompleto o desordenado. |
-| **Calidad Doc.** | Claros, coherentes, formato técnico. | Comprensible, mínimos errores. | Confusa o con errores. |
-| **Complejidad** | Evidencia sólida de razonamiento crítico. | Evidencia básica de análisis. | Evidencia limitada. |
+> [!IMPORTANT]
+> **Alineación ARC42:** Esta especificación se integra en la sección 1 (Metas) y sección 10 (Calidad) del documento maestro de arquitectura, asegurando consistencia técnica.
