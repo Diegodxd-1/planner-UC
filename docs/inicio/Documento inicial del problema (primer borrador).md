@@ -1,46 +1,38 @@
-# 🔍 DOCUMENTO INICIAL DEL PROBLEMA (PRIMER BORRADOR)
+# 🔍 DOCUMENTO INICIAL DEL PROYECTO (PRIMER BORRADOR)
 
 ### 🌏 Contexto del Problema
-La planificación de horarios académicos es un desafío logístico crítico en las universidades modernas. La transición hacia modelos de **currículo flexible** ha transformado este proceso de una tarea administrativa tediosa en un **Problema Complejo de Ingeniería** de naturaleza combinatoria.
+La planificación de horarios es un **Problema Complejo de Ingeniería**. En las universidades con **currículo flexible**, el número de combinaciones posibles crece exponencialmente, haciendo que el proceso manual sea ineficiente y propenso a errores críticos de solapamiento.
 
 ---
 
-### ⚡ Problema Central y Complejidad
-**El problema central es la incapacidad de generar horarios académicos eficientes que cumplan simultáneamente con restricciones físicas, académicas y humanas.**
+### ⚡ Problema Central
+**Existe dificultad para generar horarios académicos óptimos que cumplan con restricciones físicas, académicas y humanas en tiempo real.**
 
-Desde la perspectiva de la computación, este es un **Constraint Satisfaction Problem (CSP)**. A medida que aumenta el número de cursos (N) y docentes (M), el espacio de búsqueda de soluciones válidas crece de manera exponencial, haciendo que el proceso manual sea matemáticamente propenso al fracaso o a soluciones sub-óptimas que generan solapamientos.
-
----
-
-### 🧐 Evidencia de Complejidad: Ambigüedades y Trade-offs
-Para alcanzar una solución sobresaliente, hemos identificado y argumentado las siguientes incertidumbres:
-
-1.  **Priorización de Restricciones (Trade-off):** ¿Es más importante evitar que un docente tenga "horas muertas" o asegurar que las aulas de mayor capacidad no queden vacías? **Decisión:** Priorizamos la integridad del horario estudiantil sobre la compactación docente en la fase PMV.
-2.  **Incertidumbre en Bloques:** La variabilidad de duraciones (60 vs 90 min) dificulta el empaquetado de bloques. **Decisión:** Estandarizar bloques base para facilitar el cálculo algorítmico.
-3.  **Flexibilidad vs. Control:** Los estudiantes de currículo flexible no tienen secciones fijas. **Decisión:** El sistema modelará "proyecciones de demanda" para estimar el número de secciones necesarias.
+#### **🧐 Evidencia de Complejidad (Ambigüedades y Trade-offs)**
+1.  **Jerarquía de Conflictos:** No existe una prioridad clara entre restricciones. **Decisión:** Priorizamos las restricciones "Duras" (choques de aula/docente) sobre las "Blandas" (preferencias horarias).
+2.  **Variabilidad de Bloques:** La falta de estandarización en bloques (60/90 min) complica el algoritmo. **Decisión:** El sistema estandarizará bloques de 90 min para el PMV.
+3.  **Carga Docente:** ¿Es mejor compactar el horario del docente o el del alumno? **Trade-off:** Se prioriza la compactación de la malla estudiantil para reducir la deserción.
 
 ---
 
-### 🛠️ Restricciones y Variables
-El sistema debe procesar un ecosistema dinámico de variables:
-- **Restricciones Duras (Hard):** No solape de docente, no solape de aula, cumplimiento de prerrequisitos.
-- **Restricciones Blandas (Soft):** Docentes con preferencias de mañana/tarde, minimización de "huecos" en el horario.
-
-> [!IMPORTANT]
-> El reconocimiento de estas restricciones es vital para el diseño del algoritmo. Una solución que no considere la capacidad de aforo vs. matrícula es una solución fallida en el contexto real.
+### 🛠️ Restricciones del Problema
+1.  **Exclusividad:** Un docente/aula no puede tener dos actividades simultáneas.
+2.  **Capacidad:** El aforo del aula debe ser $\geq$ a la matrícula proyectada.
+3.  **Continuidad:** Respeto estricto a los prerrequisitos de la malla curricular.
+4.  **Disponibilidad:** Ventanas horarias obligatorias de docentes externos.
 
 ---
 
 ### 💡 Justificación de la Solución Tecnológica
-La automatización mediante un motor de optimización (basado en el enfoque **Spec-Driven Development**) es la única vía para garantizar una planificación 100% libre de errores. El uso de **Google Antigravity** como soporte conceptual nos permite diseñar una arquitectura que soporte la complejidad matemática sin sacrificar la usabilidad administrativa.
+Dada la naturaleza combinatoria (CSP - Constraint Satisfaction Problem) del problema, el uso de un motor de optimización (Google OR-Tools) es indispensable. Esto permite pasar de una planificación de días a una de **minutos**, garantizando el cumplimiento del 100% de las leyes académicas.
 
 ---
 
-### 🎯 Alcance Estratégico (PMV)
-El desarrollo se limita a las funcionalidades core que demuestren la viabilidad técnica:
-- Registro de entidades base (Docentes, Aulas, Cursos).
-- Motor de generación automática con validación de restricciones duras.
-- Interfaz de visualización y ajuste manual.
+### 🎯 Alcance del Proyecto (PMV)
+El desarrollo se centra en un **Producto Mínimo Viable** desarrollado en **16 semanas**:
+- Gestión de base de datos académica (MERN).
+- Algoritmo de generación automática validado con **TDD**.
+- Interfaz de ajuste manual con validación en tiempo real.
 
 > [!NOTE]
-> Esta delimitación es consistente con el plazo de **16 semanas** y permite centrar los esfuerzos de ingeniería en el algoritmo de resolución de conflictos, que es el corazón del problema.
+> Esta delimitación garantiza una entrega funcional y técnica de alta calidad, evitando la expansión innecesaria del alcance que ponga en riesgo los plazos.
