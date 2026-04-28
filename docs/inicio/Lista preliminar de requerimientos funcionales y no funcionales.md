@@ -1,6 +1,6 @@
 # 📋 LISTA PRELIMINAR DE REQUERIMIENTOS (ENFOQUE SMART)
 
-Siguiendo las directrices del docente, los requerimientos han sido validados bajo el enfoque **SMART** (Específicos, Medibles, Alcanzables, Relevantes y Temporales). Se mantienen los 16 requerimientos originales con su respectiva validación técnica.
+Siguiendo las directrices del docente, los requerimientos han sido validados bajo el enfoque **SMART** (Específicos, Medibles, Alcanzables, Relevantes y Temporales).
 
 ### 🔹 Requerimientos Funcionales (RF)
 | **ID** | **Nombre del Requerimiento** | **Descripción Técnica** | **Atributos SMART** |
@@ -15,7 +15,7 @@ Siguiendo las directrices del docente, los requerimientos han sido validados baj
 | **RF-08** | Detectar conflictos | Identificación en tiempo real de traslapes en el horario. | **S**: Verificación. **M**: Reporte de errores. **T**: S2. |
 | **RF-09** | Priorizar restricciones| Cumplimiento del 100% de restricciones obligatorias. | **S**: Jerarquía. **M**: 100% éxito Niv. 1. **T**: S3. |
 | **RF-10** | Visualizar horarios | Vistas filtradas por docente, curso o aula. | **S**: UX Reporting. **M**: Filtros operativos. **T**: S4. |
-| **RF-11** | Ajuste manual | Modificación manual con validación de conflictos en tiempo real. | **S**: Edición fluida. **M**: Latencia < 1s. **T**: S3. |
+| **RF-11** | Ajuste manual | Modificación manual con validación de reglas en < 1s. | **S**: Edición fluida. **M**: Latencia < 1s. **T**: S3. |
 | **RF-12** | Re-generar horarios | Nueva ejecución tras cambios en datos o restricciones. | **S**: Iteración. **M**: Nuevo horario válido. **T**: S3. |
 | **RF-13** | Consultar horarios | Búsqueda específica por ciclo, docente o ambiente. | **S**: Consultas. **M**: Datos precisos. **T**: S4. |
 | **RF-14** | Gestión de roles | Control de acceso según perfil (Admin/Coordinador). | **S**: Seguridad. **M**: Bloqueo de no-autorizados. **T**: S4. |
@@ -25,14 +25,14 @@ Siguiendo las directrices del docente, los requerimientos han sido validados baj
 ---
 
 ### ⚙️ Requerimientos No Funcionales (RNF)
-| **ID** | **Atributo** | **Requerimiento Cuantificable** | **Justificación (SMART)** |
+| **ID** | **Atributo** | **Requerimiento Cuantificable** | **Validación SMART** |
 | :--- | :--- | :--- | :--- |
-| **RNF-01** | **Rendimiento** | Consultas de horario **≤ 2 s** con 500 registros. | **M**: Latencia medible. **R**: Fluidez operativa. |
-| **RNF-02** | **Eficiencia** | Generación de horario base **≤ 60 s**. | **M**: Cronómetro. **R**: Mejora proceso manual. |
-| **RNF-03** | **Disponibilidad**| Operatividad **≥ 95%** durante el proyecto. | **M**: Logs de Uptime. **T**: 16 semanas. |
-| **RNF-04** | **Seguridad** | 100% de operaciones críticas requieren login. | **S**: Control acceso. **R**: Integridad de datos. |
-| **RNF-05** | **Seguridad** | Contraseñas con **Hash seguro (BCrypt)**. | **S**: Cifrado. **R**: Protección de identidad. |
-| **RNF-06** | **Escalabilidad** | Soporta el doble de datos con degradación < 20%. | **M**: Pruebas de carga. **R**: Viabilidad futura. |
+| **RNF-01** | **Rendimiento** | Consultas de horario **≤ 2 s** con 500 registros. | **M**: Latencia medible. **T**: Durante operación. |
+| **RNF-02** | **Eficiencia** | Generación de horario base **≤ 60 s**. | **M**: Cronómetro. **T**: Al cierre del Sprint 3. |
+| **RNF-03** | **Disponibilidad**| Operatividad **≥ 95%** en entorno de pruebas. | **M**: Logs de Uptime. **T**: Durante las 16 semanas. |
+| **RNF-04** | **Seguridad** | 100% de operaciones críticas requieren login. | **S**: Control de acceso. **T**: Desde el Sprint 2. |
+| **RNF-05** | **Seguridad** | Contraseñas con **Hash seguro (BCrypt)**. | **S**: Cifrado. **T**: Permanente en DB. |
+| **RNF-06** | **Escalabilidad** | Soportar x2 en carga de datos con degradación < 20%. | **M**: Pruebas de carga. **T**: Validado en Sprint 4. |
 
 ---
 
@@ -44,4 +44,4 @@ Siguiendo las directrices del docente, los requerimientos han sido validados baj
 | **RNF-02** | Eficiencia | Proceso manual lento | Media |
 
 > [!IMPORTANT]
-> Esta documentación sigue las directrices del estándar **ARC42** para asegurar claridad y consistencia.
+> Esta documentación sigue las directrices del estándar **ARC42** para asegurar claridad y consistencia técnica.
