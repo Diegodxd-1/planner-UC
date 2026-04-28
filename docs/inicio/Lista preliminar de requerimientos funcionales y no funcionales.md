@@ -15,7 +15,7 @@ Siguiendo las directrices del docente, los requerimientos han sido validados baj
 | **RF-08** | Detectar conflictos | Identificación en tiempo real de traslapes en el horario. | **S**: Verificación. **M**: Reporte de errores. **T**: S2. |
 | **RF-09** | Priorizar restricciones| Cumplimiento del 100% de restricciones obligatorias. | **S**: Jerarquía. **M**: 100% éxito Niv. 1. **T**: S3. |
 | **RF-10** | Visualizar horarios | Vistas filtradas por docente, curso o aula. | **S**: UX Reporting. **M**: Filtros operativos. **T**: S4. |
-| **RF-11** | Ajuste manual | Modificación manual con validación de reglas en < 1s. | **S**: Edición fluida. **M**: Latencia < 1s. **T**: S3. |
+| **RF-11** | Ajuste manual | Modificación manual con validación de conflictos en tiempo real. | **S**: Edición fluida. **M**: Latencia < 1s. **T**: S3. |
 | **RF-12** | Re-generar horarios | Nueva ejecución tras cambios en datos o restricciones. | **S**: Iteración. **M**: Nuevo horario válido. **T**: S3. |
 | **RF-13** | Consultar horarios | Búsqueda específica por ciclo, docente o ambiente. | **S**: Consultas. **M**: Datos precisos. **T**: S4. |
 | **RF-14** | Gestión de roles | Control de acceso según perfil (Admin/Coordinador). | **S**: Seguridad. **M**: Bloqueo de no-autorizados. **T**: S4. |
