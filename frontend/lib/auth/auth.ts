@@ -3,7 +3,7 @@
  */
 
 import { createClient } from '@/utils/supabase/client';
-import { UserWithRole, UserRole } from '@/types/auth';
+import { AuthUser, UserWithRole, UserRole } from '@/types/auth';
 
 const supabase = createClient();
 
@@ -117,7 +117,7 @@ export async function getCurrentUser() {
       return null;
     }
     return data.user;
-  } catch (error) {
+  } catch {
     return null;
   }
 }
@@ -145,7 +145,7 @@ export async function getUserProfile(
     }
 
     return data as UserWithRole | null;
-  } catch (error) {
+  } catch {
     return null;
   }
 }
@@ -194,7 +194,7 @@ export async function changePassword(newPassword: string) {
 /**
  * Escuchar cambios de autenticación
  */
-export function onAuthStateChanged(callback: (user: any) => void) {
+export function onAuthStateChanged(callback: (user: AuthUser | null) => void) {
   const {
     data: { subscription },
   } = supabase.auth.onAuthStateChange((event, session) => {

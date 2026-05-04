@@ -19,8 +19,6 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
 
   // Configurar listener de cambios de autenticación
   useEffect(() => {
-    setIsLoading(true);
-
     // Obtener usuario actual
     const getInitialUser = async () => {
       const currentUser = await getCurrentUser();

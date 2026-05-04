@@ -49,8 +49,8 @@ export interface SignUpData extends LoginCredentials {
 
 export interface AuthResponse {
   user: AuthUser | null;
-  session: any; // Session type from Supabase
-  error: any;
+  session: unknown;
+  error: unknown;
 }
 
 export interface AuthContextType {

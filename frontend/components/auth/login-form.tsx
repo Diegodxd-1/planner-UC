@@ -20,8 +20,8 @@ export function LoginForm() {
     try {
       await login(email, password);
       router.push('/dashboard');
-    } catch (err: any) {
-      setError(err.message || 'Error en el login. Intenta de nuevo.');
+    } catch (err) {
+      setError(err instanceof Error ? err.message : 'Error en el login. Intenta de nuevo.');
     } finally {
       setIsLoading(false);
     }

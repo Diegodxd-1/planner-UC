@@ -11,27 +11,27 @@ export default function SetupPage() {
   const [adminExists, setAdminExists] = useState(false);
 
   useEffect(() => {
+    async function checkAdmin() {
+      try {
+        const response = await fetch('/api/setup');
+        const data = await response.json();
+        setAdminExists(data.exists);
+        if (data.exists) {
+          setMessage('Admin ya existe. Redirigiendo a login...');
+          setTimeout(() => router.push('/login'), 1500);
+        }
+      } catch (err) {
+        console.error(err);
+      }
+    }
+
     // Limpiar localStorage y cookies de sesión
     if (typeof window !== 'undefined') {
       localStorage.removeItem('sb-jurhjktvifeuobpmrarr-auth-token');
       localStorage.clear();
     }
-    checkAdmin();
-  }, []);
-
-  const checkAdmin = async () => {
-    try {
-      const response = await fetch('/api/setup');
-      const data = await response.json();
-      setAdminExists(data.exists);
-      if (data.exists) {
-        setMessage('Admin ya existe. Redirigiendo a login...');
-        setTimeout(() => router.push('/login'), 1500);
-      }
-    } catch (err) {
-      console.error(err);
-    }
-  };
+    void checkAdmin();
+  }, [router]);
 
   const handleSetup = async () => {
     setLoading(true);
