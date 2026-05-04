@@ -20,3 +20,14 @@
 | R12 | Planificación deficiente de sprints           | Cronograma | Mala organización         | Serio       | Medio | 2.7   | Medio          | Activo | PM       | Inicio sprint            | Mitigar            | Refinamiento backlog               | 01/05/26  | Mejora continua    |
 | R13 | Falta de control del avance                  | Cronograma | No seguimiento            | Moderado    | Medio | 2.1   | Alto           | Activo | PM       | Ejecución sprint         | Mitigar            | Daily meetings                     | 01/05/26  | Scrum clave        |
 | R14 | Problemas de comunicación del equipo          | Cronograma | Falta de coordinación     | Moderado    | Medio | 2.1   | Alto           | Activo | PM       | Trabajo diario           | Mitigar            | Reuniones diarias                  | 01/05/26  | Impacto medio      |
+
+---
+
+## Registro de Oportunidades
+| ID | Descripción de la Oportunidad | Impacto Positivo Esperado | Estrategia de Aprovechamiento | Estado |
+|:--- | :--- | :--- | :--- | :--- |
+| O1 | Integración con LLM para explicación de horarios | Mejora de la experiencia de usuario al justificar la asignación de bloques. | Implementar un servicio que traduzca la salida del solver a lenguaje natural. | Identificada |
+| O2 | Escalabilidad a múltiples facultades | Incremento del valor estratégico del sistema para la institución. | Diseñar cargadores de datos genéricos (CSV/JSON). | Planificada |
+| O3 | Aplicación móvil para consulta en tiempo real | Facilidad de acceso para estudiantes en entornos dinámicos. | Desarrollar una API RESTful robusta para consumo multiplataforma. | Identificada |
+| O4 | Reducción de huella de carbono (Green SW) | Optimización de procesos computacionales y ahorro energético. | Refinar las restricciones del solver para reducir el tiempo de CPU por búsqueda. | En análisis |
+| O5 | Automatización de reserva de espacios no académicos | Uso eficiente de la infraestructura física en horarios valle. | Ampliar el modelo CSP para incluir eventos extracurriculares. | Identificada |
