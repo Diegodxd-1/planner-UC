@@ -2,82 +2,70 @@
 
 <div align="center">
 
-![MERN Stack](https://img.shields.io/badge/Architecture-MERN%20%2B%20Python-8860D0?style=for-the-badge)
-![TDD](https://img.shields.io/badge/Methodology-TDD%20%2F%20Scrum-5680E9?style=for-the-badge)
-![Antigravity](https://img.shields.io/badge/Support-Google%20Antigravity-5AB9EA?style=for-the-badge)
+![Architecture](https://img.shields.io/badge/Architecture-MERN%20%2B%20Python-8860D0?style=for-the-badge)
+![Methodology](https://img.shields.io/badge/Methodology-TDD%20%2F%20Scrum-5680E9?style=for-the-badge)
+![Support](https://img.shields.io/badge/Support-Google%20Antigravity-5AB9EA?style=for-the-badge)
 
-_Sistema de optimización para la planificación académica universitaria en entornos de currículo flexible._
+*Sistema de optimización para la planificación académica universitaria en entornos de currículo flexible.*
 
 ---
 
 </div>
 
 ## 📖 Índice de Documentación (TOC)
-
-Toda la documentación del proyecto está organizada en archivos independientes para garantizar claridad y mantenibilidad, siguiendo el estándar **arc42**.
+Toda la documentación del proyecto sigue el estándar **arc42** para garantizar claridad y mantenibilidad.
 
 ### **1. Inicio y Fundamentación**
+- [🔍 Documento Inicial del Problema](docs/inicio/Documento%20inicial%20del%20problema%20(primer%20borrador).md) - Análisis de complejidad y ambigüedades.
+- [✨ Declaración de la Visión](docs/inicio/Declaración%20de%20la%20visión%20del%20proyecto.md) - Propuesta de valor y misión.
+- [🛠️ Selección del Enfoque Técnico](docs/inicio/Documento%20de%20selección%20del%20enfoque%20del%20proyecto.md) - Justificación de tecnologías.
+- [📜 Project Charter](docs/inicio/Project%20Charter.md) - Acta de constitución y hitos.
+- [📌 Registro de Supuestos y Restricciones](docs/inicio/Registro%20de%20supuestos%20y%20restricciones.md) - Marco lógico.
 
-- [🔍 Documento Inicial del Problema](<docs/inicio/Documento%20inicial%20del%20problema%20(primer%20borrador).md>) - Análisis de complejidad y ambigüedades.
-- [✨ Declaración de la Visión](docs/inicio/Declaración%20de%20la%20visión%20del%20proyecto.md) - Propuesta de valor y misión del producto.
-- [🛠️ Selección del Enfoque Técnico](docs/inicio/Documento%20de%20selección%20del%20enfoque%20del%20proyecto.md) - Justificación de tecnologías y metodología.
-- [📜 Project Charter](docs/inicio/Project%20Charter.md) - Acta de constitución, hitos y riesgos.
-- [📌 Registro de Supuestos y Restricciones](docs/inicio/Registro%20de%20supuestos%20y%20restricciones.md) - Marco lógico del proyecto.
+### **2. Planificación y Gestión (Scrum)**
+- [📅 Backlog Detallado del Proyecto](docs/planificacion/Backlog%20Detallado%20del%20Proyecto%20(Hoja%201).md) - Lista total de tareas.
+- [🏃 Backlog del Sprint 1](docs/planificacion/Backlog%20del%20Sprint%201.md) / [Sprint 2](docs/planificacion/Backlog%20del%20Sprint%202.md) - Seguimiento de iteraciones.
+- [💰 Gestión de Costos](docs/planificacion/Costo%20acumulado%20del%20proyecto.md) - Presupuesto y recursos.
+- [⚠️ Registro de Riesgos](docs/planificacion/Registro%20de%20Riesgos.md) - Mitigación de riesgos técnicos.
 
-### **2. Requerimientos y Calidad**
-
-- [📋 Lista de Requerimientos SMART](docs/inicio/Lista%20preliminar%20de%20requerimientos%20funcionales%20y%20no%20funcionales.md) - RF, RNF y Matriz de Trazabilidad.
-- [🤝 Declaración del Equipo](docs/inicio/Declaración%20del%20equipo%20del%20proyecto.md) - Roles, responsabilidades y normas.
-- [🚀 Repositorio Operativo](docs/inicio/Repositorio%20GitHub%20operativo.md) - Guía de gestión de versiones.
-
-### **3. Arquitectura y Diseño (arc42)**
-
-- [🏗️ Documento Maestro ARC42](docs/ARC42.md) - Estructura completa de la arquitectura del sistema.
+### **3. Requerimientos y Arquitectura**
+- [📋 Lista de Requerimientos SMART](docs/inicio/Lista%20preliminar%20de%20requerimientos%20funcionales%20y%20no%20funcionales.md) - RF, RNF y Trazabilidad.
+- [📝 Especificación Formal (Spec.md)](Spec.md) - Reglas del solver, entradas y salidas.
+- [🏗️ Documento Maestro ARC42](docs/ARC42.md) - Estructura completa de la arquitectura.
+- [🤝 Declaración del Equipo](docs/inicio/Declaración%20del%20equipo%20del%20proyecto.md) - Roles y normas.
 
 ### **4. Documentación del Backend**
-
-- [🔧 Backend - Documentación Completa](docs/backend/README.md) - Tecnologías, algoritmos, pruebas y guías de ejecución.
-  - [📊 Explicación del Algoritmo de Scheduling](docs/backend/SCHEDULING_DEMO_ORTOOLS_EXPLAINED.md) - Desglose detallado del solver OR-Tools CP-SAT.
-  - [🧪 Guía de Pruebas](docs/backend/TESTING.md) - Tests implementados y cómo ejecutarlos.
+- [🔧 Arquitectura del Backend](docs/backend/README.md) - Tecnologías y estructura.
+- [📊 Algoritmo de Scheduling](docs/backend/SCHEDULING_DEMO_ORTOOLS_EXPLAINED.md) - Desglose del solver **OR-Tools CP-SAT**.
+- [🧪 Guía de Pruebas (TDD)](docs/backend/TESTING.md) - Evidencia de tests automatizados.
 
 ---
 
 ## 🚀 Presentación del Proyecto
+**Planner-UC** aborda un **Problema Complejo de Ingeniería (CSP)**. El sistema utiliza algoritmos de optimización para automatizar la creación de horarios, eliminando el error humano y optimizando el uso de infraestructura.
 
-**Planner-UC** aborda un **Problema Complejo de Ingeniería** de naturaleza combinatoria (**CSP**). El sistema utiliza algoritmos de optimización para automatizar la creación de horarios, eliminando el error humano y optimizando el uso de infraestructura física.
-
-### **Puntos Clave del Desarrollo:**
-
-- **SMART Compliance:** Todos los requerimientos están validados bajo criterios específicos, medibles y temporales.
-- **Spec-Driven Development:** El desarrollo se guía por especificaciones técnicas rigurosas respaldadas por **Google Antigravity**.
-- **TDD (Test-Driven Development):** Núcleo algorítmico desarrollado bajo ciclos de pruebas automatizadas.
-
----
-
-## ⚙️ Especificaciones Técnicas (Resumen)
-
-- **Rendimiento:** Generación de horarios base en **< 60 segundos**.
-- **Latencia:** Consultas administrativas con respuesta en **< 2 segundos**.
-- **Stack:** React (Frontend) + FastAPI/Python (Motor de Optimización) + PostgreSQL.
+### **Puntos Clave:**
+- **SMART Compliance:** Requerimientos validados bajo criterios técnicos rigurosos.
+- **TDD (Test-Driven Development):** Núcleo probado automáticamente antes de su implementación.
+- **Eficiencia:** Generación de horarios base en **< 60 segundos**.
 
 ---
 
 ## 🛠️ Guía de Ejecución Rápida
 
-### **Backend (Motor)**
+### **Backend (Motor de Optimización)**
+```bash
+cd Backend
+uv sync
+uv run uvicorn app.main:app --reload
+```
 
-1. `cd Backend`
-2. `uv sync`
-3. `uv run uvicorn app.main:app --reload`
-
-### **Frontend (Interfaz)**
-
-1. `cd frontend`
-2. `npm install`
-3. `npm run dev`
+### **Frontend (Interfaz Web)**
+```bash
+cd frontend
+npm install
+npm run dev
+```
 
 ---
-
-<div align="center">
-  <sub>Taller de Proyectos 2 - Universidad Continental (2026)</sub>
-</div>
+*Desarrollado por el Grupo 05 - Taller de Proyectos 2.*
