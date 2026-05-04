@@ -23,11 +23,11 @@
 | ID  | Tarea                                                     | Horas | Costo/Hora | Material | Viaje | Otros | Total |
 |-----|-----------------------------------------------------------|-------|------------|----------|-------|-------|-------|
 | 2.1 | Desarrollar Componentes                                   | 100   | $15        | $0       | $0    | $0    | $1500 |
-| 2.2 | Adquirir Software                                         | 3     | $15        | $0       | $0    | $0    | $45   |
-| 2.3 | Adquirir Hardware                                         | 2     | $15        | $0       | $0    | $0    | $30   |
+| 2.2 | Adquirir Software                                         | 3     | $0         | $15      | $0    | $0    | $15   |
+| 2.3 | Adquirir Hardware                                         | 2     | $0         | $15      | $0    | $0    | $15   |
 | 2.4 | Paquete de pruebas de aceptación                          | 10    | $15        | $0       | $0    | $0    | $150  |
 | 2.5 | Pruebas unitarias / integración                           | 25    | $15        | $0       | $0    | $0    | $375  |
-|     | **Subtotal**                                               | **140**|           |          |       |       | **$2100** |
+|     | **Subtotal**                                               | **140**|           | **$30**  |       |       | **$2055** |
 
 ---
 
@@ -60,17 +60,27 @@
 
 ---
 
+### 5. Otros
+
+| ID  | Descripción | Horas | Costo/Hora | Material | Viaje | Otros | Total |
+|-----|------------|-------|------------|----------|-------|-------|-------|
+| 10  | Otros costos | 0     | $0         | $0       | $0    | $0    | $0    |
+| 11  | Otros costos | 0     | $0         | $0       | $0    | $0    | $0    |
+
+---
+
 ### Resumen General
 
 | Concepto                  | Horas | Total |
 |---------------------------|-------|-------|
-| Subtotales                | 272   | $4080 |
+| Subtotales                | 272   | $4035 |
 | Riesgo (Contingencia)     | 0     | $0    |
-| **TOTAL (Programado)**    | **272** | **$4080** |
+| **TOTAL (Programado)**    | **272** | **$4035** |
 
 ---
 
 ### Comentarios
 
-- No se consideraron costos adicionales de materiales ni viajes.
-- El costo está basado únicamente en horas hombre.
+- No se consideraron costos de viaje ni otros costos adicionales.
+- Se incluyó un costo mínimo en materiales (software y hardware).
+- El costo total está basado principalmente en horas hombre.

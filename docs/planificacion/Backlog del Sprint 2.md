@@ -8,9 +8,9 @@
 
 ### Información General
 
-- **Duración del Sprint:** 10 días  
-- **Task rows:** 6  
-- **Done days:** 8  
+- **Duración del Sprint:** 14 días  
+- **Task rows:** 7  
+- **Done days:** 14  
 
 ---
 
@@ -18,28 +18,34 @@
 
 | Día | Totales | Ideal | Tendencia |
 |-----|--------|-------|-----------|
-| 1   | 29     | 29    | 31.17     |
-| 2   | 29     | 26.1  | 27.44     |
-| 3   | 28     | 23.2  | 23.71     |
-| 4   | 25     | 20.3  | 19.99     |
-| 5   | 21     | 17.4  | 16.26     |
-| 6   | 17     | 14.5  | 12.54     |
-| 7   | 12     | 11.6  | 8.81      |
-| 8   | 9      | 8.7   | 5.08      |
-| 9   | 4      | 5.8   | 1.36      |
+| 1   | 25     | 25.00 | 25.00     |
+| 2   | 25     | 23.21 | 25.00     |
+| 3   | 25     | 21.43 | 25.00     |
+| 4   | 25     | 19.64 | 25.00     |
+| 5   | 25     | 17.86 | 25.00     |
+| 6   | 25     | 16.07 | 25.00     |
+| 7   | 25     | 14.29 | 25.00     |
+| 8   | 25     | 12.50 | 25.00     |
+| 9   | 25     | 10.71 | 25.00     |
+| 10  | 25     | 8.93  | 25.00     |
+| 11  | 25     | 7.14  | 25.00     |
+| 12  | 25     | 5.36  | 25.00     |
+| 13  | 25     | 3.57  | 25.00     |
+| 14  | 25     | 1.79  | 25.00     |
 
 ---
 
 ### Tareas del Sprint
 
-| ID  | Tarea                    | Historia | Responsable | Estado      | Est | Día 1 | Día 2 | Día 3 | Día 4 | Día 5 | Día 6 | Día 7 | Día 8 | Día 9 | Día 10 |
-|-----|--------------------------|----------|-------------|-------------|-----|------|------|------|------|------|------|------|------|------|-------|
-| 2.1 | Generar horarios         | HU07     | LUIS        | En progreso | 7   | 7    | 6    | 5    | 4    | 3    | 2    | 1    | 0    | 0    | 0     |
-| 2.2 | Detectar conflictos      | HU08     | DANIEL      | En progreso | 5   | 5    | 5    | 4    | 4    | 3    | 2    | 2    | 1    | 0    | 0     |
-| 2.3 | Editar horarios          | HU10     | FRANK       | En progreso | 4   | 4    | 4    | 4    | 3    | 3    | 2    | 1    | 1    | 0    | 0     |
-| 2.4 | Guardar ejecuciones      | HU12     | DIEGO       | En progreso | 3   | 3    | 3    | 3    | 2    | 2    | 1    | 1    | 0    | 0    | 0     |
-| 2.5 | Matricular cursos        | HU14     | LUIS        | En progreso | 5   | 5    | 5    | 4    | 4    | 3    | 2    | 2    | 1    | 0    | 0     |
-| 2.6 | Validar prerrequisitos   | HU15     | DANIEL      | En progreso | 5   | 5    | 5    | 5    | 4    | 3    | 3    | 2    | 1    | 0    | 0     |
+| ID  | Tarea                    | Historia | Responsable | Estado       | Est | D1 | D2 | D3 | D4 | D5 | D6 | D7 | D8 | D9 | D10 | D11 | D12 | D13 | D14 |
+|-----|--------------------------|----------|-------------|--------------|-----|----|----|----|----|----|----|----|----|----|-----|-----|-----|-----|-----|
+| 2.1 | Registrar estudiantes    | HU26     | LUIS        | En Progreso  | 3   | 3  | 3  | 3  | 3  | 3  | 3  | 3  | 3  | 3  | 3   | 3   | 3   | 3   | 3   |
+| 2.2 | Matricular cursos        | HU27     | DANIEL      | En Progreso  | 5   | 5  | 5  | 5  | 5  | 5  | 5  | 5  | 5  | 5  | 5   | 5   | 5   | 5   | 5   |
+| 2.3 | Consultar horarios       | HU11     | FRANK       | En Progreso  | 3   | 3  | 3  | 3  | 3  | 3  | 3  | 3  | 3  | 3  | 3   | 3   | 3   | 3   | 3   |
+| 2.4 | Validar prerrequisitos   | HU28     | DIEGO       | En Progreso  | 5   | 5  | 5  | 5  | 5  | 5  | 5  | 5  | 5  | 5  | 5   | 5   | 5   | 5   | 5   |
+| 2.5 | Validar créditos         | HU29     | LUIS        | En Progreso  | 3   | 3  | 3  | 3  | 3  | 3  | 3  | 3  | 3  | 3  | 3   | 3   | 3   | 3   | 3   |
+| 2.6 | Guardar ejecuciones      | HU12     | DANIEL      | En Progreso  | 3   | 3  | 3  | 3  | 3  | 3  | 3  | 3  | 3  | 3  | 3   | 3   | 3   | 3   | 3   |
+| 2.7 | Reporte conflictos       | HU30     | DANIEL      | Por Hacer    | 3   | 3  | 3  | 3  | 3  | 3  | 3  | 3  | 3  | 3  | 3   | 3   | 3   | 3   | 3   |
 
 ---
 
