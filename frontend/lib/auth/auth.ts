@@ -2,16 +2,20 @@
  * Servicios de autenticación con Supabase
  */
 
+import { AuthChangeEvent, Session } from '@supabase/supabase-js';
 import { createClient } from '@/utils/supabase/client';
 import { AuthUser, UserWithRole, UserRole } from '@/types/auth';
 
-const supabase = createClient();
+function getSupabaseClient() {
+  return createClient();
+}
 
 /**
  * Login con email y contraseña
  */
 export async function loginWithEmail(email: string, password: string) {
   try {
+    const supabase = getSupabaseClient();
     const { data, error } = await supabase.auth.signInWithPassword({
       email,
       password,
@@ -44,6 +48,7 @@ export async function signupWithEmail(
   fullName: string
 ) {
   try {
+    const supabase = getSupabaseClient();
     // Crear usuario en auth
     const { data, error } = await supabase.auth.signUp({
       email,
@@ -91,6 +96,7 @@ export async function signupWithEmail(
  */
 export async function logout() {
   try {
+    const supabase = getSupabaseClient();
     const { error } = await supabase.auth.signOut();
     if (error) {
       throw error;
@@ -106,6 +112,7 @@ export async function logout() {
  */
 export async function getCurrentUser() {
   try {
+    const supabase = getSupabaseClient();
     const { data: sessionData } = await supabase.auth.getSession();
     
     if (!sessionData.session) {
@@ -129,6 +136,7 @@ export async function getUserProfile(
   userId: string
 ): Promise<UserWithRole | null> {
   try {
+    const supabase = getSupabaseClient();
     const { data, error } = await supabase
       .from('user_profiles')
       .select(
@@ -155,6 +163,7 @@ export async function getUserProfile(
  */
 export async function getUserRole(userId: string): Promise<UserRole | null> {
   try {
+    const supabase = getSupabaseClient();
     const { data, error } = await supabase
       .from('user_profiles')
       .select('role:roles(name)')
@@ -178,6 +187,7 @@ export async function getUserRole(userId: string): Promise<UserRole | null> {
  */
 export async function changePassword(newPassword: string) {
   try {
+    const supabase = getSupabaseClient();
     const { error } = await supabase.auth.updateUser({
       password: newPassword,
     });
@@ -195,9 +205,10 @@ export async function changePassword(newPassword: string) {
  * Escuchar cambios de autenticación
  */
 export function onAuthStateChanged(callback: (user: AuthUser | null) => void) {
+  const supabase = getSupabaseClient();
   const {
     data: { subscription },
-  } = supabase.auth.onAuthStateChange((event, session) => {
+  } = supabase.auth.onAuthStateChange((_event: AuthChangeEvent, session: Session | null) => {
     callback(session?.user ?? null);
   });
 
