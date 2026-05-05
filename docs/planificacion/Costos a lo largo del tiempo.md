@@ -5,61 +5,67 @@
 
 ---
 
-### Inicio
+### 1. Inicio
 
-| Item                                              | Fecha       | Costo | Razón |
-|---------------------------------------------------|------------|-------|-------|
-| Desarrollo de especificaciones funcionales         | 23/04/2026 | $180  | Levantamiento y definición de requerimientos funcionales |
-| Arquitectura del desarrollo del sistema            | 24/04/2026 | $150  | Definición de módulos y estructura del sistema |
-| Preliminar de especificaciones de diseño           | 25/04/2026 | $120  | Diseño inicial de solución |
-| Especificaciones detalladas del diseño             | 26/04/2026 | $150  | Detalle técnico de componentes y flujo |
-| Desarrollo del plan de pruebas de aceptación       | 27/04/2026 | $90   | Planificación de validación del sistema |
-| **Subtotal**                                       |            | **$690** | |
-
----
-
-### Planificación 2
-
-| Item                                              | Fecha       | Costo | Razón |
-|---------------------------------------------------|------------|-------|-------|
-| Reuniones con el cliente                          | 28/04/2026 | $120  | Seguimiento de avance y validación de entregables |
-| Reuniones internas                                | 29/04/2026 | $150  | Coordinación del equipo y control del sprint |
-| Reuniones con terceros                            | 30/04/2026 | $60   | Coordinaciones externas del proyecto |
-| Interfaz con otros departamentos                  | 01/05/2026 | $60   | Integración y comunicación interna |
-| Gestión de la configuración                       | 02/05/2026 | $90   | Control de versiones y cambios del proyecto |
-| Aseguramiento de la calidad                       | 03/05/2026 | $120  | Revisión de calidad de entregables |
-| Gestión global del proyecto                       | 04/05/2026 | $150  | Supervisión general, organización y control |
-| **Subtotal**                                       |            | **$750** | |
+| Ítem | Fecha | Costo | Razón |
+|------|-------|-------|-------|
+| Desarrollo de especificaciones funcionales | 06/04/2026 | $180 | Levantamiento y definición de requerimientos funcionales |
+| Arquitectura del desarrollo del sistema | 08/04/2026 | $150 | Definición de módulos y estructura del sistema |
+| Preliminar de especificaciones de diseño | 10/04/2026 | $120 | Diseño inicial de solución |
+| Especificaciones detalladas del diseño | 13/04/2026 | $150 | Detalle técnico de componentes y flujo |
+| Plan de pruebas de aceptación | 15/04/2026 | $90 | Planificación de validación del sistema |
+| **Subtotal** |  | **$690** |  |
 
 ---
 
-### Desarrollo
+### 2. Planificación
 
-| Item                                              | Fecha       | Costo | Razón |
-|---------------------------------------------------|------------|-------|-------|
-| Desarrollar componentes                           | 05/05/2026 | $1500 | Implementación de módulos funcionales del sistema |
-| Adquirir software                                 | 06/05/2026 | $45   | Preparación y configuración de herramientas |
-| Adquirir hardware                                 | 07/05/2026 | $30   | Recursos mínimos de soporte técnico |
-| Paquete de pruebas de aceptación                  | 08/05/2026 | $150  | Construcción de casos y escenarios de prueba |
-| Pruebas unitarias / integración                   | 09/05/2026 | $375  | Verificación técnica e integración de módulos |
-| **Subtotal**                                       |            | **$2100** | |
-
----
-
-### Pruebas & Entrega
-
-| Item                                              | Fecha       | Costo | Razón |
-|---------------------------------------------------|------------|-------|-------|
-| Instalar sistema                                  | 10/05/2026 | $90   | Puesta en marcha de la solución |
-| Entrenar clientes                                 | 11/05/2026 | $75   | Capacitación de uso del sistema |
-| Pruebas de aceptación del desempeño               | 12/05/2026 | $120  | Validación funcional y de rendimiento |
-| Revisión post proyecto                            | 13/05/2026 | $90   | Evaluación de resultados y ajustes finales |
-| Garantía de soporte                               | 14/05/2026 | $120  | Atención a incidencias posteriores |
-| Archivar materiales                               | 15/05/2026 | $45   | Cierre documental y respaldo del proyecto |
-| **Subtotal**                                       |            | **$540** | |
+| Ítem | Fecha | Costo | Razón |
+|------|-------|-------|-------|
+| Reuniones con el cliente | 16/04/2026 – 25/05/2026 | $120 | Seguimiento y validación de entregables |
+| Reuniones internas del proyecto | 17/04/2026 – 25/05/2026 | $150 | Coordinación del equipo |
+| Reuniones con terceros | 20/04/2026 | $60 | Coordinaciones externas |
+| Interfaz con otros departamentos | 21/04/2026 | $60 | Integración interna |
+| Gestión de configuración | 22/04/2026 | $90 | Control de versiones |
+| Aseguramiento de calidad | 23/04/2026 | $120 | Revisión de entregables |
+| Gestión global del proyecto | 16/04/2026 | $150 | Supervisión general |
+| **Subtotal** |  | **$750** |  |
 
 ---
 
-## 💰 TOTAL DEL PROYECTO
+### 3. Desarrollo
 
-**$4080**
+| Ítem | Fecha | Costo | Razón |
+|------|-------|-------|-------|
+| Adquirir hardware | 24/04/2026 | $30 | Recursos técnicos |
+| Adquirir software | 24/04/2026 | $45 | Configuración de herramientas |
+| Desarrollar componentes | 15/05/2026 | $1680 | Implementación de módulos del sistema |
+| Paquete de pruebas de aceptación | 26/05/2026 | $150 | Construcción de pruebas |
+| Pruebas unitarias / integración | 27/05/2026 | $375 | Verificación técnica |
+| **Subtotal** |  | **$2205** |  |
+
+---
+
+### 4. Pruebas y Entrega
+
+| Ítem | Fecha | Costo | Razón |
+|------|-------|-------|-------|
+| Instalar sistema | 26/05/2026 | $90 | Puesta en marcha |
+| Entrenar clientes | 27/05/2026 | $75 | Capacitación |
+| Pruebas de desempeño | 28/05/2026 | $120 | Validación final |
+| Revisión post proyecto | 29/05/2026 | $90 | Evaluación final |
+| Garantía de soporte | 29/05/2026 | $120 | Soporte posterior |
+| Archivar materiales | 29/05/2026 | $45 | Cierre documental |
+| **Subtotal** |  | **$540** |  |
+
+---
+
+### Resumen General
+
+| Fase | Total |
+|------|-------|
+| Inicio | $690 |
+| Planificación | $750 |
+| Desarrollo | $2205 |
+| Pruebas y Entrega | $540 |
+| **TOTAL PROYECTO** | **$4185** |
