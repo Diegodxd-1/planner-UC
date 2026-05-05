@@ -30,6 +30,7 @@ Toda la documentación del proyecto sigue el estándar **arc42** para garantizar
 
 ### **3. Requerimientos y Arquitectura**
 - [📋 Lista de Requerimientos SMART](docs/inicio/Lista%20preliminar%20de%20requerimientos%20funcionales%20y%20no%20funcionales.md) - RF, RNF y Trazabilidad.
+- [📝 Especificación Formal (Spec.md)](Spec.md) - Reglas del solver, entradas y salidas.
 - [🏗️ Documento Maestro ARC42](docs/ARC42.md) - Estructura completa de la arquitectura.
 - [🤝 Declaración del Equipo](docs/inicio/Declaración%20del%20equipo%20del%20proyecto.md) - Roles y normas.
 

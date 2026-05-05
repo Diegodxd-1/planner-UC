@@ -26,20 +26,25 @@ Descomposición lógica en módulos principales (React, Node.js, MongoDB).
 *   *Nota: El detalle de componentes internos se desarrollará en la Fase de Elaboración.*
 
 ## 6. Vista de Ejecución
-Interacción entre los bloques en tiempo de ejecución (Ej: Generación de horario).
-*   *TBD: Se definirá mediante diagramas de secuencia en el Sprint 1.*
+Interacción entre los bloques en tiempo de ejecución.
+*   **Flujo Principal**: El frontend (Next.js) solicita una solución al endpoint `/api/scheduling-demo`. El backend (FastAPI) construye el modelo matemático y lo resuelve usando Google OR-Tools (CP-SAT), devolviendo el JSON con la oferta óptima.
 
 ## 7. Vista de Despliegue
-Infraestructura de hardware y software (Vercel, Render, MongoDB Atlas).
-*   *TBD: Documentación de despliegue en etapa de pruebas.*
+Infraestructura de hardware y software.
+*   **Frontend**: Desplegado en Vercel para optimización de React.
+*   **Backend**: Alojado en Render o AWS Lambda para ejecución de Python.
+*   **Base de Datos**: MongoDB Atlas para persistencia escalable.
 
 ## 8. Conceptos Transversales
 Reglas de negocio y arquitecturales de aplicación global.
-*   *TBD: Seguridad (JWT), Manejo de Errores y Logging.*
+*   **Seguridad**: Autenticación mediante JWT y protección de rutas en el middleware de Next.js.
+*   **Manejo de Errores**: Middleware global en FastAPI para capturar excepciones del solver y devolver códigos HTTP adecuados.
+*   **Logging**: Registro centralizado en consola y archivos de texto para auditoría de soluciones generadas.
 
 ## 9. Decisiones de Arquitectura
 Registro de decisiones críticas (ADR) tomadas durante el proyecto.
-*   *Decisión 1: Uso de Stack MERN para agilidad de desarrollo.*
+*   **Decisión 1**: Uso de Stack FastAPI + OR-Tools para garantizar tiempos de respuesta en optimización combinatoria.
+*   **Decisión 2**: Arquitectura desacoplada (Decoupled) para permitir escalabilidad independiente del motor de cálculo.
 
 ## 10. Requerimientos de Calidad
 Atributos de calidad formulados bajo el enfoque **SMART**.
@@ -51,7 +56,7 @@ Identificación de riesgos técnicos y planes de mitigación.
 
 ## 12. Glosario
 Términos técnicos y de negocio unificados.
-*   [Glosario de Términos](otros/Glosario.md) (En construcción)
+*   [Glosario de Términos](otros/Glosario.md) (Actualizado)
 
 ---
 *Documentación completa siguiendo el estándar arc42 para el Proyecto Planner-UC (2026).*
