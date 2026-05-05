@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { requireAdminAccess } from '@/lib/auth/server-auth';
-import { adminClient } from '@/utils/supabase/admin';
+import { getAdminClient } from '@/utils/supabase/admin';
 
 const allowedRoles = ['profesor', 'alumno'] as const;
 
@@ -46,6 +46,7 @@ export async function PUT(
   if ('error' in auth) {
     return auth.error;
   }
+  const adminClient = getAdminClient();
 
   const { id } = await context.params;
   if (!isUuid(id)) {
@@ -124,6 +125,7 @@ export async function DELETE(
   if ('error' in auth) {
     return auth.error;
   }
+  const adminClient = getAdminClient();
 
   const { id } = await context.params;
   if (!isUuid(id)) {

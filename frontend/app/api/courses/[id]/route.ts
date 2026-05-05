@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { adminClient } from '@/utils/supabase/admin';
+import { getAdminClient } from '@/utils/supabase/admin';
 import { requireAdminAccess } from '@/lib/auth/server-auth';
 import { CourseInput, CourseKind } from '@/types/course';
 
@@ -64,6 +64,7 @@ export async function PUT(
   if ('error' in auth) {
     return auth.error;
   }
+  const adminClient = getAdminClient();
 
   const { id } = await context.params;
   const courseId = getCourseId(id);
@@ -101,6 +102,7 @@ export async function DELETE(
   if ('error' in auth) {
     return auth.error;
   }
+  const adminClient = getAdminClient();
 
   const { id } = await context.params;
   const courseId = getCourseId(id);

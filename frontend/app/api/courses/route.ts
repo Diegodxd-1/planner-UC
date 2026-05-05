@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { adminClient } from '@/utils/supabase/admin';
+import { getAdminClient } from '@/utils/supabase/admin';
 import { requireAdminAccess } from '@/lib/auth/server-auth';
 import { CourseInput, CourseKind } from '@/types/course';
 
@@ -51,6 +51,7 @@ export async function GET() {
   if ('error' in auth) {
     return auth.error;
   }
+  const adminClient = getAdminClient();
 
   const { data, error } = await adminClient
     .from('courses')
@@ -70,6 +71,7 @@ export async function POST(request: NextRequest) {
   if ('error' in auth) {
     return auth.error;
   }
+  const adminClient = getAdminClient();
 
   const payload = await request.json();
   const normalized = normalizeCoursePayload(payload);

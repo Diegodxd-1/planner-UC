@@ -1,11 +1,12 @@
 import { cookies } from 'next/headers';
 import { NextResponse } from 'next/server';
-import { adminClient } from '@/utils/supabase/admin';
+import { getAdminClient } from '@/utils/supabase/admin';
 import { createClient as createServerClient } from '@/utils/supabase/server';
 
 export async function requireAdminAccess() {
   const cookieStore = await cookies();
   const supabase = createServerClient(cookieStore);
+  const adminClient = getAdminClient();
 
   const {
     data: { user },

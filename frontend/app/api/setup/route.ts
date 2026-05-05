@@ -1,8 +1,9 @@
-import { adminClient } from '@/utils/supabase/admin';
+import { getAdminClient } from '@/utils/supabase/admin';
 import { NextResponse } from 'next/server';
 
 export async function GET() {
   try {
+    const adminClient = getAdminClient();
     const { data: existingUsers, error: listError } = await adminClient.auth.admin.listUsers();
     
     if (listError) {
@@ -28,6 +29,7 @@ export async function GET() {
 
 export async function POST() {
   try {
+    const adminClient = getAdminClient();
     const email = 'admin@example.com';
     const password = 'password123';
 

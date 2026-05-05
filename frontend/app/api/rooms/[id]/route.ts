@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { requireAdminAccess } from '@/lib/auth/server-auth';
-import { adminClient } from '@/utils/supabase/admin';
+import { getAdminClient } from '@/utils/supabase/admin';
 import { RoomInput } from '@/types/room';
 
 function getRoomId(idParam: string) {
@@ -45,6 +45,7 @@ export async function PUT(
   if ('error' in auth) {
     return auth.error;
   }
+  const adminClient = getAdminClient();
 
   const { id } = await context.params;
   const roomId = getRoomId(id);
@@ -82,6 +83,7 @@ export async function DELETE(
   if ('error' in auth) {
     return auth.error;
   }
+  const adminClient = getAdminClient();
 
   const { id } = await context.params;
   const roomId = getRoomId(id);

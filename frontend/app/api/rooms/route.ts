@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { requireAdminAccess } from '@/lib/auth/server-auth';
-import { adminClient } from '@/utils/supabase/admin';
+import { getAdminClient } from '@/utils/supabase/admin';
 import { RoomInput } from '@/types/room';
 
 function normalizeRoomPayload(payload: Partial<RoomInput>) {
@@ -33,6 +33,7 @@ export async function GET() {
   if ('error' in auth) {
     return auth.error;
   }
+  const adminClient = getAdminClient();
 
   const { data, error } = await adminClient
     .from('rooms')
@@ -51,6 +52,7 @@ export async function POST(request: NextRequest) {
   if ('error' in auth) {
     return auth.error;
   }
+  const adminClient = getAdminClient();
 
   const payload = await request.json();
   const normalized = normalizeRoomPayload(payload);

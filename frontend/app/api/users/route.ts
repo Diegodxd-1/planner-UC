@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { requireAdminAccess } from '@/lib/auth/server-auth';
-import { adminClient } from '@/utils/supabase/admin';
+import { getAdminClient } from '@/utils/supabase/admin';
 
 const allowedRoles = ['profesor', 'alumno'] as const;
 
@@ -43,6 +43,7 @@ export async function GET() {
   if ('error' in auth) {
     return auth.error;
   }
+  const adminClient = getAdminClient();
 
   const [{ data: users, error: usersError }, { data: roles, error: rolesError }] =
     await Promise.all([
@@ -86,6 +87,7 @@ export async function POST(request: NextRequest) {
   if ('error' in auth) {
     return auth.error;
   }
+  const adminClient = getAdminClient();
 
   const payload = await request.json();
   const normalized = normalizeCreatePayload(payload);
