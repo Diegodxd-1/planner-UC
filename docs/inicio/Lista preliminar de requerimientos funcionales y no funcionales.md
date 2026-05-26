@@ -24,6 +24,23 @@ Siguiendo las directrices del docente, los requerimientos han sido validados baj
 
 ---
 
+### 🆕 Requerimientos Funcionales Adicionales — MVP Ampliado
+
+> Identificados a partir del análisis normativo peruano (Ley 30220 - SUNEDU) y entrevistas con stakeholders. Priorizados por facilidad de implementación.
+
+| **ID** | **Nombre del Requerimiento** | **Descripción Técnica** | **Atributos SMART** |
+| :--- | :--- | :--- | :--- |
+| **RF-NEW-02** | Indicador ratio TC/TP en dashboard | Mostrar el porcentaje de docentes TC vs. TP/Horas asignados en el horario actual (mínimo legal: 25% TC según Art. 82 Ley 30220). | **S**: Cumplimiento normativo. **M**: % visible en dashboard. **T**: MVP. |
+| **RF-NEW-04** | Tipo de contrato docente | Registrar si el docente es Tiempo Completo (TC), Tiempo Parcial (TP) o Por Horas. | **S**: Datos docentes. **M**: Campo `contract_type` en DB. **T**: MVP. |
+| **RF-NEW-05** | Alerta de límite legal de horas | El sistema debe alertar si un docente supera su límite semanal: TC ≤ 8 h lectivas, TP ≤ 6 h (Ley 30220, Art. 84). | **S**: Validación legal. **M**: Alerta visible al asignar. **T**: MVP. |
+| **RF-NEW-06** | Categoría docente | Registrar la categoría ordinaria: Principal, Asociado, Auxiliar, Contratado o Jefe de Práctica. | **S**: Datos docentes. **M**: Campo `category` en DB. **T**: MVP. |
+| **RF-NEW-09** | Capacidad física vs. aforo autorizado | Distinguir entre capacidad física del aula y el aforo máximo autorizado por SUNEDU (1.2 m²/alumno). | **S**: Recursos físicos. **M**: Columna `authorized_capacity` en DB. **T**: MVP. |
+| **RF-NEW-14** | Ciclo académico por curso | Indicar a qué ciclo pertenece cada curso (1ro al 10mo) para evitar choques entre cursos del mismo ciclo. | **S**: Malla académica. **M**: Columna `cycle` en DB. **T**: MVP. |
+| **RF-NEW-17** | Tipo de aula | Clasificar el aula por tipo: Teórica, Laboratorio de Cómputo, Laboratorio de Ciencias, Auditorio o Taller. | **S**: Recursos físicos. **M**: Columna `room_type` en DB. **T**: MVP. |
+| **RF-NEW-21** | Feriados y días no laborables | Bloquear automáticamente fechas de feriados nacionales peruanos y días no laborables del calendario académico. | **S**: Calendario institucional. **M**: Tabla `blocked_dates` en DB. **T**: MVP. |
+
+---
+
 ### ⚙️ Requerimientos No Funcionales (RNF)
 | **ID** | **Atributo** | **Requerimiento Cuantificable** | **Validación SMART** |
 | :--- | :--- | :--- | :--- |
