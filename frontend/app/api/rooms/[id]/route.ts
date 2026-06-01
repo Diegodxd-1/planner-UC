@@ -17,6 +17,8 @@ function normalizeRoomPayload(payload: Partial<RoomInput>) {
   const location = payload.location?.trim() ?? '';
   const description = payload.description?.trim() ?? '';
   const capacity = Number(payload.capacity);
+  const authorized_capacity = payload.authorized_capacity ? Number(payload.authorized_capacity) : null;
+  const room_type = payload.room_type?.trim() || null;
 
   if (!name) {
     return { error: 'El nombre del aula es obligatorio' };
@@ -31,6 +33,8 @@ function normalizeRoomPayload(payload: Partial<RoomInput>) {
       name,
       location: location || null,
       capacity,
+      authorized_capacity,
+      room_type,
       description: description || null,
       is_active: payload.is_active ?? true,
     },

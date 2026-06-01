@@ -10,6 +10,8 @@ function normalizeCreatePayload(payload: Record<string, unknown>) {
   const password = String(payload.password ?? '');
   const role = String(payload.role ?? '') as (typeof allowedRoles)[number];
   const isActive = payload.is_active !== false;
+  const contractType = payload.contract_type ? String(payload.contract_type) : null;
+  const category = payload.category ? String(payload.category) : null;
 
   if (!fullName) {
     return { error: 'El nombre completo es obligatorio' };
@@ -34,6 +36,8 @@ function normalizeCreatePayload(payload: Record<string, unknown>) {
       password,
       role,
       is_active: isActive,
+      contract_type: contractType,
+      category,
     },
   };
 }
@@ -56,6 +60,8 @@ export async function GET() {
           full_name,
           role_id,
           is_active,
+          contract_type,
+          category,
           created_at,
           updated_at,
           role:roles(id, name, description)
@@ -130,6 +136,8 @@ export async function POST(request: NextRequest) {
       full_name: normalized.data.full_name,
       role_id: roleRecord.id,
       is_active: normalized.data.is_active,
+      contract_type: normalized.data.contract_type,
+      category: normalized.data.category,
     })
     .select(
       `
@@ -138,6 +146,8 @@ export async function POST(request: NextRequest) {
       full_name,
       role_id,
       is_active,
+      contract_type,
+      category,
       created_at,
       updated_at,
       role:roles(id, name, description)

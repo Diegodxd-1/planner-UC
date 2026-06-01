@@ -4,6 +4,7 @@ import {
   FormEvent,
   InputHTMLAttributes,
   ReactNode,
+  SelectHTMLAttributes,
   useEffect,
   useState,
 } from 'react';
@@ -15,6 +16,8 @@ const initialForm: RoomInput = {
   name: '',
   location: '',
   capacity: 35,
+  authorized_capacity: 35,
+  room_type: 'Teórica',
   description: '',
   is_active: true,
 };
@@ -63,6 +66,8 @@ export default function RoomsPage() {
       name: room.name,
       location: room.location ?? '',
       capacity: room.capacity,
+      authorized_capacity: room.authorized_capacity ?? room.capacity,
+      room_type: room.room_type ?? 'Teórica',
       description: room.description ?? '',
       is_active: room.is_active,
     });
@@ -241,7 +246,7 @@ export default function RoomsPage() {
                   <SectionTitle>Capacidad y estado</SectionTitle>
                   <div className="grid gap-4 sm:grid-cols-2">
                     <Field>
-                      <Label htmlFor="capacity">Aforo</Label>
+                      <Label htmlFor="capacity">Aforo Físico</Label>
                       <Input
                         id="capacity"
                         type="number"
@@ -256,6 +261,44 @@ export default function RoomsPage() {
                         }
                         required
                       />
+                    </Field>
+
+                    <Field>
+                      <Label htmlFor="authorized_capacity">Aforo Autorizado (SUNEDU)</Label>
+                      <Input
+                        id="authorized_capacity"
+                        type="number"
+                        min={1}
+                        max={1000}
+                        value={form.authorized_capacity}
+                        onChange={(event) =>
+                          setForm((current) => ({
+                            ...current,
+                            authorized_capacity: Number(event.target.value),
+                          }))
+                        }
+                        required
+                      />
+                    </Field>
+
+                    <Field>
+                      <Label htmlFor="room_type">Tipo de Aula</Label>
+                      <Select
+                        id="room_type"
+                        value={form.room_type}
+                        onChange={(event) =>
+                          setForm((current) => ({
+                            ...current,
+                            room_type: event.target.value as RoomInput['room_type'],
+                          }))
+                        }
+                      >
+                        <option value="Teórica">Teórica</option>
+                        <option value="Laboratorio de Cómputo">Laboratorio de Cómputo</option>
+                        <option value="Laboratorio de Ciencias">Laboratorio de Ciencias</option>
+                        <option value="Auditorio">Auditorio</option>
+                        <option value="Taller">Taller</option>
+                      </Select>
                     </Field>
 
                     <Field>
@@ -422,15 +465,13 @@ export default function RoomsPage() {
                           </div>
                         </div>
 
-                        <div className="grid gap-3 sm:grid-cols-3">
-                          <Info label="Aforo" value={String(room.capacity)} />
+                        <div className="grid gap-3 sm:grid-cols-4">
+                          <Info label="Aforo Físico" value={String(room.capacity)} />
+                          <Info label="Aforo Autorizado" value={String(room.authorized_capacity ?? '-')} />
+                          <Info label="Tipo" value={room.room_type ?? '-'} />
                           <Info
                             label="Creada"
                             value={new Date(room.created_at).toLocaleDateString('es-CL')}
-                          />
-                          <Info
-                            label="Actualizada"
-                            value={new Date(room.updated_at).toLocaleDateString('es-CL')}
                           />
                         </div>
 
@@ -482,6 +523,15 @@ function Label({
 function Input(props: InputHTMLAttributes<HTMLInputElement>) {
   return (
     <input
+      {...props}
+      className="w-full rounded-2xl border border-slate-200 bg-white px-4 py-3 text-sm text-slate-900 outline-none transition focus:border-amber-400"
+    />
+  );
+}
+
+function Select(props: SelectHTMLAttributes<HTMLSelectElement>) {
+  return (
+    <select
       {...props}
       className="w-full rounded-2xl border border-slate-200 bg-white px-4 py-3 text-sm text-slate-900 outline-none transition focus:border-amber-400"
     />
