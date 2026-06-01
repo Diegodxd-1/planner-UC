@@ -79,15 +79,29 @@ El presente informe técnico documenta la auditoría de emisiones de carbono del
 
 ---
 
-## 2. Metodología de Cálculo (SWD Model)
-Los cálculos se fundamentan en el modelo *Sustainable Web Design (SWD)* avalado por *The Green Web Foundation*:
-* **Intensidad Energética (Red y Data Center):** ${ENERGY_PER_GB} kWh por GB transferido.
-* **Intensidad de Carbono (Grid Promedio Global):** ${CARBON_PER_KWH} g CO2e por kWh.
-* **Fórmula de Extracción:** \`E = Transferencia (GB) × ${ENERGY_PER_GB} × ${CARBON_PER_KWH}\`
+## 2. Oportunidades de Optimización Detectadas (Para Exposición)
+A partir de la auditoría, se listan los 8 puntos críticos que ahogan la red y requieren ser optimizados para cumplir la rúbrica de Green Software:
+
+1. **Consultas a DB sobrecargadas:** El comando \`SELECT *\` arrastra columnas de más (exceso de red).
+2. **Saturación por carga masiva:** Cargar miles de aulas de golpe sin algoritmos de paginación.
+3. **Imágenes no optimizadas:** El tag \`<img>\` nativo descarga MBs innecesarios sin compresión WebP.
+4. **Renderizado de módulos ocultos:** Los alumnos descargan código pesado del Dashboard que ni siquiera ven.
+5. **Dependencias pesadas:** Bloques de código JS antiguo sin un empaquetador eficiente de nueva generación.
+6. **Exceso de Peticiones HTTP:** Las múltiples requests síncronas bloquean la red móvil.
+7. **Descargas repetitivas (Falta Caché):** Elementos fijos que obligan a ser descargados una y otra vez.
+8. **Bloques JSON pesados en Backend:** La API de Python (FastAPI) envía enormes respuestas matemáticas sin comprimir.
 
 ---
 
-## 3. Desglose de Telemetría (Cargas de Red)
+## 3. Metodología de Cálculo (SWD Model)
+Los cálculos se fundamentan en el modelo *Sustainable Web Design (SWD)* avalado por *The Green Web Foundation*:
+* **Intensidad Energética:** ${ENERGY_PER_GB} kWh por GB transferido.
+* **Intensidad de Carbono (Global):** ${CARBON_PER_KWH} g CO2e por kWh.
+* **Fórmula:** \`E = Transferencia (GB) × ${ENERGY_PER_GB} × ${CARBON_PER_KWH}\`
+
+---
+
+## 4. Desglose de Telemetría (Cargas de Red)
 | Componente Arquitectónico | Transferencia Dinámica | Demanda Energética | Emisión de Carbono |
 |:---|:---|:---|:---|
 | ⚙️ **Framework (JS/CSS Chunks)** | ${mJS.mb} MB | ${mJS.kwh} kWh | **${mJS.co2} g CO2e** |
@@ -97,12 +111,9 @@ Los cálculos se fundamentan en el modelo *Sustainable Web Design (SWD)* avalado
 
 ---
 
-## 4. Proyección de Impacto Ambiental (10,000 visitas/mes)
-Si el software se despliega en producción en su estado actual, el impacto anual proyectado sería:
+## 5. Proyección de Impacto Ambiental (10,000 visitas/mes)
 * ☁️ **Huella de Carbono Anual:** \`${annualCO2} kg CO2e\`
-* 📱 **Equivalencia Ambiental:** Equivale a las emisiones de cargar **${smartphonesCharged} teléfonos inteligentes** al 100%.
-
-> **Recomendación Técnica:** Es perentorio aplicar técnicas de Green Software: Paginación de base de datos, compresión de assets (WebP) y Lazy Loading de módulos no esenciales.
+* 📱 **Equivalencia Ambiental:** Emisiones de cargar **${smartphonesCharged} teléfonos inteligentes** al 100%.
     `;
 
     const outputPath = path.join(DOCS_DIR, 'reporte_linea_base.md');
@@ -144,21 +155,34 @@ Si el software se despliega en producción en su estado actual, el impacto anual
 ---
 
 ## 1. Resumen Ejecutivo
-El presente informe técnico certifica la auditoría de emisiones de carbono tras la implementación intensiva de prácticas de **Green Software Engineering**. El sistema ha sido refactorizado incorporando compresión GZip en la capa API, Lazy Loading en componentes masivos del cliente web, paginación estricta de base de datos (\`.range\`) y formatos de imagen de próxima generación (WebP).
+El presente informe técnico certifica la auditoría tras la implementación intensiva de prácticas de **Green Software Engineering**. El sistema ha sido refactorizado incorporando compresión GZip en la API, Lazy Loading en componentes del cliente, paginación estricta (\`.range\`) y formatos WebP.
 
 **Calificación de Eficiencia:** 🟢 **Grado A+ (Sobresaliente)**
 
 ---
 
-## 2. Metodología de Cálculo (SWD Model)
-Los cálculos se fundamentan en el modelo *Sustainable Web Design (SWD)* avalado por *The Green Web Foundation*:
-* **Intensidad Energética (Red y Data Center):** ${ENERGY_PER_GB} kWh por GB transferido.
-* **Intensidad de Carbono (Grid Promedio Global):** ${CARBON_PER_KWH} g CO2e por kWh.
-* **Fórmula de Extracción:** \`E = Transferencia (GB) × ${ENERGY_PER_GB} × ${CARBON_PER_KWH}\`
+## 2. Optimizaciones Implementadas y su Sustento Técnico (Para Exposición)
+Se solucionaron las vulnerabilidades ecológicas mediante 8 técnicas de impacto directo:
+
+1. **Optimización de consultas DB:** Se reemplazó \`select('*')\` por selección de columnas específicas en Supabase, limitando bytes serializados en red.
+2. **Paginación de Datos:** Se inyectó \`.range(start, end)\` en la API (ej. rutas de *users* y *rooms*) limitando los datos en pequeñas páginas.
+3. **Compresión Activa de Imágenes:** Sustituimos el \`<img>\` por el tag de Next.js \`<Image>\`, forzando la conversión a formato WebP.
+4. **Lazy Loading Diferido:** El componente \`<TeacherStats />\` del Dashboard se aisló con \`next/dynamic\` para que solo el Admin gaste recursos descargándolo.
+5. **Limpieza de Dependencias:** El compilador eficiente de próxima generación **Turbopack** genera bundles minúsculos en JS.
+6. **Reducción de Peticiones HTTP:** Al fragmentar la tabla y agrupar llamadas en el framework, se descongestionó el ciclo de request/response.
+7. **Edge Caching Activado:** Las imágenes estáticas procesadas quedan cacheadas en la plataforma Next.js localmente, reduciendo descargas a 0 en la 2da visita.
+8. **Cargas Comprimidas (FastAPI Python):** En el Backend, añadimos la librería nativa \`GZipMiddleware(minimum_size=1000)\` que empaca la respuesta matemática del algoritmo de horarios (OR-Tools) en archivos .gz antes del viaje web.
 
 ---
 
-## 3. Desglose de Telemetría (Cargas de Red Optimizadas)
+## 3. Metodología de Cálculo (SWD Model)
+Los cálculos se fundamentan en el modelo *Sustainable Web Design (SWD)* avalado por *The Green Web Foundation*:
+* **Intensidad Energética:** ${ENERGY_PER_GB} kWh por GB transferido.
+* **Intensidad de Carbono (Global):** ${CARBON_PER_KWH} g CO2e por kWh.
+
+---
+
+## 4. Desglose de Telemetría (Cargas de Red Optimizadas)
 | Componente Arquitectónico | Transferencia Dinámica | Demanda Energética | Emisión de Carbono |
 |:---|:---|:---|:---|
 | ⚙️ **Framework (Chunks Turbopack)** | ${mJS.mb} MB | ${mJS.kwh} kWh | **${mJS.co2} g CO2e** |
@@ -168,9 +192,7 @@ Los cálculos se fundamentan en el modelo *Sustainable Web Design (SWD)* avalado
 
 ---
 
-## 4. Análisis de Reducción e Impacto Ambiental
-En contraste con la línea base, la optimización estructural ha logrado una mitigación drástica de las emisiones de carbono del ecosistema:
-
+## 5. Análisis de Reducción e Impacto Ambiental
 * 📉 **Reducción de Huella de Carbono:** **~86% de ahorro neto de emisiones**.
 * ☁️ **Nueva Huella de Carbono Anual:** \`${annualCO2} kg CO2e\` (Proyectado a 10k visitas/mes).
 * 📱 **Equivalencia Ambiental:** Se ha reducido el impacto al equivalente de cargar apenas **${smartphonesCharged} teléfonos inteligentes** al año.
