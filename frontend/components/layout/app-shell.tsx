@@ -37,6 +37,11 @@ const navigationItems: NavigationItem[] = [
     label: 'Schedule Generator',
     description: 'Horario y bloques',
   },
+  {
+    href: '/green-report',
+    label: 'Green Software',
+    description: 'Reporte de CO2',
+  },
 ];
 
 function formatRoleLabel(role: string | null) {

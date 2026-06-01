@@ -42,14 +42,20 @@ function normalizeCreatePayload(payload: Record<string, unknown>) {
   };
 }
 
-export async function GET() {
+export async function GET(request: NextRequest) {
   const auth = await requireAdminAccess();
   if ('error' in auth) {
     return auth.error;
   }
   const adminClient = getAdminClient();
 
-  const [{ data: users, error: usersError }, { data: roles, error: rolesError }] =
+  const searchParams = request.nextUrl.searchParams;
+  const page = parseInt(searchParams.get('page') || '1', 10);
+  const limit = parseInt(searchParams.get('limit') || '20', 10);
+  const start = (page - 1) * limit;
+  const end = start + limit - 1;
+
+  const [{ data: users, error: usersError, count }, { data: roles, error: rolesError }] =
     await Promise.all([
       adminClient
         .from('user_profiles')
@@ -65,9 +71,10 @@ export async function GET() {
           created_at,
           updated_at,
           role:roles(id, name, description)
-        `
+        `, { count: 'exact' }
         )
-        .order('created_at', { ascending: false }),
+        .order('created_at', { ascending: false })
+        .range(start, end),
       adminClient
         .from('roles')
         .select('id, name, description')
@@ -85,6 +92,12 @@ export async function GET() {
   return NextResponse.json({
     users: users ?? [],
     roles: roles ?? [],
+    pagination: {
+      page,
+      limit,
+      total: count ?? 0,
+      totalPages: count ? Math.ceil(count / limit) : 0
+    }
   });
 }
 

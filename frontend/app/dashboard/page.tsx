@@ -3,49 +3,53 @@
 import { ProtectedRoute } from '@/components/auth/protected-route';
 import { AppShell } from '@/components/layout/app-shell';
 import { useAuth } from '@/lib/auth/auth-context';
-import { useEffect, useState } from 'react';
-import { ManagedUser } from '@/types/user-management';
+import dynamic from 'next/dynamic';
+import Image from 'next/image';
+
+// Lazy loading del componente pesado
+const TeacherStats = dynamic(() => import('@/components/dashboard/teacher-stats'), {
+  loading: () => <div className="h-40 animate-pulse rounded-lg bg-slate-100"></div>,
+  ssr: false, // No renderizar en el servidor para aligerar la carga inicial
+});
 
 export default function DashboardPage() {
   const { user, userRole } = useAuth();
-  const [teacherStats, setTeacherStats] = useState<{ total: number; tc: number; tp: number; percentTC: number } | null>(null);
-
-  useEffect(() => {
-    if (userRole === 'administrador') {
-      fetch('/api/users')
-        .then((res) => res.json())
-        .then((data) => {
-          if (data.users) {
-            const teachers = data.users.filter((u: ManagedUser) => u.role?.name === 'profesor' && u.is_active);
-            const total = teachers.length;
-            const tc = teachers.filter((u: ManagedUser) => u.contract_type === 'TC').length;
-            const tp = total - tc;
-            const percentTC = total > 0 ? (tc / total) * 100 : 0;
-            setTeacherStats({ total, tc, tp, percentTC });
-          }
-        })
-        .catch(console.error);
-    }
-  }, [userRole]);
 
   return (
     <ProtectedRoute>
       <AppShell>
         <main className="mx-auto max-w-5xl py-4">
           <div className="rounded-[32px] border border-slate-200 bg-white/90 p-8 shadow-[0_18px_50px_rgba(15,23,42,0.08)] backdrop-blur">
-            <h2 className="text-2xl font-black text-slate-950">
-              Bienvenido, {user?.full_name}!
-            </h2>
-            <p className="mt-4 text-slate-600">
-              Rol actual:{' '}
-              <span className="font-semibold text-slate-900">
-                {userRole === 'administrador'
-                  ? 'Administrador'
-                  : userRole === 'profesor'
-                    ? 'Profesor'
-                    : 'Alumno'}
-              </span>
-            </p>
+            <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-6">
+              <div>
+                <h2 className="text-2xl font-black text-slate-950">
+                  Bienvenido, {user?.full_name}!
+                </h2>
+                <p className="mt-4 text-slate-600">
+                  Rol actual:{' '}
+                  <span className="font-semibold text-slate-900">
+                    {userRole === 'administrador'
+                      ? 'Administrador'
+                      : userRole === 'profesor'
+                        ? 'Profesor'
+                        : 'Alumno'}
+                  </span>
+                </p>
+              </div>
+              
+              {/* Ejemplo de Image nativo con WebP y lazy loading para Green Software */}
+              <div className="relative h-20 w-32 shrink-0 overflow-hidden rounded-xl border border-slate-200 bg-slate-50">
+                <Image 
+                  src="https://picsum.photos/400/200" 
+                  alt="Banner decorativo" 
+                  fill
+                  sizes="(max-width: 768px) 100vw, 33vw"
+                  className="object-cover"
+                  loading="lazy"
+                  unoptimized // Para permitir externos rápidos sin configurar next.config
+                />
+              </div>
+            </div>
 
             <div className="mt-8 grid gap-6 md:grid-cols-3">
               <div className="rounded-lg border border-slate-200 bg-slate-50 p-6">
@@ -79,21 +83,8 @@ export default function DashboardPage() {
                   </p>
                 </div>
                 
-                {teacherStats !== null && (
-                  <div className={`rounded-lg border-l-4 p-6 ${teacherStats.percentTC >= 25 ? 'border-emerald-500 bg-emerald-50' : 'border-rose-500 bg-rose-50'}`}>
-                    <h3 className="font-semibold text-slate-900">Indicador Ratio Docentes (TC)</h3>
-                    <div className="mt-4 flex items-baseline gap-2">
-                      <span className={`text-4xl font-black tracking-tight ${teacherStats.percentTC >= 25 ? 'text-emerald-700' : 'text-rose-700'}`}>
-                        {teacherStats.percentTC.toFixed(1)}%
-                      </span>
-                      <span className="text-sm font-medium text-slate-600">Tiempo Completo</span>
-                    </div>
-                    <p className="mt-3 text-sm text-slate-600">
-                      Mínimo legal exigido: <strong>25%</strong> (Ley 30220).<br/>
-                      Total docentes activos: {teacherStats.total} ({teacherStats.tc} TC / {teacherStats.tp} Otros).
-                    </p>
-                  </div>
-                )}
+                {/* Usamos el componente lazy-loaded aquí */}
+                <TeacherStats />
               </div>
             )}
 

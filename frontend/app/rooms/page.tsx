@@ -30,17 +30,19 @@ export default function RoomsPage() {
   const [saving, setSaving] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [success, setSuccess] = useState<string | null>(null);
+  const [page, setPage] = useState(1);
+  const [totalPages, setTotalPages] = useState(1);
 
   useEffect(() => {
-    void loadRooms();
-  }, []);
+    void loadRooms(page);
+  }, [page]);
 
-  async function loadRooms() {
+  async function loadRooms(currentPage: number = 1) {
     try {
       setLoading(true);
       setError(null);
 
-      const response = await fetch('/api/rooms', { cache: 'no-store' });
+      const response = await fetch(`/api/rooms?page=${currentPage}&limit=5`, { cache: 'no-store' });
       const data = await response.json();
 
       if (!response.ok) {
@@ -48,6 +50,7 @@ export default function RoomsPage() {
       }
 
       setRooms(data.rooms ?? []);
+      setTotalPages(data.pagination?.totalPages || 1);
     } catch (err) {
       setError(err instanceof Error ? err.message : 'Error inesperado al cargar aulas');
     } finally {
@@ -129,7 +132,7 @@ export default function RoomsPage() {
       }
 
       setSuccess('Aula eliminada correctamente.');
-      await loadRooms();
+      await loadRooms(page);
     } catch (err) {
       setError(err instanceof Error ? err.message : 'Error inesperado al eliminar');
     }
@@ -481,6 +484,28 @@ export default function RoomsPage() {
                       </div>
                     </article>
                   ))}
+                  
+                  {totalPages > 1 && (
+                    <div className="flex items-center justify-between border-t border-slate-200 pt-4">
+                      <button
+                        onClick={() => setPage(p => Math.max(1, p - 1))}
+                        disabled={page === 1}
+                        className="rounded-2xl px-4 py-2 text-sm font-semibold text-slate-700 disabled:opacity-50"
+                      >
+                        Anterior
+                      </button>
+                      <span className="text-sm font-medium text-slate-500">
+                        Página {page} de {totalPages}
+                      </span>
+                      <button
+                        onClick={() => setPage(p => Math.min(totalPages, p + 1))}
+                        disabled={page === totalPages}
+                        className="rounded-2xl px-4 py-2 text-sm font-semibold text-slate-700 disabled:opacity-50"
+                      >
+                        Siguiente
+                      </button>
+                    </div>
+                  )}
                 </div>
               ) : null}
             </article>
