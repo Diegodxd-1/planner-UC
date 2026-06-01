@@ -3,6 +3,14 @@
 import { ProtectedRoute } from '@/components/auth/protected-route';
 import { AppShell } from '@/components/layout/app-shell';
 import { useAuth } from '@/lib/auth/auth-context';
+import dynamic from 'next/dynamic';
+import Image from 'next/image';
+
+// Lazy loading del componente pesado
+const TeacherStats = dynamic(() => import('@/components/dashboard/teacher-stats'), {
+  loading: () => <div className="h-40 animate-pulse rounded-lg bg-slate-100"></div>,
+  ssr: false, // No renderizar en el servidor para aligerar la carga inicial
+});
 
 export default function DashboardPage() {
   const { user, userRole } = useAuth();
@@ -12,19 +20,36 @@ export default function DashboardPage() {
       <AppShell>
         <main className="mx-auto max-w-5xl py-4">
           <div className="rounded-[32px] border border-slate-200 bg-white/90 p-8 shadow-[0_18px_50px_rgba(15,23,42,0.08)] backdrop-blur">
-            <h2 className="text-2xl font-black text-slate-950">
-              Bienvenido, {user?.full_name}!
-            </h2>
-            <p className="mt-4 text-slate-600">
-              Rol actual:{' '}
-              <span className="font-semibold text-slate-900">
-                {userRole === 'administrador'
-                  ? 'Administrador'
-                  : userRole === 'profesor'
-                    ? 'Profesor'
-                    : 'Alumno'}
-              </span>
-            </p>
+            <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-6">
+              <div>
+                <h2 className="text-2xl font-black text-slate-950">
+                  Bienvenido, {user?.full_name}!
+                </h2>
+                <p className="mt-4 text-slate-600">
+                  Rol actual:{' '}
+                  <span className="font-semibold text-slate-900">
+                    {userRole === 'administrador'
+                      ? 'Administrador'
+                      : userRole === 'profesor'
+                        ? 'Profesor'
+                        : 'Alumno'}
+                  </span>
+                </p>
+              </div>
+              
+              {/* Ejemplo de Image nativo con WebP y lazy loading para Green Software */}
+              <div className="relative h-20 w-32 shrink-0 overflow-hidden rounded-xl border border-slate-200 bg-slate-50">
+                <Image 
+                  src="https://picsum.photos/400/200" 
+                  alt="Banner decorativo" 
+                  fill
+                  sizes="(max-width: 768px) 100vw, 33vw"
+                  className="object-cover"
+                  loading="lazy"
+                  unoptimized // Para permitir externos rápidos sin configurar next.config
+                />
+              </div>
+            </div>
 
             <div className="mt-8 grid gap-6 md:grid-cols-3">
               <div className="rounded-lg border border-slate-200 bg-slate-50 p-6">
@@ -50,11 +75,16 @@ export default function DashboardPage() {
             </div>
 
             {userRole === 'administrador' && (
-              <div className="mt-8 rounded-lg border-l-4 border-sky-500 bg-sky-50 p-6">
-                <h3 className="font-semibold text-slate-900">Funciones de administrador</h3>
-                <p className="mt-2 text-sm text-slate-600">
-                  Tienes acceso completo al sistema. Puedes gestionar usuarios, roles y configuraciones.
-                </p>
+              <div className="mt-8 grid gap-6 md:grid-cols-2">
+                <div className="rounded-lg border-l-4 border-sky-500 bg-sky-50 p-6">
+                  <h3 className="font-semibold text-slate-900">Funciones de administrador</h3>
+                  <p className="mt-2 text-sm text-slate-600">
+                    Tienes acceso completo al sistema. Puedes gestionar usuarios, roles y configuraciones.
+                  </p>
+                </div>
+                
+                {/* Usamos el componente lazy-loaded aquí */}
+                <TeacherStats />
               </div>
             )}
 

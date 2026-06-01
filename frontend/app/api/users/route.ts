@@ -10,6 +10,8 @@ function normalizeCreatePayload(payload: Record<string, unknown>) {
   const password = String(payload.password ?? '');
   const role = String(payload.role ?? '') as (typeof allowedRoles)[number];
   const isActive = payload.is_active !== false;
+  const contractType = payload.contract_type ? String(payload.contract_type) : null;
+  const category = payload.category ? String(payload.category) : null;
 
   if (!fullName) {
     return { error: 'El nombre completo es obligatorio' };
@@ -34,18 +36,26 @@ function normalizeCreatePayload(payload: Record<string, unknown>) {
       password,
       role,
       is_active: isActive,
+      contract_type: contractType,
+      category,
     },
   };
 }
 
-export async function GET() {
+export async function GET(request: NextRequest) {
   const auth = await requireAdminAccess();
   if ('error' in auth) {
     return auth.error;
   }
   const adminClient = getAdminClient();
 
-  const [{ data: users, error: usersError }, { data: roles, error: rolesError }] =
+  const searchParams = request.nextUrl.searchParams;
+  const page = parseInt(searchParams.get('page') || '1', 10);
+  const limit = parseInt(searchParams.get('limit') || '20', 10);
+  const start = (page - 1) * limit;
+  const end = start + limit - 1;
+
+  const [{ data: users, error: usersError, count }, { data: roles, error: rolesError }] =
     await Promise.all([
       adminClient
         .from('user_profiles')
@@ -56,12 +66,15 @@ export async function GET() {
           full_name,
           role_id,
           is_active,
+          contract_type,
+          category,
           created_at,
           updated_at,
           role:roles(id, name, description)
-        `
+        `, { count: 'exact' }
         )
-        .order('created_at', { ascending: false }),
+        .order('created_at', { ascending: false })
+        .range(start, end),
       adminClient
         .from('roles')
         .select('id, name, description')
@@ -79,6 +92,12 @@ export async function GET() {
   return NextResponse.json({
     users: users ?? [],
     roles: roles ?? [],
+    pagination: {
+      page,
+      limit,
+      total: count ?? 0,
+      totalPages: count ? Math.ceil(count / limit) : 0
+    }
   });
 }
 
@@ -130,6 +149,8 @@ export async function POST(request: NextRequest) {
       full_name: normalized.data.full_name,
       role_id: roleRecord.id,
       is_active: normalized.data.is_active,
+      contract_type: normalized.data.contract_type,
+      category: normalized.data.category,
     })
     .select(
       `
@@ -138,6 +159,8 @@ export async function POST(request: NextRequest) {
       full_name,
       role_id,
       is_active,
+      contract_type,
+      category,
       created_at,
       updated_at,
       role:roles(id, name, description)

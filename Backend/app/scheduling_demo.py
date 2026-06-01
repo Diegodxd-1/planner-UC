@@ -82,6 +82,7 @@ def _build_schedule_solution() -> dict:
     }
     sections_by_course_number: dict[tuple[str, int], list[tuple[str, int, str, tuple[str, ...]]]] = {}
     sections_by_room_slot: dict[tuple[str, str], list[tuple[str, int, str, tuple[str, ...]]]] = {}
+    sections_by_cycle_slot: dict[tuple[int, str], list[tuple[str, int, str, tuple[str, ...]]]] = {}
 
     for course in courses:
         patterns = patterns_by_blocks[course.blocks_per_week]
@@ -104,8 +105,12 @@ def _build_schedule_solution() -> dict:
 
                     for slot in pattern:
                         sections_by_room_slot.setdefault((room.name, slot), []).append(section_key)
+                        sections_by_cycle_slot.setdefault((course.cycle, slot), []).append(section_key)
 
     for sections in sections_by_room_slot.values():
+        model.Add(sum(section_vars[section] for section in sections) <= 1)
+
+    for sections in sections_by_cycle_slot.values():
         model.Add(sum(section_vars[section] for section in sections) <= 1)
 
     for course in courses:

@@ -24,6 +24,8 @@ const initialForm: ManagedUserForm = {
   email: '',
   password: '',
   role: 'profesor',
+  contract_type: 'TC',
+  category: 'Auxiliar',
   is_active: true,
 };
 
@@ -42,17 +44,19 @@ export default function UsersPage() {
   const [saving, setSaving] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [success, setSuccess] = useState<string | null>(null);
+  const [page, setPage] = useState(1);
+  const [totalPages, setTotalPages] = useState(1);
 
   useEffect(() => {
-    void loadUsers();
-  }, []);
+    void loadUsers(page);
+  }, [page]);
 
-  async function loadUsers() {
+  async function loadUsers(currentPage: number = 1) {
     try {
       setLoading(true);
       setError(null);
 
-      const response = await fetch('/api/users', { cache: 'no-store' });
+      const response = await fetch(`/api/users?page=${currentPage}&limit=5`, { cache: 'no-store' });
       const data = await response.json();
 
       if (!response.ok) {
@@ -61,6 +65,7 @@ export default function UsersPage() {
 
       setUsers(data.users ?? []);
       setRoles(data.roles ?? []);
+      setTotalPages(data.pagination?.totalPages || 1);
     } catch (err) {
       setError(err instanceof Error ? err.message : 'Error inesperado al cargar usuarios');
     } finally {
@@ -80,6 +85,8 @@ export default function UsersPage() {
       email: user.email,
       password: '',
       role: user.role?.name === 'alumno' ? 'alumno' : 'profesor',
+      contract_type: user.contract_type ?? 'TC',
+      category: user.category ?? 'Auxiliar',
       is_active: user.is_active,
     });
     setSuccess(null);
@@ -100,8 +107,14 @@ export default function UsersPage() {
             role: form.role,
             is_active: form.is_active,
             password: form.password,
+            contract_type: form.role === 'profesor' ? form.contract_type : null,
+            category: form.role === 'profesor' ? form.category : null,
           }
-        : form;
+        : {
+            ...form,
+            contract_type: form.role === 'profesor' ? form.contract_type : null,
+            category: form.role === 'profesor' ? form.category : null,
+          };
 
       const response = await fetch(
         editingUserId ? `/api/users/${editingUserId}` : '/api/users',
@@ -162,7 +175,7 @@ export default function UsersPage() {
       }
 
       setSuccess('Usuario eliminado correctamente.');
-      await loadUsers();
+      await loadUsers(page);
     } catch (err) {
       setError(err instanceof Error ? err.message : 'Error inesperado al eliminar');
     }
@@ -348,6 +361,47 @@ export default function UsersPage() {
                       </div>
                     </Field>
                   </div>
+                  
+                  {form.role === 'profesor' && (
+                    <div className="grid gap-4 sm:grid-cols-2 mt-4">
+                      <Field>
+                        <Label htmlFor="contract_type">Tipo de Contrato</Label>
+                        <Select
+                          id="contract_type"
+                          value={form.contract_type}
+                          onChange={(event) =>
+                            setForm((current) => ({
+                              ...current,
+                              contract_type: event.target.value as ManagedUserForm['contract_type'],
+                            }))
+                          }
+                        >
+                          <option value="TC">Tiempo Completo (TC)</option>
+                          <option value="TP">Tiempo Parcial (TP)</option>
+                          <option value="Por Horas">Por Horas</option>
+                        </Select>
+                      </Field>
+                      <Field>
+                        <Label htmlFor="category">Categoría</Label>
+                        <Select
+                          id="category"
+                          value={form.category}
+                          onChange={(event) =>
+                            setForm((current) => ({
+                              ...current,
+                              category: event.target.value as ManagedUserForm['category'],
+                            }))
+                          }
+                        >
+                          <option value="Principal">Principal</option>
+                          <option value="Asociado">Asociado</option>
+                          <option value="Auxiliar">Auxiliar</option>
+                          <option value="Contratado">Contratado</option>
+                          <option value="Jefe de Práctica">Jefe de Práctica</option>
+                        </Select>
+                      </Field>
+                    </div>
+                  )}
 
                   <div className="mt-5 rounded-2xl border border-fuchsia-100 bg-white px-4 py-4 shadow-sm">
                     <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
@@ -498,11 +552,39 @@ export default function UsersPage() {
                               label="Actualizado"
                               value={new Date(managedUser.updated_at).toLocaleDateString('es-CL')}
                             />
+                            {managedUser.role?.name === 'profesor' && managedUser.contract_type && (
+                              <Info label="Contrato" value={managedUser.contract_type} />
+                            )}
+                            {managedUser.role?.name === 'profesor' && managedUser.category && (
+                              <Info label="Categoría" value={managedUser.category} />
+                            )}
                           </div>
                         </div>
                       </article>
                     );
                   })}
+                  
+                  {totalPages > 1 && (
+                    <div className="flex items-center justify-between border-t border-slate-200 pt-4">
+                      <button
+                        onClick={() => setPage(p => Math.max(1, p - 1))}
+                        disabled={page === 1}
+                        className="rounded-2xl px-4 py-2 text-sm font-semibold text-slate-700 disabled:opacity-50"
+                      >
+                        Anterior
+                      </button>
+                      <span className="text-sm font-medium text-slate-500">
+                        Página {page} de {totalPages}
+                      </span>
+                      <button
+                        onClick={() => setPage(p => Math.min(totalPages, p + 1))}
+                        disabled={page === totalPages}
+                        className="rounded-2xl px-4 py-2 text-sm font-semibold text-slate-700 disabled:opacity-50"
+                      >
+                        Siguiente
+                      </button>
+                    </div>
+                  )}
                 </div>
               ) : null}
             </article>
