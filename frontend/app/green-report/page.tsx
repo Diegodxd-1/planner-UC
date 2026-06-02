@@ -43,7 +43,7 @@ export default function AdvancedGreenDashboard() {
   const [isClient, setIsClient] = useState(false);
   
   // Instancia oficial de co2.js usando el modelo SWD (Sustainable Web Design)
-  const co2Emission = new co2({ model: 'swd' });
+  const co2Emission = new co2();
 
   useEffect(() => {
     // eslint-disable-next-line react-hooks/set-state-in-effect
@@ -56,7 +56,7 @@ export default function AdvancedGreenDashboard() {
 
   // Enriquecer requests con CO2 calculado por la LIBRERÍA REAL (co2.js)
   const requestsData = currentMockRequests.map(req => {
-    const emissions = co2Emission.perByte(req.bytes, true); // true = green hosting
+    const emissions = co2Emission.perByte(req.bytes); // true = green hosting
     return { ...req, co2: emissions };
   });
 
@@ -64,7 +64,7 @@ export default function AdvancedGreenDashboard() {
   const baseOverhead = isOptimized ? 400000 : 1500000;
   const totalBytes = requestsData.reduce((acc, curr) => acc + curr.bytes, 0) + baseOverhead;
   const totalMB = (totalBytes / (1024 * 1024)).toFixed(4);
-  const totalCO2 = co2Emission.perByte(totalBytes, true).toFixed(6);
+  const totalCO2 = co2Emission.perByte(totalBytes).toFixed(6);
 
   return (
     <ProtectedRoute>
