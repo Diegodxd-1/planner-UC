@@ -3,13 +3,12 @@
 import { useState, useEffect } from 'react';
 import { ProtectedRoute } from '@/components/auth/protected-route';
 import { AppShell } from '@/components/layout/app-shell';
-import { Activity, ArrowLeftRight, Server, FileText } from 'lucide-react';
 
 // Mock local seguro de co2.js (SWD Model)
 // Usamos esto para que tu dashboard no se rompa debido a fallos de red (ECONNRESET) en npm
 class co2 {
-  constructor(options) {}
-  perByte(bytes, green) {
+  constructor(options?: any) {}
+  perByte(bytes: number, green?: boolean) {
     const gb = bytes / (1024 * 1024 * 1024);
     const kwh = gb * 0.81;
     return kwh * 442;
@@ -61,13 +60,12 @@ export default function AdvancedGreenDashboard() {
             <div className="flex justify-between items-center mb-6">
               <div>
                 <h1 className="text-2xl font-bold text-slate-800 flex items-center gap-2">
-                  <Activity className="w-6 h-6 text-emerald-500" />
-                  Consumo de Recursos & Sostenibilidad
+                  ⚡ Consumo de Recursos & Sostenibilidad
                 </h1>
                 <p className="text-sm text-slate-500 mt-1">Métricas del frontend integradas con optimizaciones de Green Software y co2.js</p>
               </div>
               <button className="px-4 py-2 border border-slate-300 bg-slate-100 rounded-full text-xs font-bold text-slate-600 hover:bg-slate-200 flex items-center gap-2 transition-colors">
-                + MONITORIZAR RED
+                ⚡ MONITORIZAR RED
               </button>
             </div>
 
@@ -77,19 +75,19 @@ export default function AdvancedGreenDashboard() {
                 onClick={() => setActiveTab('impact')}
                 className={`px-4 py-3 flex items-center gap-2 text-sm font-medium border-b-2 transition-colors whitespace-nowrap ${activeTab === 'impact' ? 'border-[#6c7b95] text-[#6c7b95] bg-slate-50/50' : 'border-transparent text-slate-400 hover:text-slate-700 hover:bg-slate-50'}`}
               >
-                <FileText className="w-4 h-4" /> Impacto Ambiental
+                📄 Impacto Ambiental
               </button>
               <button 
                 onClick={() => setActiveTab('compare')}
                 className={`px-4 py-3 flex items-center gap-2 text-sm font-medium border-b-2 transition-colors whitespace-nowrap ${activeTab === 'compare' ? 'border-[#6c7b95] text-[#6c7b95] bg-slate-50/50' : 'border-transparent text-slate-400 hover:text-slate-700 hover:bg-slate-50'}`}
               >
-                <ArrowLeftRight className="w-4 h-4" /> Comparativa Antes/Después
+                ⚖️ Comparativa Antes/Después
               </button>
               <button 
                 onClick={() => setActiveTab('resources')}
                 className={`px-4 py-3 flex items-center gap-2 text-sm font-medium border-b-2 transition-colors whitespace-nowrap ${activeTab === 'resources' ? 'border-[#6c7b95] text-[#6c7b95] bg-slate-50/50' : 'border-transparent text-slate-400 hover:text-slate-700 hover:bg-slate-50'}`}
               >
-                <Server className="w-4 h-4" /> Recursos del Sistema
+                🖥️ Recursos del Sistema
               </button>
             </div>
 
@@ -97,8 +95,7 @@ export default function AdvancedGreenDashboard() {
             {activeTab === 'impact' && (
               <div className="space-y-6">
                 <h2 className="text-sm font-bold text-slate-600 flex items-center gap-2">
-                  <Activity className="w-4 h-4" />
-                  Environmental Impact Dashboard
+                  📊 Environmental Impact Dashboard
                 </h2>
                 
                 {/* 4 Cards Grises como la foto */}
@@ -125,8 +122,7 @@ export default function AdvancedGreenDashboard() {
                 <div className="bg-[#8b92a5] rounded-lg shadow-md overflow-hidden mt-6">
                   <div className="px-5 py-3 border-b border-slate-400/30 flex justify-between items-center bg-[#7b8396]">
                     <h3 className="text-xs font-bold text-white flex items-center gap-2">
-                      <FileText className="w-3 h-3 text-slate-200" />
-                      Registro de Peticiones - 153 entradas
+                      📄 Registro de Peticiones - 153 entradas
                     </h3>
                   </div>
                   <div className="overflow-x-auto">
@@ -242,7 +238,7 @@ export default function AdvancedGreenDashboard() {
             {/* TAB: RECURSOS */}
             {activeTab === 'resources' && (
               <div className="flex flex-col items-center justify-center py-20 bg-slate-50 rounded-lg border border-slate-200 animate-in fade-in">
-                 <Server className="w-16 h-16 text-emerald-400 mb-4 animate-pulse" />
+                 <div className="text-6xl mb-4 animate-pulse">🖥️</div>
                  <h2 className="text-xl font-bold text-slate-800">Recursos del Servidor</h2>
                  <p className="text-sm text-slate-500 mt-2 text-center max-w-md">
                    La carga de procesamiento CPU Backend está por debajo del 5% gracias a la compresión GZip y las conexiones optimizadas en caché a la DB Supabase.
