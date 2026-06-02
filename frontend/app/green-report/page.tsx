@@ -15,8 +15,8 @@ class co2 {
   }
 }
 
-// Mock de peticiones de red reales del proyecto para la tabla
-const mockRequests = [
+// Mock de peticiones de red reales del proyecto para la tabla (OPTIMIZADO)
+const mockRequestsOptimized = [
   { id: 1, route: '/api/rooms?select=id,name,capacity&range=0-4', status: 200, time: '120ms', bytes: 1240 },
   { id: 2, route: '/_next/static/chunks/main-app.js', status: 200, time: '45ms', bytes: 215100 },
   { id: 3, route: '/_next/static/css/global.css', status: 200, time: '22ms', bytes: 45000 },
@@ -26,8 +26,20 @@ const mockRequests = [
   { id: 7, route: '/favicon.ico', status: 200, time: '10ms', bytes: 1150 }
 ];
 
+// Mock de peticiones (LÍNEA BASE / ANTES)
+const mockRequestsBaseline = [
+  { id: 1, route: '/api/rooms', status: 200, time: '850ms', bytes: 4600500 },
+  { id: 2, route: '/_next/static/chunks/main-app-unoptimized.js', status: 200, time: '450ms', bytes: 3500000 },
+  { id: 3, route: '/_next/static/css/global.css', status: 200, time: '42ms', bytes: 125000 },
+  { id: 4, route: '/api/users/profile', status: 200, time: '120ms', bytes: 4800 },
+  { id: 5, route: '/images/avatar-hd.jpg', status: 200, time: '1200ms', bytes: 7500400 },
+  { id: 6, route: '/api/solver/schedule', status: 200, time: '2100ms', bytes: 4200500 },
+  { id: 7, route: '/favicon.ico', status: 200, time: '10ms', bytes: 1150 }
+];
+
 export default function AdvancedGreenDashboard() {
   const [activeTab, setActiveTab] = useState('impact');
+  const [isOptimized, setIsOptimized] = useState(false);
   const [isClient, setIsClient] = useState(false);
   
   // Instancia oficial de co2.js usando el modelo SWD (Sustainable Web Design)
@@ -39,14 +51,17 @@ export default function AdvancedGreenDashboard() {
 
   if (!isClient) return null;
 
+  const currentMockRequests = isOptimized ? mockRequestsOptimized : mockRequestsBaseline;
+
   // Enriquecer requests con CO2 calculado por la LIBRERÍA REAL (co2.js)
-  const requestsData = mockRequests.map(req => {
+  const requestsData = currentMockRequests.map(req => {
     const emissions = co2Emission.perByte(req.bytes, true); // true = green hosting
     return { ...req, co2: emissions };
   });
 
-  const totalRequests = 153; 
-  const totalBytes = requestsData.reduce((acc, curr) => acc + curr.bytes, 0) + 400000;
+  const totalRequests = isOptimized ? 153 : 485; 
+  const baseOverhead = isOptimized ? 400000 : 1500000;
+  const totalBytes = requestsData.reduce((acc, curr) => acc + curr.bytes, 0) + baseOverhead;
   const totalMB = (totalBytes / (1024 * 1024)).toFixed(4);
   const totalCO2 = co2Emission.perByte(totalBytes, true).toFixed(6);
 
@@ -91,12 +106,30 @@ export default function AdvancedGreenDashboard() {
               </button>
             </div>
 
-            {/* TAB: IMPACTO AMBIENTAL (Clon exacto de la foto proyectada) */}
+            {/* TAB: IMPACTO AMBIENTAL (Clon exacto de la foto proyectada con Toggle) */}
             {activeTab === 'impact' && (
               <div className="space-y-6">
-                <h2 className="text-sm font-bold text-slate-600 flex items-center gap-2">
-                  📊 Environmental Impact Dashboard
-                </h2>
+                <div className="flex flex-col sm:flex-row sm:justify-between sm:items-center gap-4">
+                  <h2 className="text-sm font-bold text-slate-600 flex items-center gap-2">
+                    📊 Environmental Impact Dashboard
+                  </h2>
+                  
+                  {/* Switch Dinámico Antes/Después */}
+                  <div className="flex items-center gap-3 bg-slate-100 p-1.5 rounded-lg border border-slate-200">
+                    <button 
+                      onClick={() => setIsOptimized(false)}
+                      className={`px-4 py-1.5 rounded-md text-xs font-bold transition-all ${!isOptimized ? 'bg-rose-500 text-white shadow-sm' : 'text-slate-500 hover:text-slate-700'}`}
+                    >
+                      🔴 ANTES
+                    </button>
+                    <button 
+                      onClick={() => setIsOptimized(true)}
+                      className={`px-4 py-1.5 rounded-md text-xs font-bold transition-all ${isOptimized ? 'bg-emerald-500 text-white shadow-sm' : 'text-slate-500 hover:text-slate-700'}`}
+                    >
+                      🟢 DESPUÉS
+                    </button>
+                  </div>
+                </div>
                 
                 {/* 4 Cards Grises como la foto */}
                 <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
