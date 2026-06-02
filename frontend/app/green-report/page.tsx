@@ -7,8 +7,8 @@ import { AppShell } from '@/components/layout/app-shell';
 // Mock local seguro de co2.js (SWD Model)
 // Usamos esto para que tu dashboard no se rompa debido a fallos de red (ECONNRESET) en npm
 class co2 {
-  constructor(options?: any) {}
-  perByte(bytes: number, green?: boolean) {
+  constructor(_options?: unknown) {}
+  perByte(bytes: number, _green?: boolean) {
     const gb = bytes / (1024 * 1024 * 1024);
     const kwh = gb * 0.81;
     return kwh * 442;
@@ -46,6 +46,7 @@ export default function AdvancedGreenDashboard() {
   const co2Emission = new co2({ model: 'swd' });
 
   useEffect(() => {
+    // eslint-disable-next-line react-hooks/set-state-in-effect
     setIsClient(true);
   }, []);
 
