@@ -78,14 +78,15 @@ function buildE2EUser(email: string, fullName?: string): UserWithRole {
 }
 
 export function AuthProvider({ children }: { children: React.ReactNode }) {
-  const [user, setUser] = useState<UserWithRole | null>(null);
-  const [isLoading, setIsLoading] = useState(true);
+  const e2eBypassEnabled = isE2EBypassEnabled();
+  const [user, setUser] = useState<UserWithRole | null>(() =>
+    e2eBypassEnabled ? loadE2EUser() : null
+  );
+  const [isLoading, setIsLoading] = useState(() => !e2eBypassEnabled);
 
   // Configurar listener de cambios de autenticación
   useEffect(() => {
-    if (isE2EBypassEnabled()) {
-      setUser(loadE2EUser());
-      setIsLoading(false);
+    if (e2eBypassEnabled) {
       return;
     }
 
@@ -114,7 +115,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     return () => {
       subscription?.unsubscribe();
     };
-  }, []);
+  }, [e2eBypassEnabled]);
 
   const login = async (email: string, password: string) => {
     setIsLoading(true);

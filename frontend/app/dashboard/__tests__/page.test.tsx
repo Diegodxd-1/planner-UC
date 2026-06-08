@@ -1,3 +1,4 @@
+/* eslint-disable @next/next/no-img-element */
 import type { ReactNode } from 'react'
 import { render, screen } from '@testing-library/react'
 import DashboardPage from '@/app/dashboard/page'
