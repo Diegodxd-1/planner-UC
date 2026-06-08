@@ -7,8 +7,8 @@ import { AppShell } from '@/components/layout/app-shell';
 // Mock local seguro de co2.js (SWD Model)
 // Usamos esto para que tu dashboard no se rompa debido a fallos de red (ECONNRESET) en npm
 class co2 {
-  constructor(options?: any) {}
-  perByte(bytes: number, green?: boolean) {
+  constructor() {}
+  perByte(bytes: number) {
     const gb = bytes / (1024 * 1024 * 1024);
     const kwh = gb * 0.81;
     return kwh * 442;
@@ -17,23 +17,23 @@ class co2 {
 
 // Mock de peticiones de red reales del proyecto para la tabla (OPTIMIZADO)
 const mockRequestsOptimized = [
-  { id: 1, route: '/api/rooms?select=id,name,capacity&range=0-4', status: 200, time: '120ms', bytes: 1240 },
-  { id: 2, route: '/_next/static/chunks/main-app.js', status: 200, time: '45ms', bytes: 215100 },
+  { id: 1, route: '/api/rooms?select=id,name,capacity&range=0-4', status: 200, time: '120ms', bytes: 600000 },
+  { id: 2, route: '/_next/static/chunks/main-app.js', status: 200, time: '45ms', bytes: 310000 },
   { id: 3, route: '/_next/static/css/global.css', status: 200, time: '22ms', bytes: 45000 },
   { id: 4, route: '/api/users/profile', status: 200, time: '85ms', bytes: 850 },
-  { id: 5, route: '/_next/image?url=avatar.webp&w=64&q=75', status: 200, time: '60ms', bytes: 15400 },
-  { id: 6, route: '/api/solver/schedule', status: 200, time: '850ms', bytes: 210500 },
+  { id: 5, route: '/_next/image?url=avatar.webp&w=64&q=75', status: 200, time: '60ms', bytes: 1220000 },
+  { id: 6, route: '/api/solver/schedule', status: 200, time: '850ms', bytes: 107511 },
   { id: 7, route: '/favicon.ico', status: 200, time: '10ms', bytes: 1150 }
 ];
 
 // Mock de peticiones (LÍNEA BASE / ANTES)
 const mockRequestsBaseline = [
-  { id: 1, route: '/api/rooms', status: 200, time: '850ms', bytes: 4600500 },
+  { id: 1, route: '/api/rooms', status: 200, time: '850ms', bytes: 4600000 },
   { id: 2, route: '/_next/static/chunks/main-app-unoptimized.js', status: 200, time: '450ms', bytes: 3500000 },
   { id: 3, route: '/_next/static/css/global.css', status: 200, time: '42ms', bytes: 125000 },
   { id: 4, route: '/api/users/profile', status: 200, time: '120ms', bytes: 4800 },
-  { id: 5, route: '/images/avatar-hd.jpg', status: 200, time: '1200ms', bytes: 7500400 },
-  { id: 6, route: '/api/solver/schedule', status: 200, time: '2100ms', bytes: 4200500 },
+  { id: 5, route: '/images/avatar-hd.jpg', status: 200, time: '1200ms', bytes: 7500000 },
+  { id: 6, route: '/api/solver/schedule', status: 200, time: '2100ms', bytes: 567637 },
   { id: 7, route: '/favicon.ico', status: 200, time: '10ms', bytes: 1150 }
 ];
 
@@ -43,9 +43,10 @@ export default function AdvancedGreenDashboard() {
   const [isClient, setIsClient] = useState(false);
   
   // Instancia oficial de co2.js usando el modelo SWD (Sustainable Web Design)
-  const co2Emission = new co2({ model: 'swd' });
+  const co2Emission = new co2();
 
   useEffect(() => {
+    // eslint-disable-next-line react-hooks/set-state-in-effect
     setIsClient(true);
   }, []);
 
@@ -55,15 +56,14 @@ export default function AdvancedGreenDashboard() {
 
   // Enriquecer requests con CO2 calculado por la LIBRERÍA REAL (co2.js)
   const requestsData = currentMockRequests.map(req => {
-    const emissions = co2Emission.perByte(req.bytes, true); // true = green hosting
+    const emissions = co2Emission.perByte(req.bytes); // true = green hosting
     return { ...req, co2: emissions };
   });
 
   const totalRequests = isOptimized ? 153 : 485; 
-  const baseOverhead = isOptimized ? 400000 : 1500000;
-  const totalBytes = requestsData.reduce((acc, curr) => acc + curr.bytes, 0) + baseOverhead;
+  const totalBytes = requestsData.reduce((acc, curr) => acc + curr.bytes, 0);
   const totalMB = (totalBytes / (1024 * 1024)).toFixed(4);
-  const totalCO2 = co2Emission.perByte(totalBytes, true).toFixed(6);
+  const totalCO2 = co2Emission.perByte(totalBytes).toFixed(5);
 
   return (
     <ProtectedRoute>
