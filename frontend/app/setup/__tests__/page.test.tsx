@@ -29,7 +29,7 @@ describe('SetupPage', () => {
   it('redirige al login si el admin ya existe', async () => {
     jest.spyOn(globalThis, 'fetch').mockResolvedValue({
       json: async () => ({ exists: true }),
-    } as Response)
+    })
 
     render(<SetupPage />)
 
@@ -46,13 +46,13 @@ describe('SetupPage', () => {
       .spyOn(globalThis, 'fetch')
       .mockResolvedValueOnce({
         json: async () => ({ exists: false }),
-      } as Response)
+      })
       .mockResolvedValueOnce({
         json: async () => ({ created: true }),
-      } as Response)
+      })
       .mockResolvedValue({
         json: async () => ({ exists: false }),
-      } as Response)
+      })
 
     render(<SetupPage />)
 

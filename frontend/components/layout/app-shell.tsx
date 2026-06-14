@@ -60,7 +60,7 @@ function formatRoleLabel(role: string | null) {
   return 'Sin rol';
 }
 
-export function AppShell({ children }: { children: ReactNode }) {
+export function AppShell({ children }: Readonly<{ children: ReactNode }>) {
   const pathname = usePathname();
   const router = useRouter();
   const { user, userRole, logout } = useAuth();

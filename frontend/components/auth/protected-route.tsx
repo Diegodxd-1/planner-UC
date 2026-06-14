@@ -9,7 +9,7 @@ interface ProtectedRouteProps {
   requiredRole?: 'administrador' | 'profesor' | 'alumno' | ('administrador' | 'profesor' | 'alumno')[];
 }
 
-export function ProtectedRoute({ children, requiredRole }: ProtectedRouteProps) {
+export function ProtectedRoute({ children, requiredRole }: Readonly<ProtectedRouteProps>) {
   const { isAuthenticated, userRole, isLoading } = useAuth();
   const router = useRouter();
 

@@ -8,7 +8,10 @@ if (!globalThis.TextEncoder) {
 }
 
 if (!globalThis.TextDecoder) {
-  globalThis.TextDecoder = TextDecoder as unknown as typeof globalThis.TextDecoder
+  Object.defineProperty(globalThis, 'TextDecoder', {
+    value: TextDecoder,
+    writable: true,
+  })
 }
 
 beforeAll(() => server.listen({ onUnhandledRequest: 'error' }))

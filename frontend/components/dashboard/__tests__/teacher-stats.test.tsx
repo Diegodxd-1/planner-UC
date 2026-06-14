@@ -15,7 +15,7 @@ describe('TeacherStats', () => {
           { role: { name: 'alumno' }, is_active: true, contract_type: null },
         ],
       }),
-    } as Response)
+    })
 
     render(<TeacherStats />)
 

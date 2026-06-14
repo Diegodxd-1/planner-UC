@@ -146,31 +146,31 @@ Linea base actual:
 | Technical Debt | `434 min` |
 | Cobertura de pruebas | `0.0%` |
 
-Metricas despues de correcciones verificadas por el workflow de GitHub Actions el `2026-06-14`:
+Metricas despues de correcciones verificadas por SonarQube el `2026-06-14`:
 
 | Metrica | Despues de correcciones | Variacion esperada |
 | --- | ---: | --- |
 | Bugs | `0` | Se mantiene en `0` |
 | Vulnerabilities | `0` | Se reduce de `1` a `0` |
-| Code Smells | `23` | Se reduce de `110` a `23` |
+| Code Smells | `0` | Se reduce de `110` a `0` |
 | Duplicacion de codigo | `6.4%` | Queda pendiente reducir duplicacion en modulos CRUD |
 | Maintainability Rating | `A` | Se mantiene en `A` |
 | Reliability Rating | `A` | Se mantiene en `A` |
 | Security Rating | `A` | Mejora de `C` a `A` |
-| Technical Debt | `63 min` | Se reduce desde `434 min` |
+| Technical Debt | `0 min` | Se reduce desde `434 min` |
 | Cobertura de pruebas | `0.0%` | Queda pendiente integrar reportes de cobertura al scanner |
 
 Distribucion de issues despues de correcciones:
 
 | Clasificacion | Cantidad |
 | --- | ---: |
-| Total de issues abiertos | `23` |
-| Code Smells | `23` |
+| Total de issues abiertos | `0` |
+| Code Smells | `0` |
 | Vulnerabilities | `0` |
 | Bugs | `0` |
 | Severidad critica | `0` |
-| Severidad mayor | `5` |
-| Severidad menor | `18` |
+| Severidad mayor | `0` |
+| Severidad menor | `0` |
 
 #### 3. Reporte tecnico de analisis
 
@@ -192,11 +192,11 @@ Evidencia verificada en la iteracion de correccion:
 | Indicador | Antes | Despues | Resultado |
 | --- | ---: | ---: | --- |
 | Vulnerabilidades | `1` | `0` | Vulnerabilidad eliminada |
-| Code Smells | `110` | `23` | Reduccion de `87` hallazgos |
-| Issues abiertos | `111` | `23` | Reduccion de `88` issues |
+| Code Smells | `110` | `0` | Reduccion de `110` hallazgos |
+| Issues abiertos | `111` | `0` | Reduccion de `111` issues |
 | Severidad critica | `5` | `0` | Sin issues criticos abiertos |
 | Security Rating | `C` | `A` | Seguridad normalizada |
-| Technical Debt | `434 min` | `63 min` | Reduccion de `371 min` |
+| Technical Debt | `434 min` | `0 min` | Reduccion de `434 min` |
 
 Queda pendiente adjuntar capturas del dashboard actualizado y publicar reportes de cobertura hacia SonarQube.
 

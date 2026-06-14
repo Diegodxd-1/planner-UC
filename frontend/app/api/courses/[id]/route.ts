@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { getAdminClient } from '@/utils/supabase/admin';
 import { requireAdminAccess } from '@/lib/auth/server-auth';
-import { CourseInput, CourseKind } from '@/types/course';
+import { CourseInput } from '@/types/course';
 
 function getCourseId(idParam: string) {
   const courseId = Number(idParam);
@@ -49,7 +49,7 @@ function normalizeCoursePayload(payload: Partial<CourseInput>) {
       cycle,
       blocks_per_week: blocksPerWeek,
       max_sections: maxSections,
-      kind: kind as CourseKind,
+      kind,
       description: description || null,
       is_active: payload.is_active ?? true,
     },

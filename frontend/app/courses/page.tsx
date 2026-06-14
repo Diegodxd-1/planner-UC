@@ -1,7 +1,6 @@
 'use client';
 
 import {
-  FormEvent,
   InputHTMLAttributes,
   ReactNode,
   SelectHTMLAttributes,
@@ -97,7 +96,7 @@ export default function CoursesPage() {
     setError(null);
   }
 
-  async function handleSubmit(event: FormEvent<HTMLFormElement>) {
+  async function handleSubmit(event: { preventDefault: () => void }) {
     event.preventDefault();
 
     try {
@@ -385,7 +384,7 @@ export default function CoursesPage() {
                         }
                         className="h-4 w-4 rounded border-slate-300 text-emerald-600 focus:ring-emerald-500"
                       />
-                      Curso activo
+                      <span>Curso activo</span>
                     </label>
 
                     <div className="flex flex-col gap-3 sm:flex-row sm:justify-end">

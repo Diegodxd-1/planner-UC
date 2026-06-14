@@ -26,9 +26,9 @@ export default function SetupPage() {
     }
 
     // Limpiar localStorage y cookies de sesión
-    if (typeof window !== 'undefined') {
-      localStorage.removeItem('sb-jurhjktvifeuobpmrarr-auth-token');
-      localStorage.clear();
+    if (globalThis.window !== undefined) {
+      globalThis.localStorage.removeItem('sb-jurhjktvifeuobpmrarr-auth-token');
+      globalThis.localStorage.clear();
     }
     void checkAdmin();
   }, [router]);

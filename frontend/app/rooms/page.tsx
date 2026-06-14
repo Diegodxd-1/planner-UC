@@ -1,7 +1,6 @@
 'use client';
 
 import {
-  FormEvent,
   InputHTMLAttributes,
   ReactNode,
   SelectHTMLAttributes,
@@ -95,7 +94,7 @@ export default function RoomsPage() {
     setError(null);
   }
 
-  async function handleSubmit(event: FormEvent<HTMLFormElement>) {
+  async function handleSubmit(event: { preventDefault: () => void }) {
     event.preventDefault();
 
     try {
@@ -333,7 +332,7 @@ export default function RoomsPage() {
                             }
                             className="h-4 w-4 rounded border-slate-300 text-amber-600 focus:ring-amber-500"
                           />
-                          Aula activa
+                          <span>Aula activa</span>
                         </label>
                       </div>
                     </Field>

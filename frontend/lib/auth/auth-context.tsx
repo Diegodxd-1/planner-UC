@@ -20,7 +20,7 @@ function isE2EBypassEnabled() {
 }
 
 function loadE2EUser(): UserWithRole | null {
-  if (typeof globalThis.window === 'undefined') {
+  if (globalThis.window === undefined) {
     return null;
   }
 
@@ -37,7 +37,7 @@ function loadE2EUser(): UserWithRole | null {
 }
 
 function persistE2EUser(user: UserWithRole | null) {
-  if (typeof globalThis.window === 'undefined') {
+  if (globalThis.window === undefined) {
     return;
   }
 

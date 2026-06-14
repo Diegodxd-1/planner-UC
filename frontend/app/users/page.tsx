@@ -1,7 +1,6 @@
 'use client';
 
 import {
-  FormEvent,
   InputHTMLAttributes,
   ReactNode,
   SelectHTMLAttributes,
@@ -132,7 +131,7 @@ export default function UsersPage() {
     setError(null);
   }
 
-  async function handleSubmit(event: FormEvent<HTMLFormElement>) {
+  async function handleSubmit(event: { preventDefault: () => void }) {
     event.preventDefault();
 
     try {
@@ -382,7 +381,7 @@ export default function UsersPage() {
                             }
                             className="h-4 w-4 rounded border-slate-300 text-fuchsia-600 focus:ring-fuchsia-500"
                           />
-                          Usuario activo
+                          <span>Usuario activo</span>
                         </label>
                       </div>
                     </Field>

@@ -5,7 +5,12 @@ import { getAdminClient } from '@/utils/supabase/admin';
 const allowedRoles = ['profesor', 'alumno'] as const;
 
 function optionalString(value: unknown) {
-  return typeof value === 'string' && value.trim() ? value.trim() : null;
+  if (typeof value !== 'string') {
+    return null;
+  }
+
+  const trimmedValue = value.trim();
+  return trimmedValue || null;
 }
 
 function requiredString(value: unknown) {
@@ -25,7 +30,7 @@ function normalizeCreatePayload(payload: Record<string, unknown>) {
     return { error: 'El nombre completo es obligatorio' };
   }
 
-  if (!email || !email.includes('@')) {
+  if (!email.includes('@')) {
     return { error: 'El correo electronico no es valido' };
   }
 

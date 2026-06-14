@@ -41,7 +41,7 @@ export default function LoginPage() {
 
         <p className="mt-6 text-center text-sm text-slate-600">
           ¿No tienes cuenta?{' '}
-          <a href="#" className="font-semibold text-sky-600 hover:text-sky-700">
+          <a href="mailto:admin@example.com" className="font-semibold text-sky-600 hover:text-sky-700">
             Solicita acceso
           </a>
         </p>

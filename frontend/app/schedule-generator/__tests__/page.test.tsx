@@ -80,7 +80,7 @@ describe('ScheduleGeneratorPage', () => {
     jest.spyOn(globalThis, 'fetch').mockResolvedValue({
       ok: true,
       json: async () => schedulePayload,
-    } as Response)
+    })
 
     render(<ScheduleGeneratorPage />)
 
@@ -104,7 +104,7 @@ describe('ScheduleGeneratorPage', () => {
       ok: false,
       status: 500,
       json: async () => ({}),
-    } as Response)
+    })
 
     render(<ScheduleGeneratorPage />)
 

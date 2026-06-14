@@ -516,17 +516,19 @@ function ScheduleGeneratorContent() {
   );
 }
 
+type FragmentRowProps = Readonly<{
+  range: string;
+  days: readonly string[];
+  grouped: Map<string, Section[]>;
+  matchesFilters: (section: Section) => boolean;
+}>;
+
 function FragmentRow({
   range,
   days,
   grouped,
   matchesFilters,
-}: {
-  range: string;
-  days: readonly string[];
-  grouped: Map<string, Section[]>;
-  matchesFilters: (section: Section) => boolean;
-}) {
+}: FragmentRowProps) {
   return (
     <>
       <div className="rounded-3xl border border-slate-200 bg-slate-50 px-4 py-4 text-sm font-semibold text-slate-700">

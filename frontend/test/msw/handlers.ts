@@ -96,6 +96,10 @@ const roleOptions = [
 let rooms = [...baseRooms]
 let users = [...baseUsers]
 
+async function readJsonPayload<T>(req: Parameters<Parameters<typeof rest.post>[1]>[0]) {
+  return (await req.json()) as T
+}
+
 export function resetCourseFixtures() {
   courses = [...baseCourses]
   rooms = [...baseRooms]
@@ -125,7 +129,7 @@ export const handlers = [
   }),
 
   rest.post('*/api/courses', async (req, res, ctx) => {
-    const payload = (await req.json()) as {
+    const payload = await readJsonPayload<{
       code: string
       name: string
       cycle: number
@@ -134,7 +138,7 @@ export const handlers = [
       kind: 'general' | 'carrera'
       description?: string
       is_active: boolean
-    }
+    }>(req)
 
     const newCourse: Course = {
       id: courses.length + 1,
@@ -178,7 +182,7 @@ export const handlers = [
   }),
 
   rest.post('*/api/rooms', async (req, res, ctx) => {
-    const payload = (await req.json()) as {
+    const payload = await readJsonPayload<{
       name: string
       location: string
       capacity: number
@@ -186,7 +190,7 @@ export const handlers = [
       room_type: Room['room_type']
       description?: string
       is_active: boolean
-    }
+    }>(req)
 
     const newRoom: Room = {
       id: rooms.length + 1,
@@ -227,14 +231,14 @@ export const handlers = [
   }),
 
   rest.post('*/api/users', async (req, res, ctx) => {
-    const payload = (await req.json()) as {
+    const payload = await readJsonPayload<{
       full_name: string
       email: string
       role: 'profesor' | 'alumno'
       is_active: boolean
       contract_type?: ManagedUser['contract_type']
       category?: ManagedUser['category']
-    }
+    }>(req)
 
     const roleId = payload.role === 'profesor' ? 2 : 3
     const newUser: ManagedUser = {
