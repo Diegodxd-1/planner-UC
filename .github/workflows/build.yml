@@ -16,10 +16,28 @@ jobs:
       - uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4.3.1
         with:
           fetch-depth: 0  # Shallow clones should be disabled for a better relevancy of analysis
-      - uses: SonarSource/sonarqube-scan-action@fd88b7d7ccbaefd23d8f36f73b59db7a3d246602 # v6.0.0
+
+      - name: Download SonarScanner CLI
+        shell: powershell
+        run: |
+          $scannerVersion = "7.2.0.5079"
+          $scannerZip = Join-Path $env:RUNNER_TEMP "sonar-scanner-cli.zip"
+          $scannerUrl = "https://binaries.sonarsource.com/Distribution/sonar-scanner-cli/sonar-scanner-cli-$scannerVersion-windows-x64.zip"
+          Invoke-WebRequest -Uri $scannerUrl -OutFile $scannerZip
+          Expand-Archive -LiteralPath $scannerZip -DestinationPath $env:RUNNER_TEMP -Force
+          $scannerHome = Get-ChildItem -Path $env:RUNNER_TEMP -Directory -Filter "sonar-scanner-$scannerVersion-windows-x64" | Select-Object -First 1
+          if (-not $scannerHome) {
+            throw "SonarScanner CLI was not extracted correctly."
+          }
+          "SONAR_SCANNER_HOME=$($scannerHome.FullName)" | Out-File -FilePath $env:GITHUB_ENV -Append
+
+      - name: Run SonarQube analysis
+        shell: powershell
         env:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
           SONAR_HOST_URL: ${{ secrets.SONAR_HOST_URL }}
+        run: |
+          & "$env:SONAR_SCANNER_HOME\bin\sonar-scanner.bat" "-Dsonar.projectBaseDir=."
       # If you wish to fail your job when the Quality Gate is red, uncomment the
       # following lines. This would typically be used to fail a deployment.
       # - uses: SonarSource/sonarqube-quality-gate-action@cf038b0e0cdecfa9e56c198bbb7d21d751d62c3b # v1.2.0
