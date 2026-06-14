@@ -41,6 +41,14 @@ function normalizeRoomPayload(payload: Partial<RoomInput>) {
   };
 }
 
+function getMutationStatus(code: string) {
+  if (code === 'PGRST116') {
+    return 404;
+  }
+
+  return code === '23505' ? 409 : 500;
+}
+
 export async function PUT(
   request: NextRequest,
   context: { params: Promise<{ id: string }> }
@@ -72,7 +80,7 @@ export async function PUT(
     .single();
 
   if (error) {
-    const status = error.code === 'PGRST116' ? 404 : error.code === '23505' ? 409 : 500;
+    const status = getMutationStatus(error.code);
     return NextResponse.json({ error: error.message }, { status });
   }
 

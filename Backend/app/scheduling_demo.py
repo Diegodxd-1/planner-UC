@@ -4,6 +4,8 @@ from ortools.sat.python import cp_model
 
 from app.scheduling_demo_data import Course, Room, Student, build_demo_data
 
+SectionKey = tuple[str, int, str, tuple[str, ...]]
+
 
 def _slot_start_minutes(slot: str) -> int:
     _, hour_range = slot.split(" ", 1)
@@ -34,6 +36,148 @@ def _pattern_convenience_penalty(pattern: tuple[str, ...]) -> int:
             penalty += 12 + max(0, (gap_minutes - 100) // 10)
 
     return penalty
+
+
+def _build_section_candidates(
+    model: cp_model.CpModel,
+    courses: tuple[Course, ...],
+    rooms: tuple[Room, ...],
+    patterns_by_blocks: dict[int, tuple[tuple[str, ...], ...]],
+) -> tuple[
+    dict[SectionKey, cp_model.IntVar],
+    list[SectionKey],
+    dict[str, list[SectionKey]],
+    dict[tuple[str, int], list[SectionKey]],
+    dict[tuple[str, str], list[SectionKey]],
+    dict[tuple[int, str], list[SectionKey]],
+]:
+    section_vars: dict[SectionKey, cp_model.IntVar] = {}
+    candidate_sections: list[SectionKey] = []
+    sections_by_course: dict[str, list[SectionKey]] = {course.code: [] for course in courses}
+    sections_by_course_number: dict[tuple[str, int], list[SectionKey]] = {}
+    sections_by_room_slot: dict[tuple[str, str], list[SectionKey]] = {}
+    sections_by_cycle_slot: dict[tuple[int, str], list[SectionKey]] = {}
+
+    for course in courses:
+        patterns = patterns_by_blocks[course.blocks_per_week]
+        for section_number in range(1, course.max_sections + 1):
+            for room in rooms:
+                for pattern in patterns:
+                    section_key = (course.code, section_number, room.name, pattern)
+                    candidate_sections.append(section_key)
+                    sections_by_course[course.code].append(section_key)
+                    sections_by_course_number.setdefault((course.code, section_number), []).append(
+                        section_key
+                    )
+
+                    section_label = (
+                        f"{course.code}_sec{section_number}_{room.name}_{'_'.join(pattern)}"
+                        .replace(" ", "_")
+                        .replace(":", "")
+                    )
+                    section_vars[section_key] = model.NewBoolVar(f"open_{section_label}")
+
+                    for slot in pattern:
+                        sections_by_room_slot.setdefault((room.name, slot), []).append(section_key)
+                        sections_by_cycle_slot.setdefault((course.cycle, slot), []).append(
+                            section_key
+                        )
+
+    return (
+        section_vars,
+        candidate_sections,
+        sections_by_course,
+        sections_by_course_number,
+        sections_by_room_slot,
+        sections_by_cycle_slot,
+    )
+
+
+def _apply_section_constraints(
+    model: cp_model.CpModel,
+    courses: tuple[Course, ...],
+    section_vars: dict[SectionKey, cp_model.IntVar],
+    sections_by_course: dict[str, list[SectionKey]],
+    sections_by_course_number: dict[tuple[str, int], list[SectionKey]],
+    sections_by_room_slot: dict[tuple[str, str], list[SectionKey]],
+    sections_by_cycle_slot: dict[tuple[int, str], list[SectionKey]],
+) -> None:
+    for sections in sections_by_room_slot.values():
+        model.Add(sum(section_vars[section] for section in sections) <= 1)
+
+    for sections in sections_by_cycle_slot.values():
+        model.Add(sum(section_vars[section] for section in sections) <= 1)
+
+    for course in courses:
+        model.Add(
+            sum(section_vars[section] for section in sections_by_course[course.code])
+            <= course.max_sections
+        )
+
+    for course in courses:
+        for section_number in range(2, course.max_sections + 1):
+            previous_sections = sections_by_course_number[(course.code, section_number - 1)]
+            current_sections = sections_by_course_number[(course.code, section_number)]
+            model.Add(
+                sum(section_vars[section] for section in current_sections)
+                <= sum(section_vars[section] for section in previous_sections)
+            )
+
+    for sections in sections_by_course_number.values():
+        model.Add(sum(section_vars[section] for section in sections) <= 1)
+
+
+def _build_capacity_vars(
+    model: cp_model.CpModel,
+    courses: tuple[Course, ...],
+    rooms: tuple[Room, ...],
+    room_capacity: dict[str, int],
+    demand_by_course: dict[str, int],
+    patterns_by_blocks: dict[int, tuple[tuple[str, ...], ...]],
+    section_vars: dict[SectionKey, cp_model.IntVar],
+) -> tuple[dict[str, cp_model.IntVar], dict[str, cp_model.IntVar]]:
+    uncovered_demand_vars: dict[str, cp_model.IntVar] = {}
+    excess_capacity_vars: dict[str, cp_model.IntVar] = {}
+
+    for course in courses:
+        served_capacity = sum(
+            room_capacity[room_name] * section_vars[(course.code, section_number, room_name, pattern)]
+            for section_number in range(1, course.max_sections + 1)
+            for room_name in room_capacity
+            for pattern in patterns_by_blocks[course.blocks_per_week]
+        )
+        uncovered = model.NewIntVar(0, demand_by_course[course.code], f"uncovered_{course.code}")
+        uncovered_demand_vars[course.code] = uncovered
+        model.Add(uncovered >= demand_by_course[course.code] - served_capacity)
+
+        max_capacity = sum(room.capacity for room in rooms) * course.max_sections
+        excess_capacity = model.NewIntVar(0, max_capacity, f"excess_{course.code}")
+        excess_capacity_vars[course.code] = excess_capacity
+        model.Add(excess_capacity >= served_capacity - demand_by_course[course.code])
+
+    return uncovered_demand_vars, excess_capacity_vars
+
+
+def _build_course_open_vars(
+    model: cp_model.CpModel,
+    courses: tuple[Course, ...],
+    section_vars: dict[SectionKey, cp_model.IntVar],
+    sections_by_course: dict[str, list[SectionKey]],
+) -> dict[str, cp_model.IntVar]:
+    course_open_vars: dict[str, cp_model.IntVar] = {}
+
+    for course in courses:
+        course_open = model.NewBoolVar(f"course_open_{course.code}")
+        course_open_vars[course.code] = course_open
+        model.Add(
+            sum(section_vars[section] for section in sections_by_course[course.code]) >= course_open
+        )
+        model.Add(
+            sum(section_vars[section] for section in sections_by_course[course.code])
+            <= course.max_sections * course_open
+        )
+
+    return course_open_vars
 
 
 def _build_schedule_solution() -> dict:
@@ -74,38 +218,14 @@ def _build_schedule_solution() -> dict:
 
     model = cp_model.CpModel()
 
-    section_vars: dict[tuple[str, int, str, tuple[str, ...]], cp_model.IntVar] = {}
-
-    candidate_sections: list[tuple[str, int, str, tuple[str, ...]]] = []
-    sections_by_course: dict[str, list[tuple[str, int, str, tuple[str, ...]]]] = {
-        course.code: [] for course in courses
-    }
-    sections_by_course_number: dict[tuple[str, int], list[tuple[str, int, str, tuple[str, ...]]]] = {}
-    sections_by_room_slot: dict[tuple[str, str], list[tuple[str, int, str, tuple[str, ...]]]] = {}
-    sections_by_cycle_slot: dict[tuple[int, str], list[tuple[str, int, str, tuple[str, ...]]]] = {}
-
-    for course in courses:
-        patterns = patterns_by_blocks[course.blocks_per_week]
-        for section_number in range(1, course.max_sections + 1):
-            for room in rooms:
-                for pattern in patterns:
-                    section_key = (course.code, section_number, room.name, pattern)
-                    candidate_sections.append(section_key)
-                    sections_by_course[course.code].append(section_key)
-                    sections_by_course_number.setdefault((course.code, section_number), []).append(
-                        section_key
-                    )
-
-                    section_label = (
-                        f"{course.code}_sec{section_number}_{room.name}_{'_'.join(pattern)}"
-                        .replace(" ", "_")
-                        .replace(":", "")
-                    )
-                    section_vars[section_key] = model.NewBoolVar(f"open_{section_label}")
-
-                    for slot in pattern:
-                        sections_by_room_slot.setdefault((room.name, slot), []).append(section_key)
-                        sections_by_cycle_slot.setdefault((course.cycle, slot), []).append(section_key)
+    (
+        section_vars,
+        candidate_sections,
+        sections_by_course,
+        sections_by_course_number,
+        sections_by_room_slot,
+        sections_by_cycle_slot,
+    ) = _build_section_candidates(model, courses, rooms, patterns_by_blocks)
 
     if not candidate_sections:
         return {
@@ -113,60 +233,22 @@ def _build_schedule_solution() -> dict:
             "message": "No se encontro una solucion factible para el prototipo.",
         }
 
-    for sections in sections_by_room_slot.values():
-        model.Add(sum(section_vars[section] for section in sections) <= 1)
-
-    for sections in sections_by_cycle_slot.values():
-        model.Add(sum(section_vars[section] for section in sections) <= 1)
-
-    for course in courses:
-        model.Add(
-            sum(section_vars[section] for section in sections_by_course[course.code])
-            <= course.max_sections
-        )
-
-    for course in courses:
-        for section_number in range(2, course.max_sections + 1):
-            previous_sections = sections_by_course_number[(course.code, section_number - 1)]
-            current_sections = sections_by_course_number[(course.code, section_number)]
-            model.Add(
-                sum(section_vars[section] for section in current_sections)
-                <= sum(section_vars[section] for section in previous_sections)
-            )
-
-    for sections in sections_by_course_number.values():
-        model.Add(sum(section_vars[section] for section in sections) <= 1)
+    _apply_section_constraints(
+        model,
+        courses,
+        section_vars,
+        sections_by_course,
+        sections_by_course_number,
+        sections_by_room_slot,
+        sections_by_cycle_slot,
+    )
 
     total_open_sections = sum(section_vars.values())
 
-    uncovered_demand_vars: dict[str, cp_model.IntVar] = {}
-    excess_capacity_vars: dict[str, cp_model.IntVar] = {}
-    for course in courses:
-        served_capacity = sum(
-            room_capacity[room_name] * section_vars[(course.code, section_number, room_name, pattern)]
-            for section_number in range(1, course.max_sections + 1)
-            for room_name in room_capacity
-            for pattern in patterns_by_blocks[course.blocks_per_week]
-        )
-        uncovered = model.NewIntVar(0, demand_by_course[course.code], f"uncovered_{course.code}")
-        uncovered_demand_vars[course.code] = uncovered
-        model.Add(uncovered >= demand_by_course[course.code] - served_capacity)
-        max_capacity = sum(room.capacity for room in rooms) * course.max_sections
-        excess_capacity = model.NewIntVar(0, max_capacity, f"excess_{course.code}")
-        excess_capacity_vars[course.code] = excess_capacity
-        model.Add(excess_capacity >= served_capacity - demand_by_course[course.code])
-
-    course_open_vars: dict[str, cp_model.IntVar] = {}
-    for course in courses:
-        course_open = model.NewBoolVar(f"course_open_{course.code}")
-        course_open_vars[course.code] = course_open
-        model.Add(
-            sum(section_vars[section] for section in sections_by_course[course.code]) >= course_open
-        )
-        model.Add(
-            sum(section_vars[section] for section in sections_by_course[course.code])
-            <= course.max_sections * course_open
-        )
+    uncovered_demand_vars, excess_capacity_vars = _build_capacity_vars(
+        model, courses, rooms, room_capacity, demand_by_course, patterns_by_blocks, section_vars
+    )
+    course_open_vars = _build_course_open_vars(model, courses, section_vars, sections_by_course)
 
     total_opened_course_codes = sum(course_open_vars.values())
     total_uncovered_demand = sum(uncovered_demand_vars.values())

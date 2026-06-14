@@ -4,14 +4,22 @@ import { getAdminClient } from '@/utils/supabase/admin';
 
 const allowedRoles = ['profesor', 'alumno'] as const;
 
+function optionalString(value: unknown) {
+  return typeof value === 'string' && value.trim() ? value.trim() : null;
+}
+
+function requiredString(value: unknown) {
+  return typeof value === 'string' ? value.trim() : '';
+}
+
 function normalizeCreatePayload(payload: Record<string, unknown>) {
-  const fullName = String(payload.full_name ?? '').trim();
-  const email = String(payload.email ?? '').trim().toLowerCase();
-  const password = String(payload.password ?? '');
-  const role = String(payload.role ?? '') as (typeof allowedRoles)[number];
+  const fullName = requiredString(payload.full_name);
+  const email = requiredString(payload.email).toLowerCase();
+  const password = typeof payload.password === 'string' ? payload.password : '';
+  const role = requiredString(payload.role) as (typeof allowedRoles)[number];
   const isActive = payload.is_active !== false;
-  const contractType = payload.contract_type ? String(payload.contract_type) : null;
-  const category = payload.category ? String(payload.category) : null;
+  const contractType = optionalString(payload.contract_type);
+  const category = optionalString(payload.category);
 
   if (!fullName) {
     return { error: 'El nombre completo es obligatorio' };
@@ -95,8 +103,8 @@ export async function GET(request: NextRequest) {
       page,
       limit,
       total: count ?? 0,
-      totalPages: count ? Math.ceil(count / limit) : 0
-    }
+      totalPages: count ? Math.ceil(count / limit) : 0,
+    },
   });
 }
 

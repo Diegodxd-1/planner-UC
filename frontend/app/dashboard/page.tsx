@@ -12,6 +12,14 @@ const TeacherStats = dynamic(() => import('@/components/dashboard/teacher-stats'
   ssr: false, // No renderizar en el servidor para aligerar la carga inicial
 });
 
+function formatUserRole(role: string | null) {
+  if (role === 'administrador') {
+    return 'Administrador';
+  }
+
+  return role === 'profesor' ? 'Profesor' : 'Alumno';
+}
+
 export default function DashboardPage() {
   const { user, userRole } = useAuth();
 
@@ -28,11 +36,7 @@ export default function DashboardPage() {
                 <p className="mt-4 text-slate-600">
                   Rol actual:{' '}
                   <span className="font-semibold text-slate-900">
-                    {userRole === 'administrador'
-                      ? 'Administrador'
-                      : userRole === 'profesor'
-                        ? 'Profesor'
-                        : 'Alumno'}
+                    {formatUserRole(userRole)}
                   </span>
                 </p>
               </div>

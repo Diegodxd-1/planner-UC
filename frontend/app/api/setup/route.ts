@@ -1,6 +1,9 @@
 import { getAdminClient } from '@/utils/supabase/admin';
 import { NextResponse } from 'next/server';
 
+const setupEmail = process.env.INITIAL_ADMIN_EMAIL ?? 'admin@example.com';
+const setupPassword = process.env.INITIAL_ADMIN_PASSWORD;
+
 export async function GET() {
   try {
     const adminClient = getAdminClient();
@@ -10,8 +13,7 @@ export async function GET() {
       throw listError;
     }
 
-    const email = 'admin@example.com';
-    const userExists = existingUsers?.users?.some((u) => u.email === email);
+    const userExists = existingUsers?.users?.some((u) => u.email === setupEmail);
 
     if (userExists) {
       return NextResponse.json({ exists: true, message: 'Admin user already exists' });
@@ -29,9 +31,14 @@ export async function GET() {
 
 export async function POST() {
   try {
+    if (!setupPassword) {
+      return NextResponse.json(
+        { error: 'INITIAL_ADMIN_PASSWORD no esta configurada', created: false },
+        { status: 500 }
+      );
+    }
+
     const adminClient = getAdminClient();
-    const email = 'admin@example.com';
-    const password = 'password123';
 
     // Verificar si el usuario ya existe
     const { data: existingUsers, error: listError } = await adminClient.auth.admin.listUsers();
@@ -40,7 +47,7 @@ export async function POST() {
       throw listError;
     }
 
-    const userExists = existingUsers?.users?.some((u) => u.email === email);
+    const userExists = existingUsers?.users?.some((u) => u.email === setupEmail);
 
     if (userExists) {
       return NextResponse.json(
@@ -51,8 +58,8 @@ export async function POST() {
 
     // Crear usuario en Authentication
     const { data: authData, error: authError } = await adminClient.auth.admin.createUser({
-      email,
-      password,
+      email: setupEmail,
+      password: setupPassword,
       email_confirm: true,
     });
 
@@ -69,7 +76,7 @@ export async function POST() {
       .from('user_profiles')
       .insert({
         id: authData.user.id,
-        email,
+        email: setupEmail,
         full_name: 'Administrador',
         role_id: 1,
         is_active: true,

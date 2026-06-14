@@ -4,6 +4,14 @@ import { getAdminClient } from '@/utils/supabase/admin';
 
 const allowedRoles = ['profesor', 'alumno'] as const;
 
+function optionalString(value: unknown) {
+  return typeof value === 'string' && value.trim() ? value.trim() : null;
+}
+
+function requiredString(value: unknown) {
+  return typeof value === 'string' ? value.trim() : '';
+}
+
 function isUuid(value: string) {
   return /^[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/i.test(
     value
@@ -11,12 +19,12 @@ function isUuid(value: string) {
 }
 
 function normalizeUpdatePayload(payload: Record<string, unknown>) {
-  const fullName = String(payload.full_name ?? '').trim();
-  const role = String(payload.role ?? '') as (typeof allowedRoles)[number];
+  const fullName = requiredString(payload.full_name);
+  const role = requiredString(payload.role) as (typeof allowedRoles)[number];
   const isActive = payload.is_active !== false;
-  const password = String(payload.password ?? '').trim();
-  const contractType = payload.contract_type ? String(payload.contract_type) : null;
-  const category = payload.category ? String(payload.category) : null;
+  const password = requiredString(payload.password);
+  const contractType = optionalString(payload.contract_type);
+  const category = optionalString(payload.category);
 
   if (!fullName) {
     return { error: 'El nombre completo es obligatorio' };

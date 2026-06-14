@@ -6,13 +6,10 @@ import { AppShell } from '@/components/layout/app-shell';
 
 // Mock local seguro de co2.js (SWD Model)
 // Usamos esto para que tu dashboard no se rompa debido a fallos de red (ECONNRESET) en npm
-class co2 {
-  constructor() {}
-  perByte(bytes: number) {
-    const gb = bytes / (1024 * 1024 * 1024);
-    const kwh = gb * 0.81;
-    return kwh * 442;
-  }
+function estimateCo2PerByte(bytes: number) {
+  const gb = bytes / (1024 * 1024 * 1024);
+  const kwh = gb * 0.81;
+  return kwh * 442;
 }
 
 // Mock de peticiones de red reales del proyecto para la tabla (OPTIMIZADO)
@@ -42,9 +39,6 @@ export default function AdvancedGreenDashboard() {
   const [isOptimized, setIsOptimized] = useState(false);
   const [isClient, setIsClient] = useState(false);
   
-  // Instancia oficial de co2.js usando el modelo SWD (Sustainable Web Design)
-  const co2Emission = new co2();
-
   useEffect(() => {
     // eslint-disable-next-line react-hooks/set-state-in-effect
     setIsClient(true);
@@ -56,14 +50,14 @@ export default function AdvancedGreenDashboard() {
 
   // Enriquecer requests con CO2 calculado por la LIBRERÍA REAL (co2.js)
   const requestsData = currentMockRequests.map(req => {
-    const emissions = co2Emission.perByte(req.bytes); // true = green hosting
+    const emissions = estimateCo2PerByte(req.bytes); // true = green hosting
     return { ...req, co2: emissions };
   });
 
   const totalRequests = isOptimized ? 153 : 485; 
   const totalBytes = requestsData.reduce((acc, curr) => acc + curr.bytes, 0);
   const totalMB = (totalBytes / (1024 * 1024)).toFixed(4);
-  const totalCO2 = co2Emission.perByte(totalBytes).toFixed(5);
+  const totalCO2 = estimateCo2PerByte(totalBytes).toFixed(5);
 
   return (
     <ProtectedRoute>
@@ -118,7 +112,7 @@ export default function AdvancedGreenDashboard() {
                   <div className="flex items-center gap-3 bg-slate-100 p-1.5 rounded-lg border border-slate-200">
                     <button 
                       onClick={() => setIsOptimized(false)}
-                      className={`px-4 py-1.5 rounded-md text-xs font-bold transition-all ${!isOptimized ? 'bg-rose-500 text-white shadow-sm' : 'text-slate-500 hover:text-slate-700'}`}
+                      className={`px-4 py-1.5 rounded-md text-xs font-bold transition-all ${isOptimized ? 'text-slate-500 hover:text-slate-700' : 'bg-rose-500 text-white shadow-sm'}`}
                     >
                       🔴 ANTES
                     </button>
@@ -172,8 +166,8 @@ export default function AdvancedGreenDashboard() {
                         </tr>
                       </thead>
                       <tbody className="divide-y divide-slate-400/20 bg-[#8b92a5]">
-                        {requestsData.map((req, idx) => (
-                          <tr key={idx} className="hover:bg-[#7b8396] transition-colors">
+                        {requestsData.map((req) => (
+                          <tr key={req.id} className="hover:bg-[#7b8396] transition-colors">
                             <td className="px-5 py-3 font-mono text-[10px] text-slate-200">
                               {new Date().toISOString().substring(0, 19).replace('T', ' ')}
                             </td>

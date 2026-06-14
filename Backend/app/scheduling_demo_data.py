@@ -36,28 +36,27 @@ def _split_slots_by_day(time_slots: tuple[str, ...]) -> dict[str, list[str]]:
     return slots_by_day
 
 
-def _build_patterns_by_blocks(
-    time_slots: tuple[str, ...],
-) -> dict[int, tuple[tuple[str, ...], ...]]:
-    slots_by_day = _split_slots_by_day(time_slots)
-    day_names = list(slots_by_day.keys())
+def _append_single_day_patterns(
+    day_slots: list[str],
+    patterns_1: list[tuple[str, ...]],
+    patterns_2: list[tuple[str, ...]],
+    patterns_3: list[tuple[str, ...]],
+) -> None:
+    for slot in day_slots:
+        patterns_1.append((slot,))
 
-    patterns_1: list[tuple[str, ...]] = []
-    patterns_2: list[tuple[str, ...]] = []
-    patterns_3: list[tuple[str, ...]] = []
+    for start in range(len(day_slots) - 1):
+        patterns_2.append((day_slots[start], day_slots[start + 1]))
 
-    for day in day_names:
-        day_slots = slots_by_day[day]
+    for start in range(len(day_slots) - 2):
+        patterns_3.append((day_slots[start], day_slots[start + 1], day_slots[start + 2]))
 
-        for slot in day_slots:
-            patterns_1.append((slot,))
 
-        for start in range(len(day_slots) - 1):
-            patterns_2.append((day_slots[start], day_slots[start + 1]))
-
-        for start in range(len(day_slots) - 2):
-            patterns_3.append((day_slots[start], day_slots[start + 1], day_slots[start + 2]))
-
+def _append_two_day_patterns(
+    day_names: list[str],
+    slots_by_day: dict[str, list[str]],
+    patterns_2: list[tuple[str, ...]],
+) -> None:
     for first_day_index in range(len(day_names)):
         for second_day_index in range(first_day_index + 1, len(day_names)):
             first_day_slots = slots_by_day[day_names[first_day_index]]
@@ -67,6 +66,12 @@ def _build_patterns_by_blocks(
             for slot_index in range(shared_count):
                 patterns_2.append((first_day_slots[slot_index], second_day_slots[slot_index]))
 
+
+def _append_three_day_patterns(
+    day_names: list[str],
+    slots_by_day: dict[str, list[str]],
+    patterns_3: list[tuple[str, ...]],
+) -> None:
     for first_day_index in range(len(day_names)):
         for second_day_index in range(first_day_index + 1, len(day_names)):
             for third_day_index in range(second_day_index + 1, len(day_names)):
@@ -87,6 +92,23 @@ def _build_patterns_by_blocks(
                             third_day_slots[slot_index],
                         )
                     )
+
+
+def _build_patterns_by_blocks(
+    time_slots: tuple[str, ...],
+) -> dict[int, tuple[tuple[str, ...], ...]]:
+    slots_by_day = _split_slots_by_day(time_slots)
+    day_names = list(slots_by_day.keys())
+
+    patterns_1: list[tuple[str, ...]] = []
+    patterns_2: list[tuple[str, ...]] = []
+    patterns_3: list[tuple[str, ...]] = []
+
+    for day in day_names:
+        _append_single_day_patterns(slots_by_day[day], patterns_1, patterns_2, patterns_3)
+
+    _append_two_day_patterns(day_names, slots_by_day, patterns_2)
+    _append_three_day_patterns(day_names, slots_by_day, patterns_3)
 
     return {
         1: tuple(patterns_1),

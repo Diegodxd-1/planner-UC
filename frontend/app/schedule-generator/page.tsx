@@ -53,7 +53,7 @@ function slotColor(seed: string) {
   let hash = 0;
 
   for (let i = 0; i < seed.length; i += 1) {
-    hash = seed.charCodeAt(i) + ((hash << 5) - hash);
+    hash = (seed.codePointAt(i) ?? 0) + ((hash << 5) - hash);
   }
 
   const hue = Math.abs(hash % 360);
@@ -71,6 +71,14 @@ function getDayAndRange(slot: string) {
 
 function formatKind(kind: string) {
   return kind === "carrera" ? "Carrera" : "General";
+}
+
+function getConnectionStatus(loading: boolean, error: string | null) {
+  if (loading) {
+    return "Cargando";
+  }
+
+  return error ? "Error" : "Conectado";
 }
 
 function ScheduleGeneratorContent() {
@@ -125,13 +133,11 @@ function ScheduleGeneratorContent() {
     }
 
     const uniqueDaySet = new Set<string>();
-    const uniqueRangeSet = new Set<string>();
     const grouped = new Map<string, Section[]>();
 
     for (const rawSlot of data.time_slots) {
-      const { day, range } = getDayAndRange(rawSlot);
+      const { day } = getDayAndRange(rawSlot);
       uniqueDaySet.add(day);
-      uniqueRangeSet.add(range);
       grouped.set(rawSlot, []);
     }
 
@@ -231,7 +237,7 @@ function ScheduleGeneratorContent() {
             <div className="grid grid-cols-2 gap-3 sm:grid-cols-4">
               <StatCard
                 label="Estado"
-                value={loading ? "Cargando" : error ? "Error" : "Conectado"}
+                value={getConnectionStatus(loading, error)}
               />
               <StatCard
                 label="Carrera"
@@ -252,9 +258,9 @@ function ScheduleGeneratorContent() {
         {loading ? (
           <section className="rounded-[28px] border border-slate-200 bg-white/85 p-8 shadow-sm">
             <div className="grid gap-4 md:grid-cols-3">
-              {Array.from({ length: 6 }).map((_, index) => (
+              {["schedule-loading-1", "schedule-loading-2", "schedule-loading-3", "schedule-loading-4", "schedule-loading-5", "schedule-loading-6"].map((skeletonKey) => (
                 <div
-                  key={index}
+                  key={skeletonKey}
                   className="h-28 animate-pulse rounded-3xl bg-slate-100"
                 />
               ))}
@@ -517,7 +523,7 @@ function FragmentRow({
   matchesFilters,
 }: {
   range: string;
-  days: string[];
+  days: readonly string[];
   grouped: Map<string, Section[]>;
   matchesFilters: (section: Section) => boolean;
 }) {
@@ -580,7 +586,7 @@ function FragmentRow({
   );
 }
 
-function StatCard({ label, value }: { label: string; value: string }) {
+function StatCard({ label, value }: Readonly<{ label: string; value: string }>) {
   return (
     <div className="rounded-2xl border border-slate-200 bg-slate-50/90 px-4 py-3">
       <p className="text-[11px] font-bold uppercase tracking-[0.2em] text-slate-500">
@@ -595,11 +601,11 @@ function SummaryCard({
   title,
   value,
   detail,
-}: {
+}: Readonly<{
   title: string;
   value: string;
   detail: string;
-}) {
+}>) {
   return (
     <article className="rounded-[28px] border border-slate-200 bg-white/90 p-5 shadow-[0_12px_30px_rgba(15,23,42,0.05)]">
       <p className="text-xs font-bold uppercase tracking-[0.22em] text-slate-500">
@@ -613,7 +619,7 @@ function SummaryCard({
   );
 }
 
-function Metric({ label, value }: { label: string; value: number }) {
+function Metric({ label, value }: Readonly<{ label: string; value: number }>) {
   return (
     <div className="rounded-2xl bg-white px-3 py-2 shadow-sm">
       <dt className="text-[11px] font-bold uppercase tracking-[0.2em] text-slate-500">

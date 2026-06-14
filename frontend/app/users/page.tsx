@@ -34,6 +34,38 @@ const defaultRoles: RoleOption[] = [
   { id: 3, name: 'alumno', description: 'Alumno de la universidad' },
 ];
 
+const loadingSkeletonKeys = ['user-skeleton-1', 'user-skeleton-2', 'user-skeleton-3', 'user-skeleton-4'];
+
+function buildUserRequestBody(form: ManagedUserForm, editingUserId: string | null) {
+  const professorFields = {
+    contract_type: form.role === 'profesor' ? form.contract_type : null,
+    category: form.role === 'profesor' ? form.category : null,
+  };
+
+  if (!editingUserId) {
+    return {
+      ...form,
+      ...professorFields,
+    };
+  }
+
+  return {
+    full_name: form.full_name,
+    role: form.role,
+    is_active: form.is_active,
+    password: form.password,
+    ...professorFields,
+  };
+}
+
+function getSaveButtonText(saving: boolean, editingUserId: string | null) {
+  if (saving) {
+    return 'Guardando...';
+  }
+
+  return editingUserId ? 'Actualizar usuario' : 'Agregar usuario';
+}
+
 export default function UsersPage() {
   const { user: currentUser } = useAuth();
   const [users, setUsers] = useState<ManagedUser[]>([]);
@@ -108,20 +140,7 @@ export default function UsersPage() {
       setError(null);
       setSuccess(null);
 
-      const body = editingUserId
-        ? {
-            full_name: form.full_name,
-            role: form.role,
-            is_active: form.is_active,
-            password: form.password,
-            contract_type: form.role === 'profesor' ? form.contract_type : null,
-            category: form.role === 'profesor' ? form.category : null,
-          }
-        : {
-            ...form,
-            contract_type: form.role === 'profesor' ? form.contract_type : null,
-            category: form.role === 'profesor' ? form.category : null,
-          };
+      const body = buildUserRequestBody(form, editingUserId);
 
       const response = await fetch(
         editingUserId ? `/api/users/${editingUserId}` : '/api/users',
@@ -158,7 +177,7 @@ export default function UsersPage() {
       return;
     }
 
-    const confirmed = window.confirm(
+    const confirmed = globalThis.confirm(
       `Se eliminara el usuario ${user.email}. ¿Deseas continuar?`
     );
 
@@ -434,11 +453,7 @@ export default function UsersPage() {
                           disabled={saving}
                           className="rounded-2xl bg-fuchsia-600 px-5 py-3 text-sm font-bold text-white transition hover:bg-fuchsia-700 disabled:cursor-not-allowed disabled:opacity-60 sm:min-w-52"
                         >
-                          {saving
-                            ? 'Guardando...'
-                            : editingUserId
-                              ? 'Actualizar usuario'
-                              : 'Agregar usuario'}
+                          {getSaveButtonText(saving, editingUserId)}
                         </button>
                       </div>
                     </div>
@@ -460,8 +475,9 @@ export default function UsersPage() {
 
                 <div className="flex flex-col gap-2 sm:flex-row sm:items-center sm:gap-3">
                   <div className="flex items-center gap-2">
-                    <label className="text-xs font-semibold text-slate-600">Por página:</label>
+                    <label htmlFor="users-page-limit" className="text-xs font-semibold text-slate-600">Por página:</label>
                     <select
+                      id="users-page-limit"
                       value={limit}
                       onChange={(e) => {
                         setLimit(Number(e.target.value));
@@ -488,9 +504,9 @@ export default function UsersPage() {
 
               {loading ? (
                 <div className="mt-6 grid gap-3">
-                  {Array.from({ length: 4 }).map((_, index) => (
+                  {loadingSkeletonKeys.map((skeletonKey) => (
                     <div
-                      key={index}
+                      key={skeletonKey}
                       className="h-28 animate-pulse rounded-3xl bg-slate-100"
                     />
                   ))}
@@ -661,7 +677,7 @@ function formatRoleLabel(role: ManagedUser['role'] extends { name: infer T } ? T
   return 'Alumno';
 }
 
-function SectionTitle({ children }: { children: ReactNode }) {
+function SectionTitle({ children }: Readonly<{ children: ReactNode }>) {
   return (
     <p className="mb-4 text-[11px] font-bold uppercase tracking-[0.22em] text-slate-500">
       {children}
@@ -669,17 +685,17 @@ function SectionTitle({ children }: { children: ReactNode }) {
   );
 }
 
-function Field({ children }: { children: ReactNode }) {
+function Field({ children }: Readonly<{ children: ReactNode }>) {
   return <div className="flex flex-col gap-2">{children}</div>;
 }
 
 function Label({
   children,
   htmlFor,
-}: {
+}: Readonly<{
   children: ReactNode;
   htmlFor: string;
-}) {
+}>) {
   return (
     <label
       htmlFor={htmlFor}
@@ -690,7 +706,7 @@ function Label({
   );
 }
 
-function Input(props: InputHTMLAttributes<HTMLInputElement>) {
+function Input(props: Readonly<InputHTMLAttributes<HTMLInputElement>>) {
   return (
     <input
       {...props}
@@ -699,7 +715,7 @@ function Input(props: InputHTMLAttributes<HTMLInputElement>) {
   );
 }
 
-function Select(props: SelectHTMLAttributes<HTMLSelectElement>) {
+function Select(props: Readonly<SelectHTMLAttributes<HTMLSelectElement>>) {
   return (
     <select
       {...props}
@@ -708,7 +724,7 @@ function Select(props: SelectHTMLAttributes<HTMLSelectElement>) {
   );
 }
 
-function Info({ label, value }: { label: string; value: string }) {
+function Info({ label, value }: Readonly<{ label: string; value: string }>) {
   return (
     <div className="rounded-2xl bg-white px-3 py-3 shadow-sm ring-1 ring-slate-200/80">
       <p className="text-[11px] font-bold uppercase tracking-[0.2em] text-slate-500">
@@ -719,7 +735,7 @@ function Info({ label, value }: { label: string; value: string }) {
   );
 }
 
-function StatCard({ label, value }: { label: string; value: string }) {
+function StatCard({ label, value }: Readonly<{ label: string; value: string }>) {
   return (
     <div className="rounded-2xl border border-slate-200 bg-slate-50/90 px-4 py-3">
       <p className="text-[11px] font-bold uppercase tracking-[0.2em] text-slate-500">

@@ -22,6 +22,16 @@ const initialForm: RoomInput = {
   is_active: true,
 };
 
+const loadingSkeletonKeys = ['room-skeleton-1', 'room-skeleton-2', 'room-skeleton-3', 'room-skeleton-4'];
+
+function getSaveButtonText(saving: boolean, editingId: number | null) {
+  if (saving) {
+    return 'Guardando...';
+  }
+
+  return editingId ? 'Actualizar aula' : 'Agregar aula';
+}
+
 export default function RoomsPage() {
   const [rooms, setRooms] = useState<Room[]>([]);
   const [form, setForm] = useState<RoomInput>(initialForm);
@@ -115,7 +125,7 @@ export default function RoomsPage() {
   }
 
   async function handleDelete(room: Room) {
-    const confirmed = window.confirm(
+    const confirmed = globalThis.confirm(
       `Se eliminara el aula ${room.name}. ¿Deseas continuar?`
     );
 
@@ -373,11 +383,7 @@ export default function RoomsPage() {
                           disabled={saving}
                           className="rounded-2xl bg-amber-500 px-5 py-3 text-sm font-bold text-slate-950 transition hover:bg-amber-400 disabled:cursor-not-allowed disabled:opacity-60 sm:min-w-52"
                         >
-                          {saving
-                            ? 'Guardando...'
-                            : editingId
-                              ? 'Actualizar aula'
-                              : 'Agregar aula'}
+                          {getSaveButtonText(saving, editingId)}
                         </button>
                       </div>
                     </div>
@@ -399,8 +405,9 @@ export default function RoomsPage() {
 
                 <div className="flex flex-col gap-2 sm:flex-row sm:items-center sm:gap-3">
                   <div className="flex items-center gap-2">
-                    <label className="text-xs font-semibold text-slate-600">Por página:</label>
+                    <label htmlFor="rooms-page-limit" className="text-xs font-semibold text-slate-600">Por página:</label>
                     <select
+                      id="rooms-page-limit"
                       value={limit}
                       onChange={(e) => {
                         setLimit(Number(e.target.value));
@@ -427,9 +434,9 @@ export default function RoomsPage() {
 
               {loading ? (
                 <div className="mt-6 grid gap-3">
-                  {Array.from({ length: 4 }).map((_, index) => (
+                  {loadingSkeletonKeys.map((skeletonKey) => (
                     <div
-                      key={index}
+                      key={skeletonKey}
                       className="h-28 animate-pulse rounded-3xl bg-slate-100"
                     />
                   ))}
@@ -566,7 +573,7 @@ export default function RoomsPage() {
   );
 }
 
-function SectionTitle({ children }: { children: ReactNode }) {
+function SectionTitle({ children }: Readonly<{ children: ReactNode }>) {
   return (
     <p className="mb-4 text-[11px] font-bold uppercase tracking-[0.22em] text-slate-500">
       {children}
@@ -574,17 +581,17 @@ function SectionTitle({ children }: { children: ReactNode }) {
   );
 }
 
-function Field({ children }: { children: ReactNode }) {
+function Field({ children }: Readonly<{ children: ReactNode }>) {
   return <div className="flex flex-col gap-2">{children}</div>;
 }
 
 function Label({
   children,
   htmlFor,
-}: {
+}: Readonly<{
   children: ReactNode;
   htmlFor: string;
-}) {
+}>) {
   return (
     <label
       htmlFor={htmlFor}
@@ -595,7 +602,7 @@ function Label({
   );
 }
 
-function Input(props: InputHTMLAttributes<HTMLInputElement>) {
+function Input(props: Readonly<InputHTMLAttributes<HTMLInputElement>>) {
   return (
     <input
       {...props}
@@ -604,7 +611,7 @@ function Input(props: InputHTMLAttributes<HTMLInputElement>) {
   );
 }
 
-function Select(props: SelectHTMLAttributes<HTMLSelectElement>) {
+function Select(props: Readonly<SelectHTMLAttributes<HTMLSelectElement>>) {
   return (
     <select
       {...props}
@@ -613,7 +620,7 @@ function Select(props: SelectHTMLAttributes<HTMLSelectElement>) {
   );
 }
 
-function Info({ label, value }: { label: string; value: string }) {
+function Info({ label, value }: Readonly<{ label: string; value: string }>) {
   return (
     <div className="rounded-2xl bg-white px-3 py-3 shadow-sm ring-1 ring-slate-200/80">
       <p className="text-[11px] font-bold uppercase tracking-[0.2em] text-slate-500">
@@ -624,7 +631,7 @@ function Info({ label, value }: { label: string; value: string }) {
   );
 }
 
-function StatCard({ label, value }: { label: string; value: string }) {
+function StatCard({ label, value }: Readonly<{ label: string; value: string }>) {
   return (
     <div className="rounded-2xl border border-slate-200 bg-slate-50/90 px-4 py-3">
       <p className="text-[11px] font-bold uppercase tracking-[0.2em] text-slate-500">

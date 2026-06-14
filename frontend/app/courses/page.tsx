@@ -23,6 +23,16 @@ const initialForm: CourseInput = {
   is_active: true,
 };
 
+const loadingSkeletonKeys = ['course-skeleton-1', 'course-skeleton-2', 'course-skeleton-3', 'course-skeleton-4'];
+
+function getSaveButtonText(saving: boolean, editingId: number | null) {
+  if (saving) {
+    return 'Guardando...';
+  }
+
+  return editingId ? 'Actualizar curso' : 'Crear curso';
+}
+
 export default function CoursesPage() {
   const [courses, setCourses] = useState<Course[]>([]);
   const [form, setForm] = useState<CourseInput>(initialForm);
@@ -122,7 +132,7 @@ export default function CoursesPage() {
   }
 
   async function handleDelete(course: Course) {
-    const confirmed = window.confirm(
+    const confirmed = globalThis.confirm(
       `Se eliminara el curso ${course.code} - ${course.name}. ¿Deseas continuar?`
     );
 
@@ -394,11 +404,7 @@ export default function CoursesPage() {
                         disabled={saving}
                         className="rounded-2xl bg-emerald-600 px-5 py-3 text-sm font-bold text-white transition hover:bg-emerald-700 disabled:cursor-not-allowed disabled:opacity-60 sm:min-w-44"
                       >
-                        {saving
-                          ? 'Guardando...'
-                          : editingId
-                            ? 'Actualizar curso'
-                            : 'Crear curso'}
+                        {getSaveButtonText(saving, editingId)}
                       </button>
                     </div>
                   </div>
@@ -419,8 +425,9 @@ export default function CoursesPage() {
 
                 <div className="flex flex-col gap-2 sm:flex-row sm:items-center sm:gap-3">
                   <div className="flex items-center gap-2">
-                    <label className="text-xs font-semibold text-slate-600">Por página:</label>
+                    <label htmlFor="courses-page-limit" className="text-xs font-semibold text-slate-600">Por página:</label>
                     <select
+                      id="courses-page-limit"
                       value={limit}
                       onChange={(e) => {
                         setLimit(Number(e.target.value));
@@ -447,9 +454,9 @@ export default function CoursesPage() {
 
               {loading ? (
                 <div className="mt-6 grid gap-3">
-                  {Array.from({ length: 4 }).map((_, index) => (
+                  {loadingSkeletonKeys.map((skeletonKey) => (
                     <div
-                      key={index}
+                      key={skeletonKey}
                       className="h-28 animate-pulse rounded-3xl bg-slate-100"
                     />
                   ))}
@@ -597,7 +604,7 @@ export default function CoursesPage() {
   );
 }
 
-function SectionTitle({ children }: { children: ReactNode }) {
+function SectionTitle({ children }: Readonly<{ children: ReactNode }>) {
   return (
     <p className="mb-4 text-[11px] font-bold uppercase tracking-[0.22em] text-slate-500">
       {children}
@@ -605,17 +612,17 @@ function SectionTitle({ children }: { children: ReactNode }) {
   );
 }
 
-function Field({ children }: { children: ReactNode }) {
+function Field({ children }: Readonly<{ children: ReactNode }>) {
   return <div className="flex flex-col gap-2">{children}</div>;
 }
 
 function Label({
   children,
   htmlFor,
-}: {
+}: Readonly<{
   children: ReactNode;
   htmlFor: string;
-}) {
+}>) {
   return (
     <label
       htmlFor={htmlFor}
@@ -626,7 +633,7 @@ function Label({
   );
 }
 
-function Input(props: InputHTMLAttributes<HTMLInputElement>) {
+function Input(props: Readonly<InputHTMLAttributes<HTMLInputElement>>) {
   return (
     <input
       {...props}
@@ -635,7 +642,7 @@ function Input(props: InputHTMLAttributes<HTMLInputElement>) {
   );
 }
 
-function Select(props: SelectHTMLAttributes<HTMLSelectElement>) {
+function Select(props: Readonly<SelectHTMLAttributes<HTMLSelectElement>>) {
   return (
     <select
       {...props}
@@ -644,7 +651,7 @@ function Select(props: SelectHTMLAttributes<HTMLSelectElement>) {
   );
 }
 
-function Info({ label, value }: { label: string; value: string }) {
+function Info({ label, value }: Readonly<{ label: string; value: string }>) {
   return (
     <div className="rounded-2xl bg-white px-3 py-3 shadow-sm ring-1 ring-slate-200/80">
       <p className="text-[11px] font-bold uppercase tracking-[0.2em] text-slate-500">
@@ -655,7 +662,7 @@ function Info({ label, value }: { label: string; value: string }) {
   );
 }
 
-function StatCard({ label, value }: { label: string; value: string }) {
+function StatCard({ label, value }: Readonly<{ label: string; value: string }>) {
   return (
     <div className="rounded-2xl border border-slate-200 bg-slate-50/90 px-4 py-3">
       <p className="text-[11px] font-bold uppercase tracking-[0.2em] text-slate-500">
