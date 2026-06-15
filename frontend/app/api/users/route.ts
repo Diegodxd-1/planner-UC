@@ -4,9 +4,11 @@ import {
   getAdminContext,
   getPagination,
   getPaginationPayload,
+  parseJsonObject,
 } from '../_shared/admin-mutations';
 
 const allowedRoles = ['profesor', 'alumno'] as const;
+const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
 function optionalString(value: unknown) {
   if (typeof value !== 'string') {
@@ -19,6 +21,15 @@ function optionalString(value: unknown) {
 
 function requiredString(value: unknown) {
   return typeof value === 'string' ? value.trim() : '';
+}
+
+function isStrongPassword(password: string) {
+  return (
+    password.length >= 10 &&
+    /[a-z]/.test(password) &&
+    /[A-Z]/.test(password) &&
+    /\d/.test(password)
+  );
 }
 
 function normalizeCreatePayload(payload: Record<string, unknown>) {
@@ -34,12 +45,14 @@ function normalizeCreatePayload(payload: Record<string, unknown>) {
     return { error: 'El nombre completo es obligatorio' };
   }
 
-  if (!email.includes('@')) {
+  if (!emailPattern.test(email)) {
     return { error: 'El correo electronico no es valido' };
   }
 
-  if (password.length < 8) {
-    return { error: 'La contraseña debe tener al menos 8 caracteres' };
+  if (!isStrongPassword(password)) {
+    return {
+      error: 'La contrasena debe tener al menos 10 caracteres, una mayuscula, una minuscula y un numero',
+    };
   }
 
   if (!allowedRoles.includes(role)) {
@@ -110,8 +123,12 @@ export async function POST(request: NextRequest) {
     return admin.error;
   }
 
-  const payload = await request.json();
-  const normalized = normalizeCreatePayload(payload);
+  const payload = await parseJsonObject(request);
+  if ('error' in payload) {
+    return errorResponse(payload.error, 400);
+  }
+
+  const normalized = normalizeCreatePayload(payload.data);
 
   if ('error' in normalized) {
     return errorResponse(normalized.error, 400);
@@ -138,7 +155,7 @@ export async function POST(request: NextRequest) {
 
   if (authError || !authData.user) {
     return errorResponse(
-      authError?.message ?? 'No se pudo crear el usuario en autenticacion',
+      'No se pudo crear el usuario en autenticacion',
       authError?.status ?? 500
     );
   }

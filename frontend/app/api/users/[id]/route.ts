@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { requireAdminAccess } from '@/lib/auth/server-auth';
 import { getAdminClient } from '@/utils/supabase/admin';
+import { parseJsonObject } from '../../_shared/admin-mutations';
 
 const allowedRoles = ['profesor', 'alumno'] as const;
 
@@ -15,6 +16,15 @@ function requiredString(value: unknown) {
 function isUuid(value: string) {
   return /^[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/i.test(
     value
+  );
+}
+
+function isStrongPassword(password: string) {
+  return (
+    password.length >= 10 &&
+    /[a-z]/.test(password) &&
+    /[A-Z]/.test(password) &&
+    /\d/.test(password)
   );
 }
 
@@ -34,8 +44,10 @@ function normalizeUpdatePayload(payload: Record<string, unknown>) {
     return { error: 'El rol seleccionado no es valido' };
   }
 
-  if (password && password.length < 8) {
-    return { error: 'La nueva contraseña debe tener al menos 8 caracteres' };
+  if (password && !isStrongPassword(password)) {
+    return {
+      error: 'La nueva contrasena debe tener al menos 10 caracteres, una mayuscula, una minuscula y un numero',
+    };
   }
 
   return {
@@ -65,8 +77,12 @@ export async function PUT(
     return NextResponse.json({ error: 'ID de usuario invalido' }, { status: 400 });
   }
 
-  const payload = await request.json();
-  const normalized = normalizeUpdatePayload(payload);
+  const payload = await parseJsonObject(request);
+  if ('error' in payload) {
+    return NextResponse.json({ error: payload.error }, { status: 400 });
+  }
+
+  const normalized = normalizeUpdatePayload(payload.data);
 
   if ('error' in normalized) {
     return NextResponse.json({ error: normalized.error }, { status: 400 });
@@ -97,7 +113,10 @@ export async function PUT(
 
   const { error: authError } = await adminClient.auth.admin.updateUserById(id, updateAuthPayload);
   if (authError) {
-    return NextResponse.json({ error: authError.message }, { status: 500 });
+    return NextResponse.json(
+      { error: 'No se pudo actualizar el usuario en autenticacion' },
+      { status: 500 }
+    );
   }
 
   const { data: updatedProfile, error: profileError } = await adminClient

@@ -24,6 +24,20 @@ export function errorResponse(message: string | undefined, status = 500) {
   return NextResponse.json({ error: message ?? 'Error inesperado' }, { status });
 }
 
+export async function parseJsonObject(request: NextRequest) {
+  try {
+    const payload = await request.json();
+
+    if (!payload || typeof payload !== 'object' || Array.isArray(payload)) {
+      return { error: 'El cuerpo de la solicitud debe ser un objeto JSON' };
+    }
+
+    return { data: payload as Record<string, unknown> };
+  } catch {
+    return { error: 'JSON invalido en el cuerpo de la solicitud' };
+  }
+}
+
 export function getPaginationPayload(page: number, limit: number, total: number) {
   const totalPages = Math.ceil(total / limit);
 

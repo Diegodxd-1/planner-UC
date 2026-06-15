@@ -16,6 +16,13 @@ export function normalizeRoomPayload(payload: Partial<RoomInput>) {
     return { error: 'El aforo debe ser un entero entre 1 y 1000' };
   }
 
+  if (
+    authorized_capacity !== null &&
+    (!Number.isInteger(authorized_capacity) || authorized_capacity <= 0 || authorized_capacity > capacity)
+  ) {
+    return { error: 'El aforo autorizado debe ser un entero positivo menor o igual al aforo total' };
+  }
+
   return {
     data: {
       name,

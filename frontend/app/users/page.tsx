@@ -275,13 +275,13 @@ export default function UsersPage() {
               </div>
 
               {error ? (
-                <div className="mt-5 rounded-2xl border border-rose-200 bg-rose-50 px-4 py-3 text-sm font-medium text-rose-800">
+                <div role="alert" className="mt-5 rounded-2xl border border-rose-200 bg-rose-50 px-4 py-3 text-sm font-medium text-rose-800">
                   {error}
                 </div>
               ) : null}
 
               {success ? (
-                <div className="mt-5 rounded-2xl border border-emerald-200 bg-emerald-50 px-4 py-3 text-sm font-medium text-emerald-800">
+                <div role="status" aria-live="polite" className="mt-5 rounded-2xl border border-emerald-200 bg-emerald-50 px-4 py-3 text-sm font-medium text-emerald-800">
                   {success}
                 </div>
               ) : null}
@@ -341,10 +341,15 @@ export default function UsersPage() {
                         placeholder={
                           editingUserId
                             ? 'Dejar vacio para no cambiarla'
-                            : 'Minimo 8 caracteres'
+                            : 'Ejemplo: Planner2026'
                         }
+                        aria-describedby="password-help"
                         required={!editingUserId}
                       />
+                      <p id="password-help" className="text-xs leading-5 text-slate-600">
+                        Usa al menos 10 caracteres con mayuscula, minuscula y numero.
+                        {editingUserId ? ' Dejalo vacio si no deseas cambiarla.' : ''}
+                      </p>
                     </Field>
                   </div>
                 </section>

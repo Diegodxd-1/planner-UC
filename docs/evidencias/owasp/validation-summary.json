@@ -1,0 +1,18 @@
+{
+    "productionVulnerabilities":  {
+                                      "info":  0,
+                                      "low":  0,
+                                      "moderate":  0,
+                                      "high":  0,
+                                      "critical":  0,
+                                      "total":  0
+                                  },
+    "nextVersion":  "^16.2.9",
+    "wsOverride":  "8.21.0",
+    "validations":  [
+                        "npm run lint",
+                        "npm test -- --runInBand",
+                        "npm run build",
+                        "uv run pytest"
+                    ]
+}

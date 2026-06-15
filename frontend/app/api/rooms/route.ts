@@ -5,6 +5,7 @@ import {
   getMutationStatus,
   getPagination,
   getPaginationPayload,
+  parseJsonObject,
 } from '../_shared/admin-mutations';
 import { normalizeRoomPayload } from './room-payload';
 
@@ -37,8 +38,12 @@ export async function POST(request: NextRequest) {
     return admin.error;
   }
 
-  const payload = await request.json();
-  const normalized = normalizeRoomPayload(payload);
+  const payload = await parseJsonObject(request);
+  if ('error' in payload) {
+    return errorResponse(payload.error, 400);
+  }
+
+  const normalized = normalizeRoomPayload(payload.data);
 
   if ('error' in normalized) {
     return errorResponse(normalized.error, 400);

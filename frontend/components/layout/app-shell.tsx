@@ -34,7 +34,7 @@ const navigationItems: NavigationItem[] = [
   },
   {
     href: '/schedule-generator',
-    label: 'Schedule Generator',
+    label: 'Generador de horarios',
     description: 'Horario y bloques',
   },
   {

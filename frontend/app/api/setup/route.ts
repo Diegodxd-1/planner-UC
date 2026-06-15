@@ -1,8 +1,27 @@
 import { getAdminClient } from '@/utils/supabase/admin';
-import { NextResponse } from 'next/server';
+import { NextRequest, NextResponse } from 'next/server';
 
 const setupEmail = process.env.INITIAL_ADMIN_EMAIL ?? 'admin@example.com';
 const setupPassword = process.env.INITIAL_ADMIN_PASSWORD;
+const setupToken = process.env.INITIAL_ADMIN_SETUP_TOKEN;
+
+function validateSetupToken(request: NextRequest) {
+  if (!setupToken) {
+    return NextResponse.json(
+      { error: 'INITIAL_ADMIN_SETUP_TOKEN no esta configurado', created: false },
+      { status: 503 }
+    );
+  }
+
+  if (request.headers.get('x-setup-token') !== setupToken) {
+    return NextResponse.json(
+      { error: 'Token de configuracion invalido', created: false },
+      { status: 403 }
+    );
+  }
+
+  return null;
+}
 
 export async function GET() {
   try {
@@ -19,18 +38,27 @@ export async function GET() {
       return NextResponse.json({ exists: true, message: 'Admin user already exists' });
     }
 
-    return NextResponse.json({ exists: false, message: 'Ready to create admin user' });
+    return NextResponse.json({
+      exists: false,
+      setupTokenRequired: true,
+      message: 'Ready to create admin user',
+    });
   } catch (error) {
     console.error('Setup check error:', error);
     return NextResponse.json(
-      { error: error instanceof Error ? error.message : 'Check failed' },
+      { error: 'No se pudo verificar el estado de configuracion' },
       { status: 500 }
     );
   }
 }
 
-export async function POST() {
+export async function POST(request: NextRequest) {
   try {
+    const tokenError = validateSetupToken(request);
+    if (tokenError) {
+      return tokenError;
+    }
+
     if (!setupPassword) {
       return NextResponse.json(
         { error: 'INITIAL_ADMIN_PASSWORD no esta configurada', created: false },
@@ -99,7 +127,7 @@ export async function POST() {
   } catch (error) {
     console.error('Setup error:', error);
     return NextResponse.json(
-      { error: error instanceof Error ? error.message : 'Setup failed', created: false },
+      { error: 'No se pudo completar la configuracion inicial', created: false },
       { status: 500 }
     );
   }
