@@ -377,11 +377,9 @@ function ScheduleGeneratorContent() {
                 </div>
               </div>
 
-              <div
-                tabIndex={0}
-                role="region"
+              <section
                 aria-label="Grilla semanal desplazable"
-                className="overflow-x-auto focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-sky-700"
+                className="overflow-x-auto"
               >
                 <div className="min-w-[980px]">
                   <div
@@ -414,7 +412,7 @@ function ScheduleGeneratorContent() {
                     ))}
                   </div>
                 </div>
-              </div>
+              </section>
             </section>
 
             <section className="grid gap-6 xl:grid-cols-[1.3fr_0.7fr]">
@@ -469,11 +467,9 @@ function ScheduleGeneratorContent() {
                   </p>
                 </div>
 
-                <div
-                  tabIndex={0}
-                  role="region"
+                <section
                   aria-label="Lista de secciones activas desplazable"
-                  className="flex max-h-[720px] flex-col gap-3 overflow-y-auto pr-1 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-sky-700"
+                  className="flex max-h-[720px] flex-col gap-3 overflow-y-auto pr-1"
                 >
                   {data.sections.map((section) => {
                     const colors = slotColor(section.label);
@@ -516,7 +512,7 @@ function ScheduleGeneratorContent() {
                       </article>
                     );
                   })}
-                </div>
+                </section>
               </div>
             </section>
           </>

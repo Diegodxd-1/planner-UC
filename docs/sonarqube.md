@@ -62,7 +62,7 @@ coverage.
 
 Se ejecuto un analisis completo del codigo fuente del frontend y backend. El
 analisis actual registrado localmente en SonarQube corresponde al
-`2026-06-14 20:11:45 -0500`.
+`2026-06-15 18:34:14 -0500`.
 
 | Metrica requerida | Resultado actual | Interpretacion |
 | --- | ---: | --- |
@@ -74,60 +74,63 @@ analisis actual registrado localmente en SonarQube corresponde al
 | Reliability Rating | `A` | La ausencia de bugs mantiene la confiabilidad en nivel alto. |
 | Security Rating | `A` | La seguridad mejora tras eliminar la vulnerabilidad inicial. |
 | Technical Debt | `0 min` | SonarQube no reporta deuda tecnica abierta. |
-| Cobertura de pruebas | `69.5%` | La cobertura ya se importa correctamente; queda como mejora subirla a 80% global. |
+| Cobertura de pruebas | `80.1%` | La cobertura supera el umbral tecnico de 80% global. |
 
 Metricas complementarias del analisis actual:
 
 | Indicador | Resultado |
 | --- | ---: |
 | Quality Gate | `Passed` |
-| Lineas de codigo | `5.6k` |
-| Lineas a cubrir | `1.1k` |
+| Lineas de codigo | `6.5k` |
+| Lineas a cubrir | `1.2k` |
 | Lineas duplicadas | `0` |
 | Bloques duplicados | `0` |
-| Security Hotspots | `0` |
+| Security Hotspots | `1` |
 | Accepted Issues | `0` |
 
 Componentes criticos actuales:
 
 | Componente | Motivo tecnico | Coverage |
 | --- | --- | ---: |
-| `frontend/lib/auth/server-auth.ts` | Logica de autenticacion server-side sin pruebas directas. | `0.0%` |
-| `frontend/utils/supabase/middleware.ts` | Helper de sesiones Supabase sin pruebas unitarias. | `0.0%` |
-| `frontend/utils/supabase/client.ts` | Cliente browser Supabase sin prueba aislada. | `0.0%` |
-| `frontend/utils/supabase/server.ts` | Cliente server Supabase sin prueba aislada. | `0.0%` |
-| `frontend/lib/auth/auth-context.tsx` | Contexto de autenticacion con flujos aun no cubiertos. | `50.4%` |
-| `frontend/app/rooms/page.tsx` | Pantalla CRUD administrativa con ramas de UI pendientes. | `53.7%` |
-| `frontend/app/courses/page.tsx` | Pantalla CRUD administrativa con ramas de UI pendientes. | `61.6%` |
-| `frontend/app/users/page.tsx` | Pantalla CRUD administrativa con ramas de UI pendientes. | `63.6%` |
+| `frontend/app/rooms/page.tsx` | Pantalla CRUD administrativa con ramas de UI residuales. | `78.6%` |
+| `frontend/app/courses/page.tsx` | Pantalla CRUD administrativa con ramas de UI residuales. | `81.7%` |
+| `frontend/app/users/page.tsx` | Pantalla CRUD administrativa con ramas de UI residuales. | `83.6%` |
+| `frontend/lib/auth/auth-context.tsx` | Contexto de autenticacion con flujos E2E pendientes de ampliar. | `50.4%` |
+| `frontend/lib/auth/auth.ts` | Servicio de autenticacion con ramas de error pendientes. | `56.4%` |
+| `frontend/utils/supabase/*` | Helpers Supabase cubiertos con pruebas unitarias aisladas. | `95.4%` |
+| `frontend/proxy.ts` | Middleware de entrada cubierto por prueba unitaria. | `100.0%` |
+| `Backend/app/scheduling_demo.py` | Solver con cobertura automatizada de reglas y casos borde. | `82.1%` |
 
 Estos componentes ya no son criticos por bugs, vulnerabilidades, code smells o
-duplicacion; el riesgo pendiente se concentra en cobertura de pruebas.
+duplicacion. El riesgo pendiente se concentra en ampliar ramas de error,
+autenticacion E2E y revision manual del hotspot de seguridad registrado.
 
 ### c. Interpretacion Tecnica
 
 La linea base del analisis mostraba problemas relevantes de seguridad,
-mantenibilidad, duplicacion y trazabilidad de pruebas. El estado inicial
-documentado fue:
+confiabilidad, mantenibilidad, duplicacion y trazabilidad de pruebas. El estado
+inicial documentado corresponde a la captura
+`docs/evidencias/sonarqube/baseline-overall-before.jpeg`:
 
 | Metrica | Antes de correcciones |
 | --- | ---: |
-| Bugs | `0` |
-| Vulnerabilities | `1` |
-| Code Smells | `110` |
+| Security open issues | `1` |
+| Reliability open issues | `12` |
+| Maintainability open issues | `107` |
 | Duplicacion de codigo | `6.1%` |
 | Maintainability Rating | `A` |
-| Reliability Rating | `A` |
+| Reliability Rating | `C` |
 | Security Rating | `C` |
 | Technical Debt | `434 min` |
 | Cobertura de pruebas en SonarQube | `0.0%` |
 
 Los problemas detectados se justifican tecnicamente de la siguiente forma:
 
-1. La vulnerabilidad provenia de una credencial inicial hardcodeada en codigo
-   fuente. Este patron expone secretos y afecta directamente el `Security
-   Rating`.
-2. Los code smells se concentraban en complejidad, condicionales anidados,
+1. El issue de seguridad provenia de una credencial inicial hardcodeada en
+   codigo fuente. Este patron expone secretos y afecta directamente el
+   `Security Rating`.
+2. Los issues de confiabilidad y mantenibilidad se concentraban en complejidad,
+   condicionales anidados,
    convenciones TypeScript/React y duplicacion entre pantallas CRUD.
 3. La duplicacion se originaba principalmente en rutas API administrativas y
    pantallas `users`, `courses` y `rooms`, que repetian estructura de
@@ -141,16 +144,16 @@ Correcciones implementadas:
 | --- | --- | --- |
 | Seguridad | Se elimino la credencial hardcodeada y se movio la configuracion inicial a variables de entorno. | `frontend/app/api/setup/route.ts`, `frontend/README.md` |
 | Mantenibilidad backend | Se redujo complejidad en helpers y flujo del solver sin cambiar el contrato del endpoint. | `Backend/app/scheduling_demo.py`, `Backend/app/scheduling_demo_data.py` |
-| Mantenibilidad frontend | Se corrigieron patrones TypeScript/React reportados por SonarQube. | `frontend/app/**`, `frontend/lib/auth/**`, `frontend/components/**` |
+| Confiabilidad y mantenibilidad frontend | Se corrigieron patrones TypeScript/React reportados por SonarQube. | `frontend/app/**`, `frontend/lib/auth/**`, `frontend/components/**` |
 | Duplicacion API | Se extrajeron helpers comunes para admin, paginacion, errores y codigos de mutacion. | `frontend/app/api/_shared/admin-mutations.ts` |
 | Duplicacion CRUD | Se extrajeron componentes y estado reutilizable para pantallas administrativas. | `frontend/components/admin/crud-ui.tsx` |
 | Validacion de payloads | Se separo normalizacion de cursos y aulas en modulos especificos. | `frontend/app/api/courses/course-payload.ts`, `frontend/app/api/rooms/room-payload.ts` |
-| Coverage | Se agrego importacion de `lcov.info` y `coverage.xml` al scanner y generacion previa en CI. | `sonar-project.properties`, `.github/workflows/build.yml` |
+| Coverage | Se agrego importacion de `lcov.info` y `coverage.xml`, pruebas de helpers Supabase, `proxy.ts`, autenticacion server-side y flujos CRUD. | `sonar-project.properties`, `frontend/jest.config.ts`, `frontend/**/__tests__/**`, `Backend/tests/**` |
 
 La mejora mas importante es que el analisis actual queda sin issues abiertos y
-sin duplicacion. El coverage ya no es `0.0%`; ahora se reporta `69.5%` con
-datos reales. Aun asi, la cobertura global queda por debajo de un objetivo
-tecnico recomendable de `80%`, por lo que se propone ampliar pruebas en:
+sin duplicacion. El coverage ya no es `0.0%`; ahora se reporta `80.1%` con
+datos reales importados desde Jest y pytest-cov. Para sostener este nivel se
+agregaron pruebas unitarias y de UI sobre:
 
 1. helpers Supabase (`client`, `server`, `middleware`, `admin`),
 2. `server-auth.ts`,
@@ -166,11 +169,14 @@ almacenan en `docs/evidencias/sonarqube/`.
 
 | Evidencia | Archivo |
 | --- | --- |
+| Baseline Overall Code antes de correcciones | `docs/evidencias/sonarqube/baseline-overall-before.jpeg` |
 | Dashboard principal | `docs/evidencias/sonarqube/dashboard.png` |
 | Quality Gate y Overall Code | `docs/evidencias/sonarqube/quality-gate-overall.png` |
 | Medidas de coverage | `docs/evidencias/sonarqube/coverage-measures.png` |
 | Medidas de duplicacion | `docs/evidencias/sonarqube/duplication-measures.png` |
 | Issues abiertos | `docs/evidencias/sonarqube/issues-open.png` |
+
+![Baseline Overall antes de correcciones](evidencias/sonarqube/baseline-overall-before.jpeg)
 
 ![Quality Gate Overall](evidencias/sonarqube/quality-gate-overall.png)
 
@@ -184,41 +190,50 @@ almacenan en `docs/evidencias/sonarqube/`.
 
 | Metrica | Antes | Despues | Resultado |
 | --- | ---: | ---: | --- |
-| Bugs | `0` | `0` | Se mantiene sin bugs abiertos. |
-| Vulnerabilities | `1` | `0` | Vulnerabilidad eliminada. |
-| Code Smells | `110` | `0` | Observaciones de mantenibilidad corregidas. |
+| Security open issues | `1` | `0` | Issue de seguridad eliminado. |
+| Reliability open issues | `12` | `0` | Issues de confiabilidad corregidos. |
+| Maintainability open issues | `107` | `0` | Observaciones de mantenibilidad corregidas. |
 | Duplicacion de codigo | `6.1%` | `0.0%` | Duplicacion eliminada. |
 | Maintainability Rating | `A` | `A` | Se mantiene en nivel alto. |
-| Reliability Rating | `A` | `A` | Se mantiene en nivel alto. |
+| Reliability Rating | `C` | `A` | Mejora por eliminacion de issues de confiabilidad. |
 | Security Rating | `C` | `A` | Mejora por eliminacion de vulnerabilidad. |
 | Technical Debt | `434 min` | `0 min` | Deuda tecnica abierta reducida. |
-| Cobertura de pruebas | `0.0%` | `69.5%` | Coverage importado correctamente en SonarQube. |
+| Cobertura de pruebas | `0.0%` | `80.1%` | Coverage importado correctamente y reforzado con pruebas CRUD y helpers. |
+
+#### 2.1. Evidencia de pruebas nuevas como despues
+
+| Validacion posterior | Resultado |
+| --- | --- |
+| `npm run lint` | Correcto |
+| `npm run test:coverage -- --runInBand` | 25 suites, 66 tests passed; coverage frontend 82.09% lineas |
+| `uv run pytest --cov=app --cov-report=xml:coverage.xml` | 39 tests passed; XML generado para SonarQube |
+| SonarScanner local | Quality Gate OK; coverage 80.1%; bugs 0; code smells 0; duplicacion 0.0% |
 
 #### 3. Reporte tecnico de analisis
 
 El analisis SonarQube confirma que `Planner-UC` cumple actualmente el Quality
-Gate configurado. La aplicacion no presenta bugs, vulnerabilidades, code smells,
-security hotspots ni duplicacion de codigo abierta. Las correcciones realizadas
+Gate configurado. La aplicacion no presenta bugs, vulnerabilidades, code smells
+ni duplicacion de codigo abierta. Las correcciones realizadas
 mantienen la arquitectura definida del proyecto: frontend para autenticacion y
 gestion administrativa con Supabase, backend para resolucion de horarios con
 FastAPI y OR-Tools.
 
-La principal mejora pendiente es ampliar cobertura automatizada. Aunque el
-problema de `0.0%` fue corregido mediante configuracion del scanner y generacion
-de reportes, el valor global de `69.5%` indica que existen modulos relevantes
-sin pruebas directas, especialmente autenticacion server-side, helpers Supabase
-y ramas de UI administrativa.
+La principal mejora conseguida en esta iteracion es que la cobertura global
+subio por encima del umbral de `80%`. El hotspot de seguridad restante debe
+revisarse manualmente desde SonarQube para marcarlo como seguro o abrir una
+mitigacion especifica si aplica.
 
 #### 4. Evidencia de reduccion de deuda tecnica
 
 | Indicador | Antes | Despues | Evidencia |
 | --- | ---: | ---: | --- |
-| Issues abiertos | `111` | `0` | Vista `issues-open.png` sin issues. |
-| Vulnerabilidades | `1` | `0` | `Security Rating` mejora de `C` a `A`. |
-| Code Smells | `110` | `0` | `Maintainability Rating` queda en `A`. |
+| Issues abiertos | `120` | `0` | Baseline `baseline-overall-before.jpeg` y vista `issues-open.png` sin issues. |
+| Security open issues | `1` | `0` | `Security Rating` mejora de `C` a `A`. |
+| Reliability open issues | `12` | `0` | `Reliability Rating` mejora de `C` a `A`. |
+| Maintainability open issues | `107` | `0` | `Maintainability Rating` queda en `A`. |
 | Deuda tecnica | `434 min` | `0 min` | SonarQube no reporta deuda abierta. |
 | Duplicacion | `6.1%` | `0.0%` | Vista `duplication-measures.png` sin resultados duplicados. |
-| Coverage reportado | `0.0%` | `69.5%` | Vista `coverage-measures.png` con reportes importados. |
+| Coverage reportado | `0.0%` | `80.1%` | Vista `coverage-measures.png` con reportes importados. |
 
 ## Pendiente
 

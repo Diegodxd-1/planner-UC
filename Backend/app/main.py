@@ -48,7 +48,7 @@ def read_root():
 def get_scheduling_demo():
     try:
         return solve_student_timetable_demo_data()
-    except Exception as exc:
+    except Exception:
         logger.exception("Unexpected scheduling demo failure")
         return JSONResponse(
             status_code=500,

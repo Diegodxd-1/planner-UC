@@ -25,19 +25,19 @@
 
 | Tipo de evidencia | Ubicacion | Estado |
 | --- | --- | --- |
-| Capturas de dashboards SonarQube | `docs/evidencias/sonarqube/*.png` | Cumple |
+| Capturas de dashboards SonarQube | `docs/evidencias/sonarqube/*.png`, `docs/evidencias/sonarqube/baseline-overall-before.jpeg` | Cumple |
 | Reportes automaticos WCAG | `docs/evidencias/wcag/baseline/*.json`, `docs/evidencias/wcag/final/*.json` | Cumple |
 | Capturas WCAG | `docs/evidencias/wcag/baseline/*.png`, `docs/evidencias/wcag/final/*.png` | Cumple |
 | Evidencias de mitigacion OWASP | `docs/evidencias/owasp/` | Cumple |
 | Resultados SUS | `docs/evidencias/sus/sus-resultados.csv`, `docs/evidencias/sus/sus-calculo.csv` | Cumple |
 | Pruebas automatizadas | Frontend Jest, backend pytest, GitHub Actions | Cumple |
-| Cobertura | SonarQube, coverage frontend/backend en workflows | Cumple |
+| Cobertura | SonarQube 80.1%, coverage frontend/backend y pruebas nuevas de helpers/CRUD | Cumple |
 
 ## 4. Cambios funcionales implementados para sustentar hallazgos
 
 | Area | Mitigacion o mejora | Archivos principales |
 | --- | --- | --- |
-| SonarQube | Reduccion de duplicacion, correcciones de maintainability/reliability y coverage en CI. | Frontend/backend tests y workflows. |
+| SonarQube | Reduccion de duplicacion, correcciones de maintainability/reliability y coverage global superior a 80%. | Frontend/backend tests, `sonar-project.properties` y workflows. |
 | OWASP | Setup protegido por token, CORS restringido, errores backend genericos, headers defensivos, validaciones JSON y dependencias productivas sin vulnerabilidades. | `backend/app/main.py`, `frontend/app/api/**`, `frontend/next.config.ts`, `frontend/package.json`. |
 | WCAG | Contraste, semantica, navegacion por teclado, regiones scrollables y estados accesibles. | `frontend/components/layout/app-shell.tsx`, pantallas principales. |
 | SUS | Mejoras de nomenclatura, carga informativa y ayuda contextual para contrasenas. | `frontend/components/layout/app-shell.tsx`, `frontend/components/auth/protected-route.tsx`, `frontend/app/users/page.tsx`. |
@@ -47,10 +47,12 @@
 | Comando | Resultado |
 | --- | --- |
 | `npm run lint` | Correcto |
-| `npm test -- --runInBand` | 19 suites, 51 tests passed |
+| `npm test -- --runInBand` | 25 suites, 66 tests passed |
+| `npm run test:coverage -- --runInBand` | 25 suites, 66 tests passed; coverage frontend 82.09% lineas |
 | `npm run build` | Correcto |
 | `uv run pytest` | 39 tests passed |
-| `uv run pytest --cov=app --cov-report=xml:coverage.xml` | Correcto en validacion OWASP previa |
+| `uv run pytest --cov=app --cov-report=xml:coverage.xml` | 39 tests passed; XML generado para SonarQube |
+| SonarScanner local | Quality Gate OK; coverage 80.1%; bugs 0; code smells 0; duplicacion 0.0% |
 | `npm audit --omit=dev` | 0 vulnerabilidades productivas despues de mitigacion OWASP |
 
 ## 6. Evaluacion frente a nivel sobresaliente

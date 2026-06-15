@@ -163,11 +163,9 @@ export default function AdvancedGreenDashboard() {
                       📄 Registro de Peticiones - 153 entradas
                     </h3>
                   </div>
-                  <div
-                    tabIndex={0}
-                    role="region"
+                  <section
                     aria-label="Tabla desplazable de peticiones y emisiones"
-                    className="overflow-x-auto focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white"
+                    className="overflow-x-auto"
                   >
                     <table className="w-full text-left text-sm text-slate-800">
                       <caption className="sr-only">
@@ -204,7 +202,7 @@ export default function AdvancedGreenDashboard() {
                         ))}
                       </tbody>
                     </table>
-                  </div>
+                  </section>
                   <div className="bg-slate-100 px-5 py-2 text-right">
                     <button type="button" className="bg-sky-700 hover:bg-sky-800 text-white text-xs font-bold py-1 px-4 rounded transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-sky-700">
                       Dejar de compartir

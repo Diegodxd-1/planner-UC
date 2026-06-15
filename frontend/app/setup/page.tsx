@@ -70,9 +70,9 @@ export default function SetupPage() {
         <h1 className="mb-6 text-2xl font-bold text-slate-900">Configuración Inicial</h1>
         
         {message && (
-          <div role="status" className="mb-4 rounded-lg bg-green-50 p-4 text-green-800">
+          <output className="mb-4 block rounded-lg bg-green-50 p-4 text-green-800">
             {message}
-          </div>
+          </output>
         )}
         
         {error && (

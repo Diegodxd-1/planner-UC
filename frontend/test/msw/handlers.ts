@@ -162,6 +162,43 @@ export const handlers = [
     )
   }),
 
+  rest.put('*/api/courses/:id', async (req, res, ctx) => {
+    const courseId = Number(req.params.id)
+    const payload = await readJsonPayload<{
+      code: string
+      name: string
+      cycle: number
+      blocks_per_week: number
+      max_sections: number
+      kind: 'general' | 'carrera'
+      description?: string
+      is_active: boolean
+    }>(req)
+
+    const currentCourse = courses.find((course) => course.id === courseId)
+    if (!currentCourse) {
+      return res(ctx.status(404), ctx.json({ error: 'Curso no encontrado' }))
+    }
+
+    const updatedCourse: Course = {
+      ...currentCourse,
+      ...payload,
+      description: payload.description?.trim() ? payload.description : null,
+      updated_at: '2026-06-08T13:00:00.000Z',
+    }
+
+    courses = courses.map((course) => (course.id === courseId ? updatedCourse : course))
+
+    return res(ctx.json({ course: updatedCourse }))
+  }),
+
+  rest.delete('*/api/courses/:id', (req, res, ctx) => {
+    const courseId = Number(req.params.id)
+    courses = courses.filter((course) => course.id !== courseId)
+
+    return res(ctx.json({ success: true }))
+  }),
+
   rest.get('*/api/rooms', async (req, res, ctx) => {
     const url = new URL(req.url.toString())
     const page = Math.max(1, Number(url.searchParams.get('page') ?? '1'))
@@ -208,6 +245,43 @@ export const handlers = [
     rooms = [newRoom, ...rooms]
 
     return res(ctx.status(201), ctx.json({ room: newRoom }))
+  }),
+
+  rest.put('*/api/rooms/:id', async (req, res, ctx) => {
+    const roomId = Number(req.params.id)
+    const payload = await readJsonPayload<{
+      name: string
+      location: string
+      capacity: number
+      authorized_capacity: number
+      room_type: Room['room_type']
+      description?: string
+      is_active: boolean
+    }>(req)
+
+    const currentRoom = rooms.find((room) => room.id === roomId)
+    if (!currentRoom) {
+      return res(ctx.status(404), ctx.json({ error: 'Aula no encontrada' }))
+    }
+
+    const updatedRoom: Room = {
+      ...currentRoom,
+      ...payload,
+      location: payload.location || null,
+      description: payload.description?.trim() ? payload.description : null,
+      updated_at: '2026-06-08T13:00:00.000Z',
+    }
+
+    rooms = rooms.map((room) => (room.id === roomId ? updatedRoom : room))
+
+    return res(ctx.json({ room: updatedRoom }))
+  }),
+
+  rest.delete('*/api/rooms/:id', (req, res, ctx) => {
+    const roomId = Number(req.params.id)
+    rooms = rooms.filter((room) => room.id !== roomId)
+
+    return res(ctx.json({ success: true }))
   }),
 
   rest.get('*/api/users', async (req, res, ctx) => {
@@ -261,5 +335,50 @@ export const handlers = [
     users = [newUser, ...users]
 
     return res(ctx.status(201), ctx.json({ user: newUser }))
+  }),
+
+  rest.put('*/api/users/:id', async (req, res, ctx) => {
+    const userId = String(req.params.id)
+    const payload = await readJsonPayload<{
+      full_name: string
+      email: string
+      role: 'profesor' | 'alumno'
+      is_active: boolean
+      contract_type?: ManagedUser['contract_type']
+      category?: ManagedUser['category']
+    }>(req)
+
+    const currentUser = users.find((user) => user.id === userId)
+    if (!currentUser) {
+      return res(ctx.status(404), ctx.json({ error: 'Usuario no encontrado' }))
+    }
+
+    const roleId = payload.role === 'profesor' ? 2 : 3
+    const updatedUser: ManagedUser = {
+      ...currentUser,
+      email: payload.email,
+      full_name: payload.full_name,
+      role_id: roleId,
+      is_active: payload.is_active,
+      contract_type: payload.role === 'profesor' ? payload.contract_type ?? 'TC' : null,
+      category: payload.role === 'profesor' ? payload.category ?? 'Auxiliar' : null,
+      updated_at: '2026-06-08T13:00:00.000Z',
+      role: {
+        id: roleId,
+        name: payload.role,
+        description: payload.role === 'profesor' ? 'Profesor' : 'Alumno',
+      },
+    }
+
+    users = users.map((user) => (user.id === userId ? updatedUser : user))
+
+    return res(ctx.json({ user: updatedUser }))
+  }),
+
+  rest.delete('*/api/users/:id', (req, res, ctx) => {
+    const userId = String(req.params.id)
+    users = users.filter((user) => user.id !== userId)
+
+    return res(ctx.json({ success: true }))
   }),
 ]
