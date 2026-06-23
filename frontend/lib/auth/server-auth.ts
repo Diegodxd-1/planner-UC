@@ -21,7 +21,7 @@ export async function requireAdminAccess() {
 
   const { data: profile, error: profileError } = await adminClient
     .from('user_profiles')
-    .select('role:roles(name)')
+    .select('is_active, role:roles(name)')
     .eq('id', user.id)
     .single();
 
@@ -35,7 +35,7 @@ export async function requireAdminAccess() {
   }
 
   const role = Array.isArray(profile?.role) ? profile.role[0] : profile?.role;
-  if (role?.name !== 'administrador') {
+  if (!profile?.is_active || role?.name !== 'administrador') {
     return {
       error: NextResponse.json({ error: 'Acceso denegado' }, { status: 403 }),
     };

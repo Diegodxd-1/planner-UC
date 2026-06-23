@@ -66,4 +66,29 @@ def test_scheduling_demo_handles_internal_exception(monkeypatch):
     assert response.status_code == 500
     data = response.json()
     assert data["success"] is False
-    assert "solver roto" in data["message"]
+    assert data["message"] == "Error interno al generar el horario"
+    assert "solver roto" not in data["message"]
+
+
+def test_cors_preflight_rejects_unauthorized_origin():
+    response = client.options(
+        "/api/scheduling-demo",
+        headers={
+            "Origin": "https://evil.example",
+            "Access-Control-Request-Method": "GET",
+        },
+    )
+
+    assert "access-control-allow-origin" not in response.headers
+
+
+def test_cors_preflight_allows_expected_origin():
+    response = client.options(
+        "/api/scheduling-demo",
+        headers={
+            "Origin": "http://localhost:3000",
+            "Access-Control-Request-Method": "GET",
+        },
+    )
+
+    assert response.headers["access-control-allow-origin"] == "http://localhost:3000"

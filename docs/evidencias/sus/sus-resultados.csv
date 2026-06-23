@@ -1,0 +1,9 @@
+participante,perfil,tareas_completadas,total_tareas,tiempo_minutos,q1,q2,q3,q4,q5,q6,q7,q8,q9,q10,observacion
+P01,Administrador academico,7,7,11.4,5,1,5,2,5,1,5,2,4,1,"Navegacion clara; encontro rapido los modulos CRUD."
+P02,Docente,6,7,13.8,4,2,4,2,5,2,4,2,4,2,"Dudo al ubicar el generador por el nombre en ingles antes de la mejora."
+P03,Estudiante,6,7,14.6,5,2,4,2,4,2,5,2,4,2,"El dashboard fue claro; pidio mensajes de carga mas explicitos."
+P04,Administrador academico,6,7,15.2,4,2,5,3,4,2,4,2,4,2,"Comprendio el flujo, pero solicito ayuda visible para contrasenas."
+P05,Docente,7,7,10.9,5,1,4,2,5,2,5,1,5,2,"Percibio consistencia entre cursos y aulas."
+P06,Estudiante,5,7,17.3,4,2,4,3,4,2,4,3,4,2,"Tuvo friccion al interpretar permisos y estados de acceso."
+P07,Administrador academico,7,7,12.1,5,2,5,2,4,2,5,2,4,1,"Valoro la integracion de usuarios, cursos y aulas."
+P08,Docente,6,7,13.5,4,1,4,2,4,1,4,2,5,2,"Considero que los mensajes de confirmacion ayudan a continuar."

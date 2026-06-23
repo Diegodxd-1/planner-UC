@@ -1,6 +1,6 @@
 'use client';
 
-import React, { createContext, useEffect, useState } from 'react';
+import React, { createContext, ReactNode, useCallback, useEffect, useMemo, useState } from 'react';
 import { AuthContextType, UserWithRole } from '@/types/auth';
 import {
   loginWithEmail,
@@ -20,11 +20,11 @@ function isE2EBypassEnabled() {
 }
 
 function loadE2EUser(): UserWithRole | null {
-  if (typeof window === 'undefined') {
+  if (globalThis.window === undefined) {
     return null;
   }
 
-  const rawValue = window.localStorage.getItem(E2E_STORAGE_KEY);
+  const rawValue = globalThis.localStorage.getItem(E2E_STORAGE_KEY);
   if (!rawValue) {
     return null;
   }
@@ -37,27 +37,37 @@ function loadE2EUser(): UserWithRole | null {
 }
 
 function persistE2EUser(user: UserWithRole | null) {
-  if (typeof window === 'undefined') {
+  if (globalThis.window === undefined) {
     return;
   }
 
   if (!user) {
-    window.localStorage.removeItem(E2E_STORAGE_KEY);
+    globalThis.localStorage.removeItem(E2E_STORAGE_KEY);
     return;
   }
 
-  window.localStorage.setItem(E2E_STORAGE_KEY, JSON.stringify(user));
+  globalThis.localStorage.setItem(E2E_STORAGE_KEY, JSON.stringify(user));
+}
+
+function getE2ERoleName(email: string): UserWithRole['role']['name'] {
+  if (email === 'admin@example.com') {
+    return 'administrador';
+  }
+
+  return email.includes('profesor') ? 'profesor' : 'alumno';
+}
+
+function getE2ERoleId(roleName: UserWithRole['role']['name']) {
+  if (roleName === 'administrador') {
+    return 1;
+  }
+
+  return roleName === 'profesor' ? 2 : 3;
 }
 
 function buildE2EUser(email: string, fullName?: string): UserWithRole {
-  const roleName =
-    email === 'admin@example.com'
-      ? 'administrador'
-      : email.includes('profesor')
-        ? 'profesor'
-        : 'alumno';
-
-  const roleId = roleName === 'administrador' ? 1 : roleName === 'profesor' ? 2 : 3;
+  const roleName = getE2ERoleName(email);
+  const roleId = getE2ERoleId(roleName);
 
   return {
     id: `e2e-${roleName}`,
@@ -77,7 +87,7 @@ function buildE2EUser(email: string, fullName?: string): UserWithRole {
   };
 }
 
-export function AuthProvider({ children }: { children: React.ReactNode }) {
+export function AuthProvider({ children }: Readonly<{ children: ReactNode }>) {
   const e2eBypassEnabled = isE2EBypassEnabled();
   const [user, setUser] = useState<UserWithRole | null>(() =>
     e2eBypassEnabled ? loadE2EUser() : null
@@ -117,7 +127,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     };
   }, [e2eBypassEnabled]);
 
-  const login = async (email: string, password: string) => {
+  const login = useCallback(async (email: string, password: string) => {
     setIsLoading(true);
     try {
       if (isE2EBypassEnabled()) {
@@ -136,9 +146,9 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     } finally {
       setIsLoading(false);
     }
-  };
+  }, []);
 
-  const logout = async () => {
+  const logout = useCallback(async () => {
     setIsLoading(true);
     try {
       if (isE2EBypassEnabled()) {
@@ -152,9 +162,9 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     } finally {
       setIsLoading(false);
     }
-  };
+  }, []);
 
-  const signup = async (
+  const signup = useCallback(async (
     email: string,
     password: string,
     fullName: string
@@ -176,17 +186,20 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     } finally {
       setIsLoading(false);
     }
-  };
+  }, []);
 
-  const value: AuthContextType = {
-    user,
-    isLoading,
-    isAuthenticated: user !== null,
-    login,
-    logout,
-    signup,
-    userRole: user?.role?.name ?? null,
-  };
+  const value: AuthContextType = useMemo(
+    () => ({
+      user,
+      isLoading,
+      isAuthenticated: user !== null,
+      login,
+      logout,
+      signup,
+      userRole: user?.role?.name ?? null,
+    }),
+    [isLoading, login, logout, signup, user]
+  );
 
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
 }

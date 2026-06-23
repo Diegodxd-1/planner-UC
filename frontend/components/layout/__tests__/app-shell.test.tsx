@@ -53,7 +53,7 @@ describe('AppShell', () => {
     expect(screen.queryByText('Cursos')).not.toBeInTheDocument()
     expect(screen.queryByText('Aulas')).not.toBeInTheDocument()
     expect(screen.queryByText('Usuarios')).not.toBeInTheDocument()
-    expect(screen.getByText('Schedule Generator')).toBeInTheDocument()
+    expect(screen.getByText('Generador de horarios')).toBeInTheDocument()
   })
 
   it('ejecuta logout y redirige al login', async () => {

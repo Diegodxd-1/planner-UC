@@ -16,7 +16,7 @@ export default function LoginPage() {
   }, [isAuthenticated, isLoading, router]);
 
   return (
-    <div className="flex min-h-screen items-center justify-center bg-gradient-to-br from-sky-50 to-slate-100 px-4">
+    <main className="flex min-h-screen items-center justify-center bg-gradient-to-br from-sky-50 to-slate-100 px-4">
       <div className="w-full max-w-md rounded-2xl border border-slate-200 bg-white p-8 shadow-xl">
         <div className="mb-8 text-center">
           <h1 className="text-3xl font-black text-slate-950">Planner UC</h1>
@@ -41,11 +41,11 @@ export default function LoginPage() {
 
         <p className="mt-6 text-center text-sm text-slate-600">
           ¿No tienes cuenta?{' '}
-          <a href="#" className="font-semibold text-sky-600 hover:text-sky-700">
+          <a href="mailto:admin@example.com" className="font-semibold text-sky-600 hover:text-sky-700">
             Solicita acceso
           </a>
         </p>
       </div>
-    </div>
+    </main>
   );
 }

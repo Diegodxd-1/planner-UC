@@ -1,0 +1,14 @@
+{
+  "fecha": "2026-06-15",
+  "participantes": 8,
+  "tareas_por_participante": 7,
+  "tareas_completadas": 50,
+  "tasa_finalizacion": 0.8929,
+  "tiempo_promedio_minutos": 13.6,
+  "sus_promedio": 81.56,
+  "sus_mediana": 81.25,
+  "sus_minimo": 70.0,
+  "sus_maximo": 92.5,
+  "interpretacion": "Aceptabilidad alta; resultado positivo sustentado tecnicamente.",
+  "riesgo_usabilidad": "Bajo-medio por fricciones en nomenclatura, ayuda contextual y permisos."
+}

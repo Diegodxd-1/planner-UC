@@ -1,5 +1,5 @@
-const fs = require('fs');
-const path = require('path');
+const fs = require('node:fs');
+const path = require('node:path');
 
 const NEXT_STATIC_DIR = path.join(__dirname, '../frontend/.next/static');
 const DOCS_DIR = path.join(__dirname, '../docs');
@@ -60,8 +60,8 @@ function generateReport() {
     const mTotal = getMetrics(totalBytes);
     
     // Proyección a 10,000 visitas mensuales (120,000 anuales)
-    const annualCO2 = (parseFloat(mTotal.co2) * 120000 / 1000).toFixed(2); // en kg
-    const smartphonesCharged = Math.round((parseFloat(annualCO2) * 1000) / 8.22); // 8.22g per smartphone charge
+    const annualCO2 = (Number.parseFloat(mTotal.co2) * 120000 / 1000).toFixed(2); // en kg
+    const smartphonesCharged = Math.round((Number.parseFloat(annualCO2) * 1000) / 8.22); // 8.22g per smartphone charge
 
     const reportContent = `
 # 📄 Auditoría de Sostenibilidad de Software (Línea Base)
@@ -142,8 +142,8 @@ Los cálculos se fundamentan en el modelo *Sustainable Web Design (SWD)* avalado
     const totalBytes = (realJSBytes * 0.3) + optimizedImageBytes + optimizedDBBytes;
     const mTotal = getMetrics(totalBytes);
 
-    const annualCO2 = (parseFloat(mTotal.co2) * 120000 / 1000).toFixed(2); // en kg
-    const smartphonesCharged = Math.round((parseFloat(annualCO2) * 1000) / 8.22); 
+    const annualCO2 = (Number.parseFloat(mTotal.co2) * 120000 / 1000).toFixed(2); // en kg
+    const smartphonesCharged = Math.round((Number.parseFloat(annualCO2) * 1000) / 8.22);
 
     const reportContent = `
 # 📄 Auditoría de Sostenibilidad de Software (Optimizado)

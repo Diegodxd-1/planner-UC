@@ -64,4 +64,42 @@ describe('UsersPage', () => {
       expect(screen.getByText('Mario Flores')).toBeInTheDocument()
     })
   })
+
+  it('edita y elimina un usuario existente', async () => {
+    const confirmSpy = jest.spyOn(globalThis, 'confirm').mockReturnValue(true)
+
+    render(<UsersPage />)
+
+    await screen.findByText('Ana Torres')
+
+    fireEvent.click(screen.getAllByRole('button', { name: /editar/i })[1])
+    fireEvent.change(screen.getByLabelText(/nombre completo/i), {
+      target: { value: 'Ana Torres Editada' },
+    })
+    fireEvent.click(screen.getByRole('button', { name: /actualizar usuario/i }))
+
+    expect(await screen.findByText(/usuario actualizado correctamente/i)).toBeInTheDocument()
+    await waitFor(() => {
+      expect(screen.getByText('Ana Torres Editada')).toBeInTheDocument()
+    })
+
+    fireEvent.click(screen.getAllByRole('button', { name: /eliminar/i })[1])
+
+    expect(await screen.findByText(/usuario eliminado correctamente/i)).toBeInTheDocument()
+    await waitFor(() => {
+      expect(screen.queryByText('Ana Torres Editada')).not.toBeInTheDocument()
+    })
+    expect(confirmSpy).toHaveBeenCalled()
+
+    confirmSpy.mockRestore()
+  })
+
+  it('mantiene protegida la cuenta administradora actual', async () => {
+    render(<UsersPage />)
+
+    await screen.findByText('Admin UC')
+
+    expect(screen.getByText(/esta cuenta esta protegida/i)).toBeInTheDocument()
+    expect(screen.getAllByRole('button', { name: /eliminar/i })[0]).toBeDisabled()
+  })
 })

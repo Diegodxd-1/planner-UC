@@ -1,28 +1,80 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { requireAdminAccess } from '@/lib/auth/server-auth';
-import { getAdminClient } from '@/utils/supabase/admin';
+import {
+  errorResponse,
+  getAdminContext,
+  getPagination,
+  getPaginationPayload,
+  parseJsonObject,
+} from '../_shared/admin-mutations';
 
 const allowedRoles = ['profesor', 'alumno'] as const;
+const maxEmailLength = 254;
+
+function isValidEmail(email: string) {
+  if (email.length === 0 || email.length > maxEmailLength) {
+    return false;
+  }
+
+  if (email !== email.trim() || email.includes(' ')) {
+    return false;
+  }
+
+  const emailParts = email.split('@');
+  if (emailParts.length !== 2) {
+    return false;
+  }
+
+  const [localPart, domain] = emailParts;
+  if (!localPart || !domain || domain.startsWith('.') || domain.endsWith('.')) {
+    return false;
+  }
+
+  return domain.split('.').every((segment) => segment.length > 0);
+}
+
+function optionalString(value: unknown) {
+  if (typeof value !== 'string') {
+    return null;
+  }
+
+  const trimmedValue = value.trim();
+  return trimmedValue || null;
+}
+
+function requiredString(value: unknown) {
+  return typeof value === 'string' ? value.trim() : '';
+}
+
+function isStrongPassword(password: string) {
+  return (
+    password.length >= 10 &&
+    /[a-z]/.test(password) &&
+    /[A-Z]/.test(password) &&
+    /\d/.test(password)
+  );
+}
 
 function normalizeCreatePayload(payload: Record<string, unknown>) {
-  const fullName = String(payload.full_name ?? '').trim();
-  const email = String(payload.email ?? '').trim().toLowerCase();
-  const password = String(payload.password ?? '');
-  const role = String(payload.role ?? '') as (typeof allowedRoles)[number];
+  const fullName = requiredString(payload.full_name);
+  const email = requiredString(payload.email).toLowerCase();
+  const password = typeof payload.password === 'string' ? payload.password : '';
+  const role = requiredString(payload.role) as (typeof allowedRoles)[number];
   const isActive = payload.is_active !== false;
-  const contractType = payload.contract_type ? String(payload.contract_type) : null;
-  const category = payload.category ? String(payload.category) : null;
+  const contractType = optionalString(payload.contract_type);
+  const category = optionalString(payload.category);
 
   if (!fullName) {
     return { error: 'El nombre completo es obligatorio' };
   }
 
-  if (!email || !email.includes('@')) {
+  if (!isValidEmail(email)) {
     return { error: 'El correo electronico no es valido' };
   }
 
-  if (password.length < 8) {
-    return { error: 'La contraseña debe tener al menos 8 caracteres' };
+  if (!isStrongPassword(password)) {
+    return {
+      error: 'La contrasena debe tener al menos 10 caracteres, una mayuscula, una minuscula y un numero',
+    };
   }
 
   if (!allowedRoles.includes(role)) {
@@ -43,20 +95,15 @@ function normalizeCreatePayload(payload: Record<string, unknown>) {
 }
 
 export async function GET(request: NextRequest) {
-  const auth = await requireAdminAccess();
-  if ('error' in auth) {
-    return auth.error;
+  const admin = await getAdminContext();
+  if ('error' in admin) {
+    return admin.error;
   }
-  const adminClient = getAdminClient();
-
-  const searchParams = request.nextUrl.searchParams;
-  const page = Math.max(1, Number(searchParams.get('page') ?? '1'));
-  const limit = Math.min(100, Math.max(1, Number(searchParams.get('limit') ?? '5')));
-  const offset = (page - 1) * limit;
+  const { page, limit, offset } = getPagination(request, 5);
 
   const [{ data: users, error: usersError, count }, { data: roles, error: rolesError }] =
     await Promise.all([
-      adminClient
+      admin.adminClient
         .from('user_profiles')
         .select(
           `
@@ -74,7 +121,7 @@ export async function GET(request: NextRequest) {
         )
         .order('created_at', { ascending: false })
         .range(offset, offset + limit - 1),
-      adminClient
+      admin.adminClient
         .from('roles')
         .select('id, name, description')
         .in('name', allowedRoles)
@@ -82,49 +129,44 @@ export async function GET(request: NextRequest) {
     ]);
 
   if (usersError || rolesError) {
-    return NextResponse.json(
-      { error: usersError?.message ?? rolesError?.message ?? 'No se pudo cargar usuarios' },
-      { status: 500 }
-    );
+    return errorResponse(usersError?.message ?? rolesError?.message ?? 'No se pudo cargar usuarios');
   }
 
   return NextResponse.json({
     users: users ?? [],
     roles: roles ?? [],
-    pagination: {
-      page,
-      limit,
-      total: count ?? 0,
-      totalPages: count ? Math.ceil(count / limit) : 0
-    }
+    pagination: getPaginationPayload(page, limit, count ?? 0),
   });
 }
 
 export async function POST(request: NextRequest) {
-  const auth = await requireAdminAccess();
-  if ('error' in auth) {
-    return auth.error;
+  const admin = await getAdminContext();
+  if ('error' in admin) {
+    return admin.error;
   }
-  const adminClient = getAdminClient();
 
-  const payload = await request.json();
-  const normalized = normalizeCreatePayload(payload);
+  const payload = await parseJsonObject(request);
+  if ('error' in payload) {
+    return errorResponse(payload.error, 400);
+  }
+
+  const normalized = normalizeCreatePayload(payload.data);
 
   if ('error' in normalized) {
-    return NextResponse.json({ error: normalized.error }, { status: 400 });
+    return errorResponse(normalized.error, 400);
   }
 
-  const { data: roleRecord, error: roleError } = await adminClient
+  const { data: roleRecord, error: roleError } = await admin.adminClient
     .from('roles')
     .select('id, name')
     .eq('name', normalized.data.role)
     .single();
 
   if (roleError || !roleRecord) {
-    return NextResponse.json({ error: 'No se encontro el rol solicitado' }, { status: 400 });
+    return errorResponse('No se encontro el rol solicitado', 400);
   }
 
-  const { data: authData, error: authError } = await adminClient.auth.admin.createUser({
+  const { data: authData, error: authError } = await admin.adminClient.auth.admin.createUser({
     email: normalized.data.email,
     password: normalized.data.password,
     email_confirm: true,
@@ -134,13 +176,13 @@ export async function POST(request: NextRequest) {
   });
 
   if (authError || !authData.user) {
-    return NextResponse.json(
-      { error: authError?.message ?? 'No se pudo crear el usuario en autenticacion' },
-      { status: authError?.status ?? 500 }
+    return errorResponse(
+      'No se pudo crear el usuario en autenticacion',
+      authError?.status ?? 500
     );
   }
 
-  const { data: profile, error: profileError } = await adminClient
+  const { data: profile, error: profileError } = await admin.adminClient
     .from('user_profiles')
     .insert({
       id: authData.user.id,
@@ -169,12 +211,12 @@ export async function POST(request: NextRequest) {
 
   if (profileError) {
     try {
-      await adminClient.auth.admin.deleteUser(authData.user.id);
+      await admin.adminClient.auth.admin.deleteUser(authData.user.id);
     } catch (cleanupError) {
       console.error('Error cleaning up auth user after profile failure:', cleanupError);
     }
 
-    return NextResponse.json({ error: profileError.message }, { status: 500 });
+    return errorResponse(profileError.message);
   }
 
   return NextResponse.json({ user: profile }, { status: 201 });

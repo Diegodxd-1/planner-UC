@@ -1,0 +1,7 @@
+{
+    "X-Content-Type-Options":  "nosniff",
+    "X-Frame-Options":  "DENY",
+    "Referrer-Policy":  "strict-origin-when-cross-origin",
+    "Permissions-Policy":  "camera=(), microphone=(), geolocation=()",
+    "Content-Security-Policy":  "frame-ancestors \u0027none\u0027; object-src \u0027none\u0027; base-uri \u0027self\u0027"
+}

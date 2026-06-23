@@ -10,6 +10,9 @@ build/
 .env.test.local
 .env.production.local
 
+# Supabase CLI local metadata
+frontend/supabase/.temp/
+
 # IDEs
 .vscode/
 .idea/
@@ -28,6 +31,17 @@ __pycache__/
 *.pyc
 *.pyo
 *.pyd
+.pytest_cache/
+.coverage
+coverage.xml
 
 # Virtual environments
 venv/
+.venv/
+
+# Local analysis artifacts
+.scannerwork/
+Backend/coverage.xml
+Backend/.coverage
+Backend/.pytest_cache/
+Backend/.venv/

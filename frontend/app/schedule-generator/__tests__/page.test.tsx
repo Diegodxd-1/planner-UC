@@ -77,10 +77,10 @@ describe('ScheduleGeneratorPage', () => {
   })
 
   it('muestra el horario cuando el backend responde correctamente', async () => {
-    jest.spyOn(global, 'fetch').mockResolvedValue({
+    jest.spyOn(globalThis, 'fetch').mockResolvedValue({
       ok: true,
       json: async () => schedulePayload,
-    } as Response)
+    })
 
     render(<ScheduleGeneratorPage />)
 
@@ -100,11 +100,11 @@ describe('ScheduleGeneratorPage', () => {
   })
 
   it('muestra error cuando el backend falla', async () => {
-    jest.spyOn(global, 'fetch').mockResolvedValue({
+    jest.spyOn(globalThis, 'fetch').mockResolvedValue({
       ok: false,
       status: 500,
       json: async () => ({}),
-    } as Response)
+    })
 
     render(<ScheduleGeneratorPage />)
 

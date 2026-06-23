@@ -60,4 +60,33 @@ describe('RoomsPage', () => {
       expect(screen.getByText('Aula 303')).toBeInTheDocument()
     })
   })
+
+  it('edita y elimina un aula existente', async () => {
+    const confirmSpy = jest.spyOn(globalThis, 'confirm').mockReturnValue(true)
+
+    render(<RoomsPage />)
+
+    await screen.findByText('Aula 101')
+
+    fireEvent.click(screen.getAllByRole('button', { name: /editar/i })[0])
+    fireEvent.change(screen.getByLabelText(/nombre del aula/i), {
+      target: { value: 'Aula 101 Renovada' },
+    })
+    fireEvent.click(screen.getByRole('button', { name: /actualizar aula/i }))
+
+    expect(await screen.findByText(/aula actualizada correctamente/i)).toBeInTheDocument()
+    await waitFor(() => {
+      expect(screen.getByText('Aula 101 Renovada')).toBeInTheDocument()
+    })
+
+    fireEvent.click(screen.getAllByRole('button', { name: /eliminar/i })[0])
+
+    expect(await screen.findByText(/aula eliminada correctamente/i)).toBeInTheDocument()
+    await waitFor(() => {
+      expect(screen.queryByText('Aula 101 Renovada')).not.toBeInTheDocument()
+    })
+    expect(confirmSpy).toHaveBeenCalled()
+
+    confirmSpy.mockRestore()
+  })
 })

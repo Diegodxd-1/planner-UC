@@ -1,0 +1,7 @@
+{
+    "status":  503,
+    "body":  {
+                 "error":  "INITIAL_ADMIN_SETUP_TOKEN no esta configurado",
+                 "created":  false
+             }
+}

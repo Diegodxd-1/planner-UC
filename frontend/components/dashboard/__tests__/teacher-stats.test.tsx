@@ -7,7 +7,7 @@ describe('TeacherStats', () => {
   })
 
   it('muestra indicador verde cuando cumple el mínimo legal', async () => {
-    jest.spyOn(global, 'fetch').mockResolvedValue({
+    jest.spyOn(globalThis, 'fetch').mockResolvedValue({
       json: async () => ({
         users: [
           { role: { name: 'profesor' }, is_active: true, contract_type: 'TC' },
@@ -15,7 +15,7 @@ describe('TeacherStats', () => {
           { role: { name: 'alumno' }, is_active: true, contract_type: null },
         ],
       }),
-    } as Response)
+    })
 
     render(<TeacherStats />)
 
@@ -26,7 +26,7 @@ describe('TeacherStats', () => {
   })
 
   it('retorna null si todavía no hay datos', () => {
-    jest.spyOn(global, 'fetch').mockReturnValue(new Promise(() => {}) as Promise<Response>)
+    jest.spyOn(globalThis, 'fetch').mockReturnValue(new Promise(() => {}))
 
     const { container } = render(<TeacherStats />)
 

@@ -27,9 +27,9 @@ describe('SetupPage', () => {
   })
 
   it('redirige al login si el admin ya existe', async () => {
-    jest.spyOn(global, 'fetch').mockResolvedValue({
+    jest.spyOn(globalThis, 'fetch').mockResolvedValue({
       json: async () => ({ exists: true }),
-    } as Response)
+    })
 
     render(<SetupPage />)
 
@@ -42,22 +42,23 @@ describe('SetupPage', () => {
   })
 
   it('crea el admin y redirige', async () => {
-    jest
-      .spyOn(global, 'fetch')
-      .mockResolvedValueOnce({
-        json: async () => ({ exists: false }),
-      } as Response)
-      .mockResolvedValueOnce({
-        json: async () => ({ created: true }),
-      } as Response)
-      .mockResolvedValue({
-        json: async () => ({ exists: false }),
-      } as Response)
+    jest.spyOn(globalThis, 'fetch').mockImplementation(async (_input, init) => ({
+      json: async () => (init?.method === 'POST' ? { created: true } : { exists: false }),
+    }))
 
     render(<SetupPage />)
 
+    fireEvent.change(await screen.findByLabelText(/token de configuracion/i), {
+      target: { value: 'setup-token' },
+    })
     fireEvent.click(await screen.findByRole('button', { name: /crear usuario admin/i }))
 
+    expect(globalThis.fetch).toHaveBeenCalledWith('/api/setup', {
+      method: 'POST',
+      headers: {
+        'x-setup-token': 'setup-token',
+      },
+    })
     expect(await screen.findByText(/admin creado/i)).toBeInTheDocument()
     jest.advanceTimersByTime(1500)
 

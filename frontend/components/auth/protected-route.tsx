@@ -9,7 +9,7 @@ interface ProtectedRouteProps {
   requiredRole?: 'administrador' | 'profesor' | 'alumno' | ('administrador' | 'profesor' | 'alumno')[];
 }
 
-export function ProtectedRoute({ children, requiredRole }: ProtectedRouteProps) {
+export function ProtectedRoute({ children, requiredRole }: Readonly<ProtectedRouteProps>) {
   const { isAuthenticated, userRole, isLoading } = useAuth();
   const router = useRouter();
 
@@ -22,7 +22,10 @@ export function ProtectedRoute({ children, requiredRole }: ProtectedRouteProps) 
   if (isLoading) {
     return (
       <div className="flex min-h-screen items-center justify-center">
-        <div className="animate-spin rounded-full h-12 w-12 border-4 border-slate-300 border-t-sky-600"></div>
+        <div role="status" aria-live="polite" className="flex flex-col items-center gap-3">
+          <div className="h-12 w-12 animate-spin rounded-full border-4 border-slate-300 border-t-sky-600"></div>
+          <span className="text-sm font-semibold text-slate-700">Cargando acceso...</span>
+        </div>
       </div>
     );
   }

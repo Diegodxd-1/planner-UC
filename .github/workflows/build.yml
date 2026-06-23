@@ -1,0 +1,72 @@
+name: Build
+
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+
+
+jobs:
+  build:
+    name: Build and analyze
+    runs-on: [self-hosted, Windows, X64]
+    
+    steps:
+      - uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4.3.1
+        with:
+          fetch-depth: 0  # Shallow clones should be disabled for a better relevancy of analysis
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: 'npm'
+          cache-dependency-path: frontend/package-lock.json
+
+      - name: Install frontend dependencies
+        working-directory: frontend
+        run: npm ci
+
+      - name: Generate frontend coverage
+        working-directory: frontend
+        run: npm run test:coverage -- --runInBand
+
+      - name: Setup uv
+        uses: astral-sh/setup-uv@v3
+
+      - name: Install backend dependencies
+        working-directory: Backend
+        run: uv sync
+
+      - name: Generate backend coverage
+        working-directory: Backend
+        run: uv run pytest --cov=app --cov-report=xml:coverage.xml
+
+      - name: Download SonarScanner CLI
+        shell: powershell
+        run: |
+          $scannerVersion = "7.2.0.5079"
+          $scannerZip = Join-Path $env:RUNNER_TEMP "sonar-scanner-cli.zip"
+          $scannerUrl = "https://binaries.sonarsource.com/Distribution/sonar-scanner-cli/sonar-scanner-cli-$scannerVersion-windows-x64.zip"
+          Invoke-WebRequest -Uri $scannerUrl -OutFile $scannerZip
+          Expand-Archive -LiteralPath $scannerZip -DestinationPath $env:RUNNER_TEMP -Force
+          $scannerHome = Get-ChildItem -Path $env:RUNNER_TEMP -Directory -Filter "sonar-scanner-$scannerVersion-windows-x64" | Select-Object -First 1
+          if (-not $scannerHome) {
+            throw "SonarScanner CLI was not extracted correctly."
+          }
+          "SONAR_SCANNER_HOME=$($scannerHome.FullName)" | Out-File -FilePath $env:GITHUB_ENV -Append
+
+      - name: Run SonarQube analysis
+        shell: powershell
+        env:
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+          SONAR_HOST_URL: ${{ secrets.SONAR_HOST_URL }}
+        run: |
+          & "$env:SONAR_SCANNER_HOME\bin\sonar-scanner.bat" "-Dsonar.projectBaseDir=."
+      # If you wish to fail your job when the Quality Gate is red, uncomment the
+      # following lines. This would typically be used to fail a deployment.
+      # - uses: SonarSource/sonarqube-quality-gate-action@cf038b0e0cdecfa9e56c198bbb7d21d751d62c3b # v1.2.0
+      #   timeout-minutes: 5
+      #   env:
+      #     SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}

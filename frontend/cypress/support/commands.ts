@@ -17,4 +17,4 @@ Cypress.Commands.add('seedAdminSession', () => {
   })
 })
 
-export {}
+export type CypressCommands = typeof Cypress.Commands

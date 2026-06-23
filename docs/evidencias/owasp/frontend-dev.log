@@ -1,0 +1,21 @@
+
+> frontend@0.1.0 dev
+> next dev --hostname 127.0.0.1 --port 3000
+
+▲ Next.js 16.2.9 (Turbopack)
+- Local:         http://127.0.0.1:3000
+- Network:       http://127.0.0.1:3000
+- Environments: .env.local
+✓ Ready in 2.5s
+Creating turbopack project {
+  dir: 'C:\\Users\\FRANK\\Desktop\\ForkProyectos2\\planner-UC\\frontend',
+  testMode: true
+}
+
+ GET /setup 200 in 3.3s (next.js: 2.7s, proxy.ts: 325ms, application-code: 261ms)
+ GET /setup 200 in 51ms (next.js: 7ms, proxy.ts: 7ms, application-code: 38ms)
+ GET /setup 200 in 60ms (next.js: 6ms, proxy.ts: 8ms, application-code: 46ms)
+ GET /api/setup 200 in 1320ms (next.js: 620ms, proxy.ts: 6ms, application-code: 694ms)
+ POST /api/setup 503 in 16ms (next.js: 4ms, proxy.ts: 7ms, application-code: 5ms)
+ GET /setup 200 in 49ms (next.js: 5ms, proxy.ts: 5ms, application-code: 39ms)
+[?25h

@@ -81,4 +81,33 @@ describe('CoursesPage', () => {
     })
     expect(screen.getByText('CS999')).toBeInTheDocument()
   })
+
+  it('edita y elimina un curso existente', async () => {
+    const confirmSpy = jest.spyOn(globalThis, 'confirm').mockReturnValue(true)
+
+    render(<CoursesPage />)
+
+    await screen.findByText('Introduccion a la Programacion')
+
+    fireEvent.click(screen.getAllByRole('button', { name: /editar/i })[0])
+    fireEvent.change(screen.getByLabelText(/^nombre$/i), {
+      target: { value: 'Programacion Aplicada' },
+    })
+    fireEvent.click(screen.getByRole('button', { name: /actualizar curso/i }))
+
+    expect(await screen.findByText(/curso actualizado correctamente/i)).toBeInTheDocument()
+    await waitFor(() => {
+      expect(screen.getByText('Programacion Aplicada')).toBeInTheDocument()
+    })
+
+    fireEvent.click(screen.getAllByRole('button', { name: /eliminar/i })[0])
+
+    expect(await screen.findByText(/curso eliminado correctamente/i)).toBeInTheDocument()
+    await waitFor(() => {
+      expect(screen.queryByText('Programacion Aplicada')).not.toBeInTheDocument()
+    })
+    expect(confirmSpy).toHaveBeenCalled()
+
+    confirmSpy.mockRestore()
+  })
 })

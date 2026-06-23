@@ -1,5 +1,5 @@
 import type { Config } from 'jest'
-import nextJest from 'next/jest'
+import nextJest from 'next/jest.js'
 
 const createJestConfig = nextJest({
   dir: './',
@@ -15,6 +15,8 @@ const config: Config = {
     '<rootDir>/components/**/*.{ts,tsx}',
     '<rootDir>/app/**/*.{ts,tsx}',
     '<rootDir>/lib/**/*.{ts,tsx}',
+    '<rootDir>/utils/**/*.{ts,tsx}',
+    '<rootDir>/proxy.ts',
     '!<rootDir>/**/*.d.ts',
     '!<rootDir>/app/api/**',
     '!<rootDir>/app/layout.tsx',

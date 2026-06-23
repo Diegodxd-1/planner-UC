@@ -163,12 +163,15 @@ El frontend requiere un archivo `.env.local` dentro de `frontend` con variables 
 NEXT_PUBLIC_SUPABASE_URL=...
 NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY=...
 SUPABASE_SERVICE_ROLE_KEY=...
+INITIAL_ADMIN_EMAIL=admin@example.com
+INITIAL_ADMIN_PASSWORD=...
 ```
 
 Notas:
 
 - `NEXT_PUBLIC_SUPABASE_URL` y `NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY` se usan en cliente y servidor
 - `SUPABASE_SERVICE_ROLE_KEY` se usa en rutas API administrativas de Next.js
+- `INITIAL_ADMIN_EMAIL` e `INITIAL_ADMIN_PASSWORD` se usan solo en `/api/setup` para crear el administrador inicial en entornos de desarrollo
 
 ## Instalacion de dependencias
 
