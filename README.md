@@ -38,6 +38,10 @@
 | **Vasquez Miranda, Luis Alexis** | Líder / Desarrollador Backend |
 | **Vilcarano De La Cruz, Frank** | Desarrollador Frontend y QA |
 
+<div align="center">
+  <img src="docs/otros/Grupo05.jpeg" alt="Equipo OptiHorario - Grupo 05" width="500">
+</div>
+
 ## 3. Problemática abordada
 La planificación académica universitaria tradicional requiere un esfuerzo humano intensivo y es propensa a errores combinatorios. Cuadrar la disponibilidad de aulas, aforos, cruces de cursos y secciones demanda semanas de trabajo administrativo, generando fricciones en entornos de currículo flexible y provocando problemas en la experiencia del estudiante.
 
