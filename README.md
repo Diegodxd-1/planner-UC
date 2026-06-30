@@ -1,71 +1,145 @@
-# 🗓️ Planner-UC: Generación Óptima de Horarios Académicos
+# Planner-UC (Generador Óptimo de Horarios Académicos)
 
 <div align="center">
 
-![Architecture](https://img.shields.io/badge/Architecture-MERN%20%2B%20Python-8860D0?style=for-the-badge)
+![Architecture](https://img.shields.io/badge/Architecture-React%20%2B%20Python-8860D0?style=for-the-badge)
 ![Methodology](https://img.shields.io/badge/Methodology-TDD%20%2F%20Scrum-5680E9?style=for-the-badge)
-![Support](https://img.shields.io/badge/Support-Google%20Antigravity-5AB9EA?style=for-the-badge)
+![Support](https://img.shields.io/badge/Version-v1.0.0-5AB9EA?style=for-the-badge)
 
-*Sistema de optimización para la planificación académica universitaria en entornos de currículo flexible.*
+*Producto Mínimo Viable (PMV) para la generación automática de horarios universitarios.*
 
 ---
 
 </div>
 
-## 📖 Índice de Documentación (TOC)
-Toda la documentación del proyecto sigue el estándar **arc42** para garantizar claridad y mantenibilidad.
-
-### **1. Inicio y Fundamentación**
-- [🔍 Documento Inicial del Problema](docs/inicio/Documento%20inicial%20del%20problema%20(primer%20borrador).md) - Análisis de complejidad y ambigüedades.
-- [✨ Declaración de la Visión](docs/inicio/Declaración%20de%20la%20visión%20del%20proyecto.md) - Propuesta de valor y misión.
-- [🛠️ Selección del Enfoque Técnico](docs/inicio/Documento%20de%20selección%20del%20enfoque%20del%20proyecto.md) - Justificación de tecnologías.
-- [📜 Project Charter](docs/inicio/Project%20Charter.md) - Acta de constitución y hitos.
-- [📌 Registro de Supuestos y Restricciones](docs/inicio/Registro%20de%20supuestos%20y%20restricciones.md) - Marco lógico.
-
-### **2. Planificación y Gestión (Scrum)**
-- [📅 Backlog Detallado del Proyecto](docs/planificacion/Backlog%20Detallado%20del%20Proyecto%20(Hoja%201).md) - Lista total de tareas.
-- [🏃 Backlog del Sprint 1](docs/planificacion/Backlog%20del%20Sprint%201.md) / [Sprint 2](docs/planificacion/Backlog%20del%20Sprint%202.md) - Seguimiento de iteraciones.
-- [💰 Gestión de Costos](docs/planificacion/Costo%20acumulado%20del%20proyecto.md) - Presupuesto y recursos.
-- [⚠️ Registro de Riesgos](docs/planificacion/Registro%20de%20Riesgos.md) - Mitigación de riesgos técnicos.
-
-### **3. Requerimientos y Arquitectura**
-- [📋 Lista de Requerimientos SMART](docs/inicio/Lista%20preliminar%20de%20requerimientos%20funcionales%20y%20no%20funcionales.md) - RF, RNF y Trazabilidad.
-- [📝 Especificación Formal (Spec.md)](Spec.md) - Reglas del solver, entradas y salidas.
-- [🏗️ Documento Maestro ARC42](docs/ARC42.md) - Estructura completa de la arquitectura.
-- [🤝 Declaración del Equipo](docs/inicio/Declaración%20del%20equipo%20del%20proyecto.md) - Roles y normas.
-
-### **4. Documentación del Backend**
-- [🔧 Arquitectura del Backend](docs/backend/README.md) - Tecnologías y estructura.
-- [📊 Algoritmo de Scheduling](docs/backend/SCHEDULING_DEMO_ORTOOLS_EXPLAINED.md) - Desglose del solver **OR-Tools CP-SAT**.
-- [🧪 Guía de Pruebas (TDD)](docs/backend/TESTING.md) - Evidencia de tests automatizados.
+## Tabla de Contenido
+1. [Nombre del proyecto](#nombre-del-proyecto)
+2. [Integrantes del equipo](#integrantes-del-equipo)
+3. [Problemática abordada](#problemática-abordada)
+4. [Justificación del PMV](#justificación-del-pmv)
+5. [Tecnologías utilizadas](#tecnologías-utilizadas)
+6. [Arquitectura del sistema](#arquitectura-del-sistema)
+7. [Instrucciones de instalación](#instrucciones-de-instalación)
+8. [Instrucciones de build](#instrucciones-de-build)
+9. [Instrucciones de despliegue](#instrucciones-de-despliegue)
+10. [Enlace a video explicativo](#enlace-a-video-explicativo)
+11. [Enlaces a la documentación (docs/)](#enlaces-a-la-documentación-ubicada-en-la-carpeta-docs)
 
 ---
 
-## 🚀 Presentación del Proyecto
-**Planner-UC** aborda un **Problema Complejo de Ingeniería (CSP)**. El sistema utiliza algoritmos de optimización para automatizar la creación de horarios, eliminando el error humano y optimizando el uso de infraestructura.
+## 1. Nombre del proyecto
+**Planner-UC** (Equipo: *OptiHorario*)
 
-### **Puntos Clave:**
-- **SMART Compliance:** Requerimientos validados bajo criterios técnicos rigurosos.
-- **TDD (Test-Driven Development):** Núcleo probado automáticamente antes de su implementación.
-- **Eficiencia:** Generación de horarios base en **< 60 segundos**.
+## 2. Integrantes del equipo
+| Nombre | Rol principal |
+| :--- | :--- |
+| **Araujo Huamani, Leonardo Daniel** | Analista de Sistemas |
+| **Curi Untiveros, Jefferson Diego** | Diseñador de Software |
+| **Vasquez Miranda, Luis Alexis** | Líder / Desarrollador Backend |
+| **Vilcarano De La Cruz, Frank** | Desarrollador Frontend y QA |
 
----
+## 3. Problemática abordada
+La planificación académica universitaria tradicional requiere un esfuerzo humano intensivo y es propensa a errores combinatorios. Cuadrar la disponibilidad de aulas, aforos, cruces de cursos y secciones demanda semanas de trabajo administrativo, generando fricciones en entornos de currículo flexible y provocando problemas en la experiencia del estudiante.
 
-## 🛠️ Guía de Ejecución Rápida
+## 4. Justificación del PMV
+Planner-UC aborda este **Problema Complejo de Ingeniería** automatizando la generación de horarios mediante algoritmos matemáticos de optimización. El Producto Mínimo Viable (PMV v1.0.0) justifica su existencia al reducir el tiempo de creación de horarios de días a **menos de 60 segundos**, validando matemáticamente restricciones duras (choques de aula, excesos de aforo) y proporcionando una interfaz web intuitiva para la gestión académica.
 
-### **Backend (Motor de Optimización)**
-```bash
-cd Backend
-uv sync
-uv run uvicorn app.main:app --reload
-```
+## 5. Tecnologías utilizadas
+* **Frontend (Cliente):** Next.js, React, TypeScript, Tailwind CSS
+* **Backend (Servidor):** Python, FastAPI
+* **Motor de Optimización:** Google OR-Tools (CP-SAT Solver)
+* **Base de Datos y Autenticación:** Supabase (PostgreSQL)
+* **Calidad y Pruebas:** Jest, Cypress, SonarQube, pytest
 
-### **Frontend (Interfaz Web)**
+## 6. Arquitectura del sistema
+El software está diseñado bajo el patrón de **Arquitectura por capas separadas** (Client-Server), garantizando la separación de responsabilidades, mantenibilidad y escalabilidad:
+* **Frontend (Capa de Presentación):** Consume la API, maneja la interfaz administrativa (UI/UX) y persiste los datos en Supabase.
+* **Backend (Capa de Lógica/Negocio):** Recibe cargas útiles (payloads), ejecuta el modelo matemático de programación de restricciones (Constraint Programming) y devuelve los horarios viables generados.
+
+## 7. Instrucciones de instalación
+Para configurar el entorno de desarrollo en una máquina local:
+
+**Requisitos previos:** Node.js (v20+), Python (v3.10+), y `uv` instalado.
+
+1. **Clonar el repositorio:**
+   ```bash
+   git clone https://github.com/Diegodxd-1/planner-UC.git
+   cd planner-UC
+   ```
+
+2. **Instalar Backend:**
+   ```bash
+   cd Backend
+   uv sync
+   ```
+
+3. **Instalar Frontend:**
+   ```bash
+   cd ../frontend
+   npm install
+   ```
+
+## 8. Instrucciones de build
+Para generar los empaquetados optimizados para producción:
+
+**Frontend:**
 ```bash
 cd frontend
-npm install
-npm run dev
+npm run build
 ```
 
+**Backend:**
+Al ser una aplicación basada en FastAPI/Python, el build se gestiona mediante la sincronización del entorno y la ejecución directa del servidor ASGI, no requiere transpilación.
+
+## 9. Instrucciones de despliegue
+Para levantar el sistema de manera local (Entorno de desarrollo / demostración):
+
+**1. Desplegar el Backend:**
+Abre una terminal y ejecuta:
+```bash
+cd Backend
+uv run uvicorn app.main:app --reload
+```
+*(El servidor estará escuchando en http://localhost:8000)*
+
+**2. Desplegar el Frontend:**
+Abre una segunda terminal y ejecuta:
+```bash
+cd frontend
+npm run dev
+```
+*(La aplicación web estará disponible en http://localhost:3000)*
+
+## 10. Enlace a video explicativo
+*(Añadir aquí el enlace al video en YouTube/Drive. Máximo 5 minutos)*
+[👉 Ver Video de Demostración del PMV](https://youtube.com)
+
+## 11. Enlaces a la documentación ubicada en la carpeta `docs/`
+La documentación del proyecto sigue la estructura basada en las áreas de conocimiento del estándar **PMBOK**:
+
+### a. Inicio
+* [Documento Inicial del Problema](docs/inicio/Documento%20inicial%20del%20problema%20(primer%20borrador).md)
+* [Declaración de la Visión y del Equipo](docs/inicio/Declaración%20de%20la%20visión%20del%20proyecto.md)
+* [Project Charter (Acta de Constitución Inicial)](docs/inicio/Project%20Charter.md)
+* [Registro de Supuestos y Restricciones](docs/inicio/Registro%20de%20supuestos%20y%20restricciones.md)
+
+### b. Planificación
+* [Backlog Detallado](docs/planificacion/Backlog%20Detallado%20del%20Proyecto%20(Hoja%201).md)
+* [Costos del proyecto](docs/planificacion/Costo%20acumulado%20del%20proyecto.md)
+
+### c. Ejecución
+* [Documentación Técnica (Backend / Solver)](docs/backend/README.md)
+* [Especificación Formal de Reglas (Spec)](Spec.md)
+
+### d. Seguimiento y Control
+* [Evidencias de SonarQube, Accesibilidad (WCAG) y Seguridad (OWASP)](docs/evidencias/README.md)
+
+### e. Cierre
+* [Informe Final del Proyecto](docs/cierre/informe-final-del-proyecto.md)
+* [Informe Final de Lecciones Aprendidas](docs/cierre/informe-final-de-lecciones-aprendidas.md)
+* [Registro de Riesgos](docs/cierre/registro-de-riesgos.md)
+* [Registro de Incidentes y Problemas](docs/cierre/registro-de-incidentes-o-problemas.md)
+* [Acta de Constitución Revisada](docs/cierre/acta-de-constitucion-del-proyecto.md)
+
 ---
-*Desarrollado por el Grupo 05 - Taller de Proyectos 2.*
+*Desarrollado para el curso Taller de Proyectos 2 – Ingeniería de Sistemas e Informática.*
