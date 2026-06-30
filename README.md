@@ -115,8 +115,7 @@ npm run dev
 *(La aplicación web estará disponible en http://localhost:3000)*
 
 ## 10. Enlace a video explicativo
-*(Añadir aquí el enlace al video en YouTube/Drive. Máximo 5 minutos)*
-[👉 Ver Video de Demostración del PMV](https://youtube.com)
+[👉 Ver Video de Demostración del PMV](docs/otros/Video%20demostrativo%20PMV.mp4)
 
 ## 11. Enlaces a la documentación ubicada en la carpeta `docs/`
 La documentación del proyecto sigue la estructura basada en las áreas de conocimiento del estándar **PMBOK**:
